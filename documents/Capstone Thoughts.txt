@@ -1,36 +1,17 @@
-Utilize two differnt types of UI/UX
-	First will be for the Consumer
-		Needs to be flashy and direct there attention towards certain parts of the page
-	Second will be for the Mechanics
-		Functional and easy to navigate/operate for doing a job
+DUE TODAY:
 
-Two types of accounts
-	Consumer
-	Technician
+Readme will be MVP
+submit via link to github repo
+
+create database model
+dm a screenshot to brady
+
+
 
 toDateString(), toDateTime() and new Date() for date stuff
 
+React Templates?
 
-Consumer pages
-	browse through parts catelogue
-	Ability to order parts and check out
-
-Technician page
-	manage work orders
-	Add catelogue items to work orders
-	add labor items to work orders
-
-Utilize styling packages to handle resizing
-	bootstrap (css)
-	Material UI
-	React Templates?
-
-From a little research maybe use Material UI for the customer side and Bootstrap for the tech side
-Material UI is more consumer focused and flashy with animations
-Bootstrap uses a minimalist design with more customization
-
-Make sure the styling accounts for multiple view port sizes
-Home page should not require an account - keep it interesting and give options for login/create account
 Maybe see if there is a pinkbike API for a default news homepage display??? Links to pinkbike.com articles?
 
 REFERENCE:
