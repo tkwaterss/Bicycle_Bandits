@@ -1,11 +1,16 @@
-DUE TODAY:
+Derrick at HLC (Hawley)
+	Talking about getting access to there API through Contender Bicycles if Ryan is cool with allowing it.
 
-Readme will be MVP
-submit via link to github repo
+HLC has a service app/site called HubTiger, pretty cool
+	https://hubtiger.com/
 
-create database model
-dm a screenshot to brady
-
+Project Idea:
+	Meld together an e-commerce site with a service ticket management site. Kind of a one stop shop for both customers and technicians.
+	Allow for online purhcasing for shipping or in store pickup
+	Allow for customers to view live updates on there service tickets
+	Technicians will use a seperate side for managing tickets
+	Site can handle online payments only -> maybe add inperson payments
+	
 
 
 toDateString(), toDateTime() and new Date() for date stuff
@@ -34,3 +39,9 @@ Stripe for payments
 	Kelsey suggested google?
 
 Socket for a website chat room function?
+
+
+
+
+
+
