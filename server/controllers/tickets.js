@@ -38,7 +38,7 @@ module.exports = {
       const tickets = await Ticket.findAll({
         where: {
           userId: {
-            [Op.eq]: userId,
+            [Op.eq]: +userId,
           },
         },
         include: [{ model: Bike }],
@@ -109,7 +109,7 @@ module.exports = {
       res.sendStatus(400);
     }
   },
-  // create a new ticket
+  // create a new ticket (new bike/user will be handled by front end)
   newTicket: async (req, res) => {
     try {
       const newTicket = await Ticket.create(req.body)
@@ -120,16 +120,26 @@ module.exports = {
       res.sendStatus(400);
     }
   },
+  //edit ticket, will recieve body with data (body should be a copy with updates)
   editTicket: async (req, res) => {
+    const {ticketId} = req.params
     try {
+      const ticket = await Ticket.findByPk(ticketId)
+      await ticket.set(req.body)
+      await ticket.save()
+      res.status(200).send(ticket)
     } catch (err) {
       console.log("error in editTicket");
       console.log(err);
       res.sendStatus(400);
     }
   },
+  //delete ticket by ID
   deleteTicket: async (req, res) => {
     try {
+      const {ticketId} = req.params;
+      await Ticket.destroy({ where: {id: +ticketId}})
+      res.sendStatus(200);
     } catch (err) {
       console.log("error in deleteTicket");
       console.log(err);
