@@ -11,7 +11,6 @@ const {
   Labor,
   Product,
   Order,
-  Todo,
   Cart,
   TicketLabor,
   TicketProduct,
@@ -26,6 +25,30 @@ const {
   editTicket,
   deleteTicket,
 } = require("./controllers/tickets");
+const {
+  getTicketItems,
+  getTicketTotal,
+  addTicketLabor,
+  updateTicketLabor,
+  deleteTicketLabor,
+  addTicketProduct,
+  updateTicketProduct,
+  deleteTicketProduct,
+} = require("./controllers/ticketItems");
+const {
+  searchCustomers,
+  getBikes,
+  updateUserInfo,
+  createUser,
+  createBike,
+} = require("./controllers/users");
+const {
+  getToDoList,
+  addToDoItem,
+  updateToDoItem,
+  deleteToDoItem,
+} = require("./controllers/todoList");
+const { searchCatelogue } = require("./controllers/items");
 
 //^ Variables
 const server = express();
@@ -65,6 +88,32 @@ server.get("/tickets/search", searchTickets);
 server.post("/tickets", newTicket);
 server.put("/tickets/:ticketId", editTicket);
 server.delete("/tickets/:ticketId", deleteTicket);
+
+//ticketItems controller end points
+server.get("/tickets/items/:ticketId", getTicketItems);
+server.get("/tickets/total/:ticketId", getTicketTotal);
+server.post("/tickets/labor", addTicketLabor);
+server.put("/tickets/labor/:ticketLaborId", updateTicketLabor);
+server.delete("/tickets/labor/:ticketLaborId", deleteTicketLabor);
+server.post("/tickets/products", addTicketProduct);
+server.put("/tickets/products/:ticketProductId", updateTicketProduct);
+server.delete("/tickets/products/:ticketProductId", deleteTicketProduct);
+
+//users controller end points
+server.get("/users", searchCustomers);
+server.get("/users/:userId", getBikes);
+server.put("/users/:ticketId", updateUserInfo);
+server.post("/users", createUser);
+server.post("/users/bike", createBike);
+
+//to do list contoller
+server.get('/toDoList', getToDoList);
+server.post('/toDoList/:toDoId', addToDoItem);
+server.put('/toDoList/:toDoId', updateToDoItem);
+server.delete('/toDoList/:toDoId', deleteToDoItem);
+
+//items controller
+server.get('/tech/catalogue', searchCatelogue);
 
 //^ Database sycn and seed
 db.sync()
