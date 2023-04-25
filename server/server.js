@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const db = require("./util/database");
+const seed = require("./util/seed");
 const {
   User,
   Bike,
@@ -16,6 +17,15 @@ const {
   TicketProduct,
   OrderProduct,
 } = require("./util/models");
+const {
+  getTickets,
+  getUserTickets,
+  getTicketDetails,
+  searchTickets,
+  newTicket,
+  editTicket,
+  deleteTicket,
+} = require("./controllers/tickets");
 
 //^ Variables
 const server = express();
@@ -47,9 +57,17 @@ Product.belongsToMany(Ticket, { through: TicketProduct });
 
 //^ Endpoints
 
+//tickets controller end points
+server.get("/tickets", getTickets);
+server.get("/tickets/:userId", getUserTickets);
+server.get("/tickets/:ticketId", getTicketDetails);
+server.get("/tickets/search", searchTickets);
+server.post("/tickets", newTicket);
+server.put("/tickets/:ticketId", editTicket);
+server.delete("/tickets/:ticketId", deleteTicket);
+
 //^ Database sycn and seed
-db
-  .sync()
+db.sync()
   // .sync({force: true})
   .then(() => {
     // seed()
