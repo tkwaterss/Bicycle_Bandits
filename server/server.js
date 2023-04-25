@@ -116,7 +116,8 @@ server.delete('/toDoList/:toDoId', deleteToDoItem);
 server.get('/tech/catalogue', searchCatelogue);
 
 //^ Database sycn and seed
-db.sync()
+db
+  .sync()
   // .sync({force: true})
   .then(() => {
     // seed()

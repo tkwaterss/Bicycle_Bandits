@@ -37,16 +37,16 @@ const bikes = [
   {brand: "Time", model: "Scylon", color: "Pink", size: "XL", type: "Road"},
 ]
 const tickets = [
-  {userId: "1", bikeId: "1", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Checked In'},
-  {userId: "2", bikeId: "2", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Finished'},
-  {userId: "3", bikeId: "3", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Done and Paid'},
-  {userId: "4", bikeId: "4", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Waiting for Parts'},
-  {userId: "5", bikeId: "5", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Not Here'},
-  {userId: "6", bikeId: "6", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Checked In'},
-  {userId: "7", bikeId: "7", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Finished'},
-  {userId: "8", bikeId: "8", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Checked In'},
-  {userId: "9", bikeId: "9", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Finished'},
-  {userId: "10", bikeId: "10", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-12-12', location: 'Storage', status: 'Done and Paid'},
+  {userId: "1", bikeId: "1", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-01-12', location: 'Storage', status: 'Checked In', total: '39.99'},
+  {userId: "2", bikeId: "2", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-02-12', location: 'Storage', status: 'Finished', total: '29.99'},
+  {userId: "3", bikeId: "3", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-03-12', location: 'Storage', status: 'Done and Paid', total: '49.99'},
+  {userId: "4", bikeId: "4", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-04-12', location: 'Storage', status: 'Waiting for Parts', total: '59.99'},
+  {userId: "5", bikeId: "5", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-05-12', location: 'Storage', status: 'Not Here', total: '69.99'},
+  {userId: "6", bikeId: "6", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-06-12', location: 'Storage', status: 'Checked In', total: '79.99'},
+  {userId: "7", bikeId: "7", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-07-12', location: 'Storage', status: 'Finished', total: '89.99'},
+  {userId: "8", bikeId: "8", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-08-12', location: 'Storage', status: 'Checked In', total: '99.99'},
+  {userId: "9", bikeId: "9", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2023-09-12', location: 'Storage', status: 'Finished', total: '129.99'},
+  {userId: "10", bikeId: "10", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2023-1-12', location: 'Storage', status: 'Done and Paid', total: '229.99'},
 ]
 const labor = [
   {laborTitle: 'LABOR BASIC TUNE', laborDescription: 'basic tune', laborPrice: '85.00', laborTime: '45'},

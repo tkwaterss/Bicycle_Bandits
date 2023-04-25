@@ -41,6 +41,7 @@ module.exports = {
     dueDate: DataTypes.DATEONLY,
     location: DataTypes.STRING(50),
     status: DataTypes.STRING(50),
+    total: DataTypes.FLOAT,
   }),
   Labor: db.define("labor", {
     id: {
