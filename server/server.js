@@ -83,8 +83,8 @@ Product.belongsToMany(Ticket, { through: TicketProduct });
 //tickets controller end points
 server.get("/tickets", getTickets);
 server.get("/tickets/:userId", getUserTickets);
-server.get("/tickets/:ticketId", getTicketDetails);
-server.get("/tickets/search", searchTickets);
+server.get("/ticket/:ticketId", getTicketDetails);
+server.get("/search/tickets", searchTickets);
 server.post("/tickets", newTicket);
 server.put("/tickets/:ticketId", editTicket);
 server.delete("/tickets/:ticketId", deleteTicket);

@@ -25,16 +25,16 @@ const users = [
   {firstname: "Leeroy", lastname: "Jenkins", email: "leeroyemail@email.com", phone: "0000000000", address: "123 some street, some town, UT 12345", employee: "true"},
 ]
 const bikes = [
-  {brand: "Santa Cruz", model: "Bronson", color: "Black/Pink", size: "small", type: "Full Suspension"},
-  {brand: "Cannondale", model: "F29", color: "Green", size: "small", type: "Hardtail"},
-  {brand: "Ritchey", model: "Outback", color: "Red", size: "small", type: "Gravel"},
-  {brand: "Pinarello", model: "F12", color: "Silver", size: "medium", type: "Road"},
-  {brand: "Salsa", model: "Vaya", color: "Yellow", size: "medium", type: "Commuter"},
-  {brand: "Orbea", model: "Gain", color: "Blue", size: "medium", type: "E-Bike"},
-  {brand: "Giant", model: "Trance", color: "Grey", size: "large", type: "Full Suspension"},
-  {brand: "Scott", model: "Scale", color: "Black", size: "large", type: "Hardtail"},
-  {brand: "Open", model: "UPPER", color: "Purple", size: "large", type: "Gravel"},
-  {brand: "Time", model: "Scylon", color: "Pink", size: "XL", type: "Road"},
+  {userId: "1", brand: "Santa Cruz", model: "Bronson", color: "Black/Pink", size: "small", type: "Full Suspension"},
+  {userId: "2", brand: "Cannondale", model: "F29", color: "Green", size: "small", type: "Hardtail"},
+  {userId: "3", brand: "Ritchey", model: "Outback", color: "Red", size: "small", type: "Gravel"},
+  {userId: "4", brand: "Pinarello", model: "F12", color: "Silver", size: "medium", type: "Road"},
+  {userId: "5", brand: "Salsa", model: "Vaya", color: "Yellow", size: "medium", type: "Commuter"},
+  {userId: "6", brand: "Orbea", model: "Gain", color: "Blue", size: "medium", type: "E-Bike"},
+  {userId: "7", brand: "Giant", model: "Trance", color: "Grey", size: "large", type: "Full Suspension"},
+  {userId: "8", brand: "Scott", model: "Scale", color: "Black", size: "large", type: "Hardtail"},
+  {userId: "9", brand: "Open", model: "UPPER", color: "Purple", size: "large", type: "Gravel"},
+  {userId: "10", brand: "Time", model: "Scylon", color: "Pink", size: "XL", type: "Road"},
 ]
 const tickets = [
   {userId: "1", bikeId: "1", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2024-01-12', location: 'Storage', status: 'Checked In', total: '39.99'},
