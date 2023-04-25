@@ -136,8 +136,8 @@ module.exports = {
   },
   //delete ticket by ID
   deleteTicket: async (req, res) => {
+    const {ticketId} = req.params;
     try {
-      const {ticketId} = req.params;
       await Ticket.destroy({ where: {id: +ticketId}})
       res.sendStatus(200);
     } catch (err) {

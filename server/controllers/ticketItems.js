@@ -5,6 +5,7 @@ const {
   TicketLabor,
   TicketProduct,
 } = require("../util/models");
+const {Op} = require('sequelize');
 
 module.exports = {
   getTicketItems: async (req, res) => {

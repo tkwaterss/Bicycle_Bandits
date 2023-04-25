@@ -108,7 +108,7 @@ server.post("/users/bike", createBike);
 
 //to do list contoller
 server.get('/toDoList', getToDoList);
-server.post('/toDoList/:toDoId', addToDoItem);
+server.post('/toDoList', addToDoItem);
 server.put('/toDoList/:toDoId', updateToDoItem);
 server.delete('/toDoList/:toDoId', deleteToDoItem);
 
