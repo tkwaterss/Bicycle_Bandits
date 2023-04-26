@@ -110,8 +110,8 @@ server.delete("/ticketProducts/:ticketProductId", deleteTicketProduct);
 
 //users controller end points
 server.get("/users", searchCustomers);
-server.get("/users/:userId", getBikes);
-server.put("/users/:ticketId", updateUserInfo);
+server.get("/users/bikes/:userId", getBikes);
+server.put("/users/update", updateUserInfo);
 server.post("/users", createUser);
 server.post("/users/bike", createBike);
 
