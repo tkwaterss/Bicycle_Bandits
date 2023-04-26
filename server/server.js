@@ -27,7 +27,6 @@ const {
 } = require("./controllers/tickets");
 const {
   getTicketItems,
-  getTicketTotal,
   addTicketLabor,
   updateTicketLabor,
   deleteTicketLabor,
@@ -65,8 +64,10 @@ User.hasMany(Ticket);
 Ticket.belongsTo(User);
 User.hasMany(Order);
 Order.belongsTo(User);
+
 User.belongsToMany(Product, { through: Cart });
 Product.belongsToMany(User, { through: Cart });
+
 Order.belongsToMany(Product, { through: OrderProduct });
 Product.belongsToMany(Order, { through: OrderProduct });
 
@@ -75,8 +76,17 @@ Ticket.belongsTo(Bike);
 
 Ticket.belongsToMany(Labor, { through: TicketLabor });
 Labor.belongsToMany(Ticket, { through: TicketLabor });
+Ticket.hasMany(TicketLabor);
+TicketLabor.belongsTo(Ticket);
+Labor.hasMany(TicketLabor);
+TicketLabor.belongsTo(Labor);
+
 Ticket.belongsToMany(Product, { through: TicketProduct });
 Product.belongsToMany(Ticket, { through: TicketProduct });
+Ticket.hasMany(TicketProduct);
+TicketProduct.belongsTo(Ticket);
+Product.hasMany(TicketProduct);
+TicketProduct.belongsTo(Product);
 
 //^ Endpoints
 
@@ -90,14 +100,13 @@ server.put("/tickets/:ticketId", editTicket);
 server.delete("/tickets/:ticketId", deleteTicket);
 
 //ticketItems controller end points
-server.get("/tickets/items/:ticketId", getTicketItems);
-server.get("/tickets/total/:ticketId", getTicketTotal);
-server.post("/tickets/labor", addTicketLabor);
-server.put("/tickets/labor/:ticketLaborId", updateTicketLabor);
-server.delete("/tickets/labor/:ticketLaborId", deleteTicketLabor);
-server.post("/tickets/products", addTicketProduct);
-server.put("/tickets/products/:ticketProductId", updateTicketProduct);
-server.delete("/tickets/products/:ticketProductId", deleteTicketProduct);
+server.get("/ticketItems/:ticketId", getTicketItems);
+server.post("/ticketLabor", addTicketLabor);
+server.put("/ticketLabor/:ticketLaborId", updateTicketLabor);
+server.delete("/ticketLabor/:ticketLaborId", deleteTicketLabor);
+server.post("/ticketProducts", addTicketProduct);
+server.put("/ticketProducts/:ticketProductId", updateTicketProduct);
+server.delete("/ticketProducts/:ticketProductId", deleteTicketProduct);
 
 //users controller end points
 server.get("/users", searchCustomers);
@@ -107,17 +116,16 @@ server.post("/users", createUser);
 server.post("/users/bike", createBike);
 
 //to do list contoller
-server.get('/toDoList', getToDoList);
-server.post('/toDoList', addToDoItem);
-server.put('/toDoList/:toDoId', updateToDoItem);
-server.delete('/toDoList/:toDoId', deleteToDoItem);
+server.get("/toDoList", getToDoList);
+server.post("/toDoList", addToDoItem);
+server.put("/toDoList/:toDoId", updateToDoItem);
+server.delete("/toDoList/:toDoId", deleteToDoItem);
 
 //items controller
-server.get('/tech/catalogue', searchCatelogue);
+server.get("/tech/catalogue", searchCatelogue);
 
 //^ Database sycn and seed
-db
-  .sync()
+db.sync()
   // .sync({force: true})
   .then(() => {
     // seed()

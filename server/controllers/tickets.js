@@ -1,12 +1,4 @@
-const {
-  User,
-  Bike,
-  Ticket,
-  TicketLabor,
-  TicketProduct,
-  Product,
-  Labor,
-} = require("../util/models");
+const { User, Bike, Ticket } = require("../util/models");
 const { Op } = require("sequelize");
 const { toTitleCase } = require("../util/formatting");
 module.exports = {
@@ -56,7 +48,7 @@ module.exports = {
   getTicketDetails: async (req, res) => {
     const { ticketId } = req.params;
     try {
-      const ticket = await Ticket.findByPk(ticketId, {
+      const ticket = await Ticket.findByPk(+ticketId, {
         include: [{ model: User }, { model: Bike }],
       });
       res.status(200).send(ticket);
@@ -112,8 +104,8 @@ module.exports = {
   // create a new ticket (new bike/user will be handled by front end)
   newTicket: async (req, res) => {
     try {
-      const newTicket = await Ticket.create(req.body)
-      res.status(200).send(newTicket)
+      const newTicket = await Ticket.create(req.body);
+      res.status(200).send(newTicket);
     } catch (err) {
       console.log("error in newTicket");
       console.log(err);
@@ -122,12 +114,12 @@ module.exports = {
   },
   //edit ticket, will recieve body with data (body should be a copy with updates)
   editTicket: async (req, res) => {
-    const {ticketId} = req.params
+    const { ticketId } = req.params;
     try {
-      const ticket = await Ticket.findByPk(ticketId)
-      await ticket.set(req.body)
-      await ticket.save()
-      res.status(200).send(ticket)
+      const ticket = await Ticket.findByPk(ticketId);
+      await ticket.set(req.body);
+      await ticket.save();
+      res.sendStatus(200)
     } catch (err) {
       console.log("error in editTicket");
       console.log(err);
@@ -136,9 +128,9 @@ module.exports = {
   },
   //delete ticket by ID
   deleteTicket: async (req, res) => {
-    const {ticketId} = req.params;
+    const { ticketId } = req.params;
     try {
-      await Ticket.destroy({ where: {id: +ticketId}})
+      await Ticket.destroy({ where: { id: +ticketId } });
       res.sendStatus(200);
     } catch (err) {
       console.log("error in deleteTicket");

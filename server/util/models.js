@@ -102,6 +102,7 @@ module.exports = {
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
+    quantity: DataTypes.INTEGER,
   }),
   TicketProduct: db.define("ticketProduct", {
     id: {
@@ -110,6 +111,7 @@ module.exports = {
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
+    quantity: DataTypes.INTEGER,
   }),
   OrderProduct: db.define("orderProduct", {
     id: {
