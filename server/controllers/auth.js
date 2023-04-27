@@ -74,7 +74,7 @@ module.exports = {
           res.status(200).send({
             email: user.dataValues.email,
             userId: user.dataValues.id,
-            toke: token,
+            token: token,
             exp: exp,
           });
         } else {

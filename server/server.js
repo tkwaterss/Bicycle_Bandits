@@ -131,7 +131,8 @@ server.delete("/toDoList/:toDoId",isAuthenticated, deleteToDoItem);
 server.get("/tech/catalogue",isAuthenticated, searchCatelogue);
 
 //^ Database sycn and seed
-db.sync()
+db
+.sync()
   // .sync({force: true})
   .then(() => {
     // seed()

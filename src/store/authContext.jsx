@@ -57,7 +57,6 @@ export const AuthContextProvider = (props) => {
   //initialize state for token and ID
   const [token, setToken] = useState(initialToken);
   const [userId, setUserId] = useState(initialId);
-  console.log(userId)
 
 //logout function to be called in a component (clears all record of token and userId)
   const logout = useCallback(() => {
