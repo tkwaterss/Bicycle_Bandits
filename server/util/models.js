@@ -12,6 +12,7 @@ module.exports = {
     firstname: DataTypes.STRING(50),
     lastname: DataTypes.STRING(50),
     email: DataTypes.STRING,
+    hashedPass: DataTypes.STRING,
     phone: DataTypes.STRING(10),
     address: DataTypes.STRING,
     employee: DataTypes.BOOLEAN,

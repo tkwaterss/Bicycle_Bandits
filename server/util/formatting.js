@@ -14,4 +14,7 @@ module.exports = {
   toLowerCase: (string) => {
     return string.toLowerCase();
   },
+  phoneFormat: (string) => {
+    //remove all special characters and make sure length is 10
+  }
 };

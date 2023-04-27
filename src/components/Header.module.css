@@ -1,0 +1,25 @@
+.header {
+  width: 100vw;
+  background-color: #30362F;
+  height: 80px;
+  color: #FFFBDB;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nameContainer {
+  margin-left: 40px;
+}
+
+.linksContainer {
+  list-style: none;
+  display:flex;
+  gap: 2rem;
+  margin-right: 40px;
+}
+
+.linksContainer li:hover, .linksContainer li:active { 
+  color: #A59132;
+  text-decoration: underline;
+}

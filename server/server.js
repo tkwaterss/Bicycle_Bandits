@@ -48,6 +48,8 @@ const {
   deleteToDoItem,
 } = require("./controllers/todoList");
 const { searchCatelogue } = require("./controllers/items");
+const { login, register } = require('./controllers/auth');
+const { isAuthenticated } = require("./middleware/isAuthenticated");
 
 //^ Variables
 const server = express();
@@ -90,39 +92,43 @@ TicketProduct.belongsTo(Product);
 
 //^ Endpoints
 
+//Authentication Controller
+server.post('/register', register);
+server.post('/login', login);
+
 //tickets controller end points
-server.get("/tickets", getTickets);
-server.get("/tickets/:userId", getUserTickets);
-server.get("/ticket/:ticketId", getTicketDetails);
-server.get("/search/tickets", searchTickets);
-server.post("/tickets", newTicket);
-server.put("/tickets/:ticketId", editTicket);
-server.delete("/tickets/:ticketId", deleteTicket);
+server.get("/tickets",isAuthenticated, getTickets);
+server.get("/tickets/:userId",isAuthenticated, getUserTickets);
+server.get("/ticket/:ticketId",isAuthenticated, getTicketDetails);
+server.get("/search/tickets",isAuthenticated, searchTickets);
+server.post("/tickets",isAuthenticated, newTicket);
+server.put("/tickets/:ticketId",isAuthenticated, editTicket);
+server.delete("/tickets/:ticketId",isAuthenticated, deleteTicket);
 
 //ticketItems controller end points
-server.get("/ticketItems/:ticketId", getTicketItems);
-server.post("/ticketLabor", addTicketLabor);
-server.put("/ticketLabor/:ticketLaborId", updateTicketLabor);
-server.delete("/ticketLabor/:ticketLaborId", deleteTicketLabor);
-server.post("/ticketProducts", addTicketProduct);
-server.put("/ticketProducts/:ticketProductId", updateTicketProduct);
-server.delete("/ticketProducts/:ticketProductId", deleteTicketProduct);
+server.get("/ticketItems/:ticketId",isAuthenticated, getTicketItems);
+server.post("/ticketLabor",isAuthenticated, addTicketLabor);
+server.put("/ticketLabor/:ticketLaborId",isAuthenticated, updateTicketLabor);
+server.delete("/ticketLabor/:ticketLaborId",isAuthenticated, deleteTicketLabor);
+server.post("/ticketProducts",isAuthenticated, addTicketProduct);
+server.put("/ticketProducts/:ticketProductId",isAuthenticated, updateTicketProduct);
+server.delete("/ticketProducts/:ticketProductId",isAuthenticated, deleteTicketProduct);
 
 //users controller end points
-server.get("/users", searchCustomers);
-server.get("/users/bikes/:userId", getBikes);
-server.put("/users/update", updateUserInfo);
-server.post("/users", createUser);
-server.post("/users/bike", createBike);
+server.get("/users",isAuthenticated, searchCustomers);
+server.get("/users/bikes/:userId",isAuthenticated, getBikes);
+server.put("/users/update",isAuthenticated, updateUserInfo);
+server.post("/users",isAuthenticated, createUser);
+server.post("/users/bike",isAuthenticated, createBike);
 
 //to do list contoller
-server.get("/toDoList", getToDoList);
-server.post("/toDoList", addToDoItem);
-server.put("/toDoList/:toDoId", updateToDoItem);
-server.delete("/toDoList/:toDoId", deleteToDoItem);
+server.get("/toDoList",isAuthenticated, getToDoList);
+server.post("/toDoList",isAuthenticated, addToDoItem);
+server.put("/toDoList/:toDoId",isAuthenticated, updateToDoItem);
+server.delete("/toDoList/:toDoId",isAuthenticated, deleteToDoItem);
 
 //items controller
-server.get("/tech/catalogue", searchCatelogue);
+server.get("/tech/catalogue",isAuthenticated, searchCatelogue);
 
 //^ Database sycn and seed
 db.sync()
