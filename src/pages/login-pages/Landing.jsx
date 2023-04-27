@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "@mui/material/Button";
+import DisplayContext from "../../store/displayContext";
 
 const Landing = () => {
+  const {displayState, displayDispatch} = useContext(DisplayContext)
+
   return (
     <div>
       <h3>Welcome blah blah</h3>
       <p>some blurb about logging in or registering</p>
       <div>
-        <Button variant="contained">
+        <Button onClick={() => displayDispatch({type: "CHANGE_PAGE", payload: 'login'})} variant="contained">
           Login
         </Button>
-        <Button variant="contained">
+        <Button onClick={() => displayDispatch({type: "CHANGE_PAGE", payload: 'register'})} variant="contained">
           Register
         </Button>
       </div>
