@@ -18,8 +18,6 @@ import TicketSearch from './pages/tech-pages/TicketSearch';
 function App() {
   const authCtx = useContext(AuthContext);
 
-  console.log(typeof authCtx.employee);
-
   return (
     <div className="App">
       <Header />
@@ -47,7 +45,7 @@ function App() {
           //ItemsSearch
         <Route path="/searchTickets" element={authCtx.employee ? <TicketSearch /> : ''} />
         <Route path="/newTicket" element={authCtx.employee ? <NewTicket /> : ''} />
-        <Route path="/serachItems" element={authCtx.employee ? <ProductLaborSearch /> : ''} />
+        <Route path="/searchItems" element={authCtx.employee ? <ProductLaborSearch /> : ''} />
 
       </Routes>
       <Footer />

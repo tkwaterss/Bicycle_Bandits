@@ -31,7 +31,7 @@ module.exports = {
           hashedPass: hash,
           phone: phone,
           address: address,
-          employee: true,
+          employee: false,
         });
 
         const token = createToken(

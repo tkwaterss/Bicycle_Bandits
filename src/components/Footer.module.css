@@ -1,0 +1,16 @@
+footer {
+  width: 100vw;
+  height: 40px;
+  background-color: #30362F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:absolute;
+  bottom: 0px;
+}
+
+.socialContainer {
+  display: flex;
+  width: 120px;
+  justify-content: space-between;
+}

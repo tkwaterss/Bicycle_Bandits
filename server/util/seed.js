@@ -13,6 +13,9 @@ const {
 } = require("./models");
 
 const users = [
+  // {firstname: "Guest", lastname: "Customer", email: "customer@email.com", hashedPass: "", phone: "1111111112", address: "123 customer street, some town, UT 12345", employee: "false"},
+  // {firstname: "Guest", lastname: "Employee", email: "employee@email.com", hashedPass: "", phone: "1111111113", address: "123 employee street, some town, UT 12345", employee: "true"},
+  
   {firstname: "Tobin", lastname: "Waters", email: "tobinsemail@email.com", phone: "1111111111", address: "123 some street, some town, UT 12345", employee: "true"},
   {firstname: "Billy", lastname: "Bobby", email: "billyemail@email.com", phone: "2222222222", address: "123 some street, some town, UT 12345", employee: "false"},
   {firstname: "Bobby", lastname: "Billy", email: "bobbyemail@email.com", phone: "3333333333", address: "123 some street, some town, UT 12345", employee: "false"},

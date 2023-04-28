@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import classes from "./Header.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import DisplayContext from "../store/displayContext";
 import AuthContext from "../store/authContext";
 
@@ -8,10 +8,18 @@ const Header = () => {
   const { displayState, displayDispatch } = useContext(DisplayContext);
   const authCtx = useContext(AuthContext);
 
+  const activeStyle = ({ isActive }) => {
+    return {
+      color: isActive ? "#A59132" : "",
+      textDecoration: isActive ? "underline" : "",
+    };
+  };
+
   let links;
 
   if (!authCtx.token) {
     //^ Landing Nav Bar
+    //TODO Should probably transition these to NavLinks as well
     links = (
       <ul className={classes.linksContainer}>
         <li
@@ -28,7 +36,6 @@ const Header = () => {
         >
           LOGIN
         </li>
-        <li onClick={() => authCtx.logout()}>LOGOUT</li>
       </ul>
     );
   }
@@ -37,22 +44,24 @@ const Header = () => {
     //^ Employee Nav Bar
     links = (
       <ul className={classes.linksContainer}>
-        <li
-          onClick={() =>
-            displayDispatch({ type: "CHANGE_PAGE", payload: "register" })
-          }
-        >
-          DASHBOARD
+        <li>
+          <NavLink style={activeStyle} to="/">
+            DASHBOARD
+          </NavLink>
         </li>
-        <li
-          onClick={() =>
-            displayDispatch({ type: "CHANGE_PAGE", payload: "login" })
-          }
-        >
-          SEACH TICKETS
+        <li>
+          <NavLink style={activeStyle} to="/searchTickets">
+            SEARCH TICKETS
+          </NavLink>
         </li>
-        <li onClick={() => authCtx.logout()}>NEW TICKET</li>
-        <li onClick={() => authCtx.logout()}>LOGOUT</li>
+        <li>
+          <NavLink style={activeStyle} to="/newTicket">
+            NEW TICKET
+          </NavLink>
+        </li>
+        <li onClick={() => authCtx.logout()}>
+          <NavLink to="/">LOGOUT</NavLink>
+        </li>
       </ul>
     );
   }
@@ -61,23 +70,24 @@ const Header = () => {
     //^ Customer Nav Bar
     links = (
       <ul className={classes.linksContainer}>
-        <li
-          onClick={() =>
-            displayDispatch({ type: "CHANGE_PAGE", payload: "register" })
-          }
-        >
-          HOME
+        <li>
+          <NavLink style={activeStyle} to="/">
+            HOME
+          </NavLink>
         </li>
-        <li
-          onClick={() =>
-            displayDispatch({ type: "CHANGE_PAGE", payload: "login" })
-          }
-        >
-          YOUR SERVICE
+        <li>
+          <NavLink style={activeStyle} to="/shopping">
+            SHOP ONLINE
+          </NavLink>
         </li>
-        <li onClick={() => authCtx.logout()}>SHOP ONLINE</li>
-        <li onClick={() => authCtx.logout()}>CART/CHECKOUT</li>
-        <li onClick={() => authCtx.logout()}>LOGOUT</li>
+        <li onClick={() => authCtx.logout()}>
+          <NavLink to="/">LOGOUT</NavLink>
+        </li>
+        <li>
+          <NavLink style={activeStyle} to="/checkout">
+            CART/CHECKOUT
+          </NavLink>
+        </li>
       </ul>
     );
   }
@@ -85,18 +95,17 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <div className={classes.nameContainer}>
-        <h1
-        //! Add conditional for logged in or not, when logged in this will return to dashboard
-          onClick={() =>
-            displayDispatch({ type: "CHANGE_PAGE", payload: "landing" })
-          }
-        >
-          BICYCLE BANDITS
-        </h1>
+        <Link to="/">
+          <h1
+            onClick={() =>
+              displayDispatch({ type: "CHANGE_PAGE", payload: "landing" })
+            }
+          >
+            BICYCLE BANDITS
+          </h1>
+        </Link>
       </div>
-      <nav>
-        {links}
-      </nav>
+      <nav>{links}</nav>
     </header>
   );
 };

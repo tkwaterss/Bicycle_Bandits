@@ -1,7 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye');
+header {
+  font-family: 'Rye';
+
+}
+
 .header {
   width: 100vw;
   background-color: #30362F;
-  height: 80px;
+  height: 60px;
   color: #FFFBDB;
   display: flex;
   justify-content: space-between;
@@ -9,17 +15,50 @@
 }
 
 .nameContainer {
-  margin-left: 40px;
+  margin-left: 20px;
+  width: 250px;
+  border: solid;
+  text-align: center;
+  padding: 5px;
+}
+.nameContainer a {
+  text-decoration: none;
+  color: #FFFBDB
+}
+.nameContainer h1 {
+  font-size: 24px;
+  font-weight: lighter;
+}
+.nameContainer h1:hover {
+  cursor: pointer;
 }
 
 .linksContainer {
   list-style: none;
   display:flex;
-  gap: 2rem;
+  gap: 1rem;
   margin-right: 40px;
 }
 
-.linksContainer li:hover, .linksContainer li:active { 
+.linksContainer li {
+  font-size: 12px;
+  font-weight: 300;
+  text-decoration: none;
+}
+.linksContainer a {
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 300;
+  color: #FFFBDB
+}
+.linksContainer a:hover {
+  cursor: pointer;
   color: #A59132;
   text-decoration: underline;
 }
+.linksContainer li:hover { 
+  cursor: pointer;
+  color: #A59132;
+  text-decoration: underline;
+}
+
