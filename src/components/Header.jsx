@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import classes from "./Header.module.css";
 import { NavLink } from "react-router-dom";
 import DisplayContext from "../store/displayContext";
+import AuthContext from "../store/authContext";
 
 const Header = () => {
   const { displayState, displayDispatch } = useContext(DisplayContext);
+  const authCtx = useContext(AuthContext);
 
   return (
     <header className={classes.header}>
@@ -33,6 +35,7 @@ const Header = () => {
           >
             LOGIN
           </li>
+          <li onClick={() => authCtx.logout()}>LOGOUT</li>
         </ul>
       </nav>
     </header>

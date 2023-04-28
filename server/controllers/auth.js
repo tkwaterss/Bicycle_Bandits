@@ -31,7 +31,7 @@ module.exports = {
           hashedPass: hash,
           phone: phone,
           address: address,
-          employee: false,
+          employee: true,
         });
 
         const token = createToken(
@@ -46,6 +46,7 @@ module.exports = {
           userId: newUser.dataValues.id,
           token: token,
           exp: exp,
+          employee: newUser.dataValues.employee,
         });
       }
     } catch (err) {
@@ -65,9 +66,10 @@ module.exports = {
       }
 
       const user = await User.findOne({ where: { email } });
-
+      console.log(user);
       if (user) {
         const isAuthenticated = bcrypt.compareSync(password, user.hashedPass);
+        console.log(isAuthenticated)
         if (isAuthenticated) {
           const token = createToken(user.dataValues.email, user.dataValues.id);
           const exp = Date.now() + 1000 * 60 * 60 * 48;
@@ -76,6 +78,7 @@ module.exports = {
             userId: user.dataValues.id,
             token: token,
             exp: exp,
+            employee: user.dataValues.employee,
           });
         } else {
           res.status(400).send("Unable to Authenticate");

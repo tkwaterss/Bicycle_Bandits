@@ -11,6 +11,8 @@ import LandingPage from "./pages/login-pages/LandingPage";
 function App() {
   const authCtx = useContext(AuthContext);
 
+  console.log(typeof authCtx.employee);
+
   return (
     <div className="App">
       <Header />
