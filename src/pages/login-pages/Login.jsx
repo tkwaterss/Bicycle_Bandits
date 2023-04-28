@@ -4,6 +4,8 @@ import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import axios from "axios";
 import AuthContext from "../../store/authContext";
+import Container from "../../components/UI/Container"
+import classes from './Landing.module.css';
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
@@ -28,9 +30,9 @@ const Login = () => {
   });
   return (
     //contain the login form and logic here
-    <div>
+    <Container className={classes.loginContainer}>
       <h2>ENTER LOGIN INFO</h2>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={classes.loginForm}>
         <TextField
           id="email"
           name="email"
@@ -38,6 +40,7 @@ const Login = () => {
           onChange={formik.handleChange}
           label="Email"
           variant="filled"
+          size="small"
         ></TextField>
         <TextField
           id="password"
@@ -46,12 +49,13 @@ const Login = () => {
           onChange={formik.handleChange}
           label="Password"
           variant="filled"
+          size="small"
         ></TextField>
         <Button variant="contained" type="submit">
           SUBMIT
         </Button>
       </form>
-    </div>
+    </Container>
   );
 };
 

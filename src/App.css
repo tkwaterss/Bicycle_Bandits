@@ -9,3 +9,11 @@ body {
   font-family: 'Montserrat';
 }
 
+main {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('./images/aaker-_LvWJqlORuQ-unsplash.jpg') no-repeat center center /cover;
+}
+

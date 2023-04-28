@@ -25,9 +25,9 @@ const LandingPage = () => {
   }
 
   return (
-    <div>
+    <>
       {content}
-    </div>
+    </>
   )
 }
 
