@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Rye');
 header {
   font-family: 'Rye';
-
-}
-
-.header {
   width: 100vw;
   background-color: #30362F;
   height: 60px;
@@ -12,6 +8,10 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position:fixed;
+  left: 0;
+  top: 0;
+  z-index: 5;
 }
 
 .nameContainer {

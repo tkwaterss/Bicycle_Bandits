@@ -54,7 +54,7 @@ const Register = () => {
 
   return (
     <Container className={classes.registerContainer}>
-      <h2>ENTER REGISTRATION INFO</h2>
+      <h3>ENTER REGISTRATION INFO</h3>
       <form onSubmit={formik.handleSubmit} className={classes.registerForm}>
         <div className={classes.registerInputs}>
           <TextField

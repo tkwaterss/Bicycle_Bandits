@@ -10,10 +10,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 .registerContainer {
-  width: 90%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,7 +21,7 @@
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 p {
   font-size: 0.9rem;
@@ -35,13 +35,13 @@ p {
 .loginGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   width: 220px;
 }
 .registerGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   width: 220px;
 }
 
@@ -49,18 +49,19 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 .registerForm {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  gap: 8px;
+  gap: 16px;
 
 }
 .registerInputs {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;

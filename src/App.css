@@ -3,6 +3,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 body {
@@ -11,9 +14,22 @@ body {
 
 main {
   min-height: calc(100vh - 100px);
+  margin-top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('./images/aaker-_LvWJqlORuQ-unsplash.jpg') no-repeat center center /cover;
+  background: url('./images/jackson-blackhurst-AezEmNkxXQg-unsplash.jpg') no-repeat center center /cover;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #777c76;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: #444943;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 

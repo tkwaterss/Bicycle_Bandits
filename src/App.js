@@ -5,7 +5,7 @@ import AuthContext from "./store/authContext";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Dashboard from "./pages/shared-pages/Dashboard";
+import Dashboard from "./pages/shared-pages/dashboard/DashboardPage";
 import LandingPage from "./pages/login-pages/LandingPage";
 import TicketDetails from "./pages/shared-pages/TicketDetails";
 import ProductDetails from "./pages/shared-pages/ProductDetails";

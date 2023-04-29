@@ -6,9 +6,9 @@ const Footer = () => {
   return (
     <footer>
       <div className={classes.socialContainer}>
-        <BsLinkedin size='1.5em' color="#FFFBDB" />
-        <BsGithub size='1.5em' color="#FFFBDB" />
-        <BsInstagram size='1.5em' color="#FFFBDB" />
+        <BsLinkedin id={classes.linked} size='1.5em' color="#FFFBDB" />
+        <BsGithub id={classes.github} size='1.5em' color="#FFFBDB" />
+        <BsInstagram id={classes.instagram} size='1.5em' color="#FFFBDB" />
       </div>
     </footer>
   )

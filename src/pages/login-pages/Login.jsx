@@ -31,7 +31,7 @@ const Login = () => {
   return (
     //contain the login form and logic here
     <Container className={classes.loginContainer}>
-      <h2>ENTER LOGIN INFO</h2>
+      <h3>ENTER LOGIN INFO</h3>
       <form onSubmit={formik.handleSubmit} className={classes.loginForm}>
         <TextField
           id="email"

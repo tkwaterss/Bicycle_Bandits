@@ -5,7 +5,7 @@ import DisplayContext from "../store/displayContext";
 import AuthContext from "../store/authContext";
 
 const Header = () => {
-  const { displayState, displayDispatch } = useContext(DisplayContext);
+  const { displayDispatch } = useContext(DisplayContext);
   const authCtx = useContext(AuthContext);
 
   const activeStyle = ({ isActive }) => {
@@ -93,7 +93,7 @@ const Header = () => {
   }
 
   return (
-    <header className={classes.header}>
+    <header>
       <div className={classes.nameContainer}>
         <Link to="/">
           <h1
