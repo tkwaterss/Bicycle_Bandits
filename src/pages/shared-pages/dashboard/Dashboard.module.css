@@ -35,7 +35,10 @@ a {
   color: #30362F;
   padding: 4px 8px;
 }
-
+.searchForm {
+  text-align: center;
+  width: 100%;
+}
 .ticketList {
   list-style: none;
   color: #30362F;

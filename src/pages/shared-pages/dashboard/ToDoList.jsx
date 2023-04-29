@@ -20,10 +20,8 @@ const ToDoList = () => {
       .catch((err) => console.log(err))
   }, [token])
 
-  console.log(list);
-
   let display = list.map(item => {
-    return (<Card className={classes.ticketCard}>
+    return (<Card key={item.id} className={classes.ticketCard}>
       <ul className={classes.ticketList}>
         <li>{item.description}</li>
       </ul>

@@ -6,6 +6,7 @@ import Card from "../../../components/UI/Card";
 import classes from "./Dashboard.module.css";
 import AuthContext from "../../../store/authContext";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
 
 const TechTickets = () => {
   const { token } = useContext(AuthContext);
@@ -22,7 +23,27 @@ const TechTickets = () => {
       .catch((err) => console.log(err));
   }, [token]);
 
-  console.log(tickets);
+  const formik = useFormik({
+    initialValues: {
+      search: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      axios
+        .get(`http://localhost:4040/search/tickets?input=${values.search}`, {
+          headers: {
+            authorization: token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data)
+          //Getting data, now will display different tickets in the .map
+          //or just redirect to ticket search page
+        })
+        .catch((err) => console.log(err));
+    },
+  });
+
   let display = tickets.map((ticket) => {
     return (
       <Link key={ticket.id} to={`/ticket/${ticket.id}`}>
@@ -48,7 +69,15 @@ const TechTickets = () => {
         <li>Status</li>
         <li>Cost</li>
       </ul>
-      <SearchBar placeholder={"Search Tickets"}></SearchBar>
+      <form onSubmit={formik.handleSubmit} className={classes.searchForm}>
+        <SearchBar
+          id={"search"}
+          name={"search"}
+          value={formik.values.search}
+          onChange={formik.handleChange}
+          placeholder={"Search Tickets"}
+        ></SearchBar>
+      </form>
       <div className={classes.cardContainer}>{display}</div>
     </Container>
   );
