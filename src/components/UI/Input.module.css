@@ -1,0 +1,52 @@
+.formGroup {
+  position: relative;
+  padding: 15px 0px 0 0px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px 3px 0px 0px;
+  width: 200px;
+}
+
+.formField {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #FFFDBD;
+  outline: 0;
+  font-size: 14px;
+  color: #FFFDBD;
+  padding: 5px 0px 4px 0px;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.formField::placeholder {
+  color: transparent;
+}
+
+.formField:placeholder-shown ~ .formLabel {
+  font-size: 16px;
+  cursor: text;
+  top: 20px;
+}
+
+label,
+.formField:focus ~ .formLabel {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+.formField:focus ~ .formLabel {
+  color: #A59132;
+}
+.formField:focus ~ .formGroup {
+  
+}
+
+.formField:focus {
+  padding-bottom: 3px;
+  border-bottom: 2px solid #A59132;
+}

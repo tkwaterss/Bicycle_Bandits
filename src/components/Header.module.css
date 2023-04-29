@@ -2,6 +2,7 @@
 header {
   font-family: 'Rye';
   width: 100vw;
+  min-width: 500px;
   background-color: #30362F;
   height: 60px;
   color: #FFFBDB;

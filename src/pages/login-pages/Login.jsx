@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { Button } from "@mui/material";
-import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import axios from "axios";
 import AuthContext from "../../store/authContext";
-import Container from "../../components/UI/Container"
-import classes from './Landing.module.css';
+import Container from "../../components/UI/Container";
+import classes from "./Landing.module.css";
+import Input from "../../components/UI/Input";
+import LargeBtn from "../../components/UI/LargeBtn";
 
 const Login = () => {
   const authCtx = useContext(AuthContext);
@@ -33,27 +33,29 @@ const Login = () => {
     <Container className={classes.loginContainer}>
       <h3>ENTER LOGIN INFO</h3>
       <form onSubmit={formik.handleSubmit} className={classes.loginForm}>
-        <TextField
-          id="email"
-          name="email"
+        <Input
+          id={"email"}
+          type={"email"}
+          name={"email"}
           value={formik.values.email}
           onChange={formik.handleChange}
-          label="Email"
-          variant="filled"
-          size="small"
-        ></TextField>
-        <TextField
-          id="password"
-          name="password"
+          placeholder={"email"}
+        >
+          Email
+        </Input>
+        <Input
+          id={"password"}
+          type={"password"}
+          name={"password"}
           value={formik.values.password}
           onChange={formik.handleChange}
-          label="Password"
-          variant="filled"
-          size="small"
-        ></TextField>
-        <Button variant="contained" type="submit">
+          placeholder={"name"}
+        >
+          Password
+        </Input>
+        <LargeBtn type={"submit"} className={classes.submitBtn}>
           SUBMIT
-        </Button>
+        </LargeBtn>
       </form>
     </Container>
   );

@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { Button } from "@mui/material";
-import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
 import AuthContext from "../../store/authContext";
 import Container from "../../components/UI/Container";
 import classes from "./Landing.module.css";
+import LargeBtn from "../../components/UI/LargeBtn";
+import Input from "../../components/UI/Input";
 
 const Register = () => {
   //! Need to add validation with yup
@@ -54,77 +54,84 @@ const Register = () => {
 
   return (
     <Container className={classes.registerContainer}>
-      <h3>ENTER REGISTRATION INFO</h3>
+      <h3>ENTER YOUR INFORMATION</h3>
       <form onSubmit={formik.handleSubmit} className={classes.registerForm}>
         <div className={classes.registerInputs}>
-          <TextField
-            size="small"
+          <Input
             id="firstname"
             name="firstname"
+            type={"text"}
             value={formik.values.firstname}
             onChange={formik.handleChange}
-            label="First Name"
-            variant="filled"
-          ></TextField>
-          <TextField
-            size="small"
-            id="lastname"
-            name="lastname"
+            placeholder={"First Name"}
+          >
+            First Name
+          </Input>
+          <Input
+            id={"lastname"}
+            name={"lastname"}
+            type={"text"}
             value={formik.values.lastname}
             onChange={formik.handleChange}
-            label="Last Name"
-            variant="filled"
-          ></TextField>
-          <TextField
-            size="small"
-            id="email"
-            name="email"
+            placeholder={"Last Name"}
+          >
+            Last Name
+          </Input>
+          <Input
+            id={"email"}
+            name={"email"}
+            type={"email"}
             value={formik.values.email}
             onChange={formik.handleChange}
-            label="Email"
-            variant="filled"
-          ></TextField>
-          <TextField
-            size="small"
-            id="password"
-            name="password"
+            placeholder={"email"}
+          >
+            Email
+          </Input>
+          <Input
+            id={"password"}
+            name={"password"}
+            type={"password"}
             value={formik.values.password}
             onChange={formik.handleChange}
-            label="Password"
-            variant="filled"
-          ></TextField>
-          <TextField
-            size="small"
-            id="confirmPass"
-            name="confirmPass"
+            placeholder={"Password"}
+          >
+            Password
+          </Input>
+          <Input
+            id={"confirmPass"}
+            name={"confirmPass"}
+            type={"password"}
             value={formik.values.confirmPass}
             onChange={formik.handleChange}
-            label="Confirm Password"
-            variant="filled"
-          ></TextField>
-          <TextField
-            size="small"
-            id="phone"
-            name="phone"
+            placeholder={"Confirm Password"}
+          >
+            Confirm Password
+          </Input>
+          <Input
+            id={"phone"}
+            name={"phone"}
+            type={"text"}
             value={formik.values.phone}
             onChange={formik.handleChange}
-            label="Phone"
-            variant="filled"
-          ></TextField>
-          <TextField
-            size="small"
-            id="address"
-            name="address"
+            placeholder={"Phone"}
+          >
+            Phone
+          </Input>
+          <Input
+            id={"address"}
+            name={"address"}
+            type={"text"}
             value={formik.values.address}
             onChange={formik.handleChange}
-            label="address"
-            variant="filled"
-          ></TextField>
+            placeholder={"address"}
+          >
+            Address
+          </Input>
         </div>
 
-        <Button variant="contained" type="submit">
+        <LargeBtn type="submit" className={classes.submitBtn}>
           SUBMIT
-        </Button>
+        </LargeBtn>
       </form>
     </Container>
   );
