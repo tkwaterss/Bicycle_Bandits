@@ -1,9 +1,12 @@
 import React from 'react'
 import classes from './SearchBar.module.css'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   return (
-    <div>SearchBar</div>
+    <div className={classes.searchContainer}>
+      <input className={classes.searchInput} placeholder={props.placeholder}></input>
+      <button className={classes.searchBtn}>Search</button>
+    </div>
   )
 }
 

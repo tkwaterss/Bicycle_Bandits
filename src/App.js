@@ -29,11 +29,11 @@ function App() {
               element={!authCtx.token ? <LandingPage /> : <Dashboard />}
             />
             <Route
-              path="/ticketDetails"
+              path="/ticket/:id"
               element={authCtx.token ? <TicketDetails /> : ""}
             />
             <Route
-              path="/productDetails"
+              path="/product/:id"
               element={authCtx.token ? <ProductDetails /> : ""}
             />
             <Route

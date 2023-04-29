@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import AuthContext from "../../../store/authContext";
 import TechTickets from "./TechTickets";
 import ToDoList from "./ToDoList";
+import classes from './Dashboard.module.css';
 
 const Dashboard = () => {
   const authCtx = useContext(AuthContext);

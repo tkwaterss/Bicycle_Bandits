@@ -17,6 +17,7 @@ main {
   min-height: calc(100vh - 100px);
   margin-top: 60px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: url('./images/jackson-blackhurst-AezEmNkxXQg-unsplash.jpg') no-repeat center center /cover;
