@@ -1,8 +1,9 @@
 import React from 'react'
+import Container from '../../components/UI/Container'
 
 const TicketSearch = () => {
   return (
-    <div>TicketSearch</div>
+    <Container>TicketSearch</Container>
   )
 }
 

@@ -38,7 +38,7 @@ const Register = () => {
       address: "",
     },
     // validationSchema: validationSchema,
-    onSubmit: (values) => {
+    onSubmit: (values, helpers) => {
       console.log(values);
       axios
         .post("http://localhost:4040/register", values)
@@ -49,6 +49,7 @@ const Register = () => {
         .catch((err) => {
           console.log("Sorry there was an issue with your registration", err);
         });
+      helpers.resetForm();
     },
   });
 
@@ -60,27 +61,27 @@ const Register = () => {
           <Input
             id="firstname"
             name="firstname"
-            type={"text"}
+            type="text"
             value={formik.values.firstname}
             onChange={formik.handleChange}
-            placeholder={"First Name"}
+            placeholder="First Name"
           >
             First Name
           </Input>
           <Input
-            id={"lastname"}
-            name={"lastname"}
-            type={"text"}
+            id="lastname"
+            name="lastname"
+            type="text"
             value={formik.values.lastname}
             onChange={formik.handleChange}
-            placeholder={"Last Name"}
+            placeholder="Last Name"
           >
             Last Name
           </Input>
           <Input
-            id={"email"}
-            name={"email"}
-            type={"email"}
+            id="email"
+            name="email"
+            type="email"
             value={formik.values.email}
             onChange={formik.handleChange}
             placeholder={"email"}
@@ -88,42 +89,42 @@ const Register = () => {
             Email
           </Input>
           <Input
-            id={"password"}
-            name={"password"}
-            type={"password"}
+            id="password"
+            name="password"
+            type="password"
             value={formik.values.password}
             onChange={formik.handleChange}
-            placeholder={"Password"}
+            placeholder="Password"
           >
             Password
           </Input>
           <Input
-            id={"confirmPass"}
-            name={"confirmPass"}
-            type={"password"}
+            id="confirmPass"
+            name="confirmPass"
+            type="password"
             value={formik.values.confirmPass}
             onChange={formik.handleChange}
-            placeholder={"Confirm Password"}
+            placeholder="Confirm Password"
           >
             Confirm Password
           </Input>
           <Input
-            id={"phone"}
-            name={"phone"}
-            type={"text"}
+            id="phone"
+            name="phone"
+            type="text"
             value={formik.values.phone}
             onChange={formik.handleChange}
-            placeholder={"Phone"}
+            placeholder="Phone"
           >
             Phone
           </Input>
           <Input
-            id={"address"}
-            name={"address"}
-            type={"text"}
+            id="address"
+            name="address"
+            type="text"
             value={formik.values.address}
             onChange={formik.handleChange}
-            placeholder={"address"}
+            placeholder="address"
           >
             Address
           </Input>

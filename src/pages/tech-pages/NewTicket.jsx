@@ -1,8 +1,9 @@
 import React from 'react'
+import Container from '../../components/UI/Container'
 
 const NewTicket = () => {
   return (
-    <div>NewTicket</div>
+    <Container>New Ticket Page</Container>
   )
 }
 

@@ -15,7 +15,7 @@ const Login = () => {
       email: "",
       password: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, helpers) => {
       console.log(values);
       axios
         .post("http://localhost:4040/login", values)
@@ -26,6 +26,7 @@ const Login = () => {
         .catch((err) => {
           console.log("Sorry there was an issue with your login", err);
         });
+      helpers.resetForm();
     },
   });
   return (

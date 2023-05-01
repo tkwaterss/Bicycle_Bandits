@@ -17,7 +17,7 @@ header {
 
 .nameContainer {
   margin-left: 20px;
-  width: 250px;
+  min-width: 250px;
   border: solid;
   text-align: center;
   padding: 5px;

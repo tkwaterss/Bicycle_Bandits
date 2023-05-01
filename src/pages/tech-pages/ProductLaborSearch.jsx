@@ -1,8 +1,9 @@
 import React from 'react'
+import Container from '../../components/UI/Container'
 
 const ProductLaborSearch = () => {
   return (
-    <div>ProductLaborSearch</div>
+    <Container>Product Labor Search</Container>
   )
 }
 

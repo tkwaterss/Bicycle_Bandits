@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Dashboard from "./pages/shared-pages/dashboard/DashboardPage";
 import LandingPage from "./pages/login-pages/LandingPage";
-import TicketDetails from "./pages/shared-pages/TicketDetails";
+import TicketDetails from "./pages/shared-pages/ticketDetails/TicketDetails";
 import ProductDetails from "./pages/shared-pages/ProductDetails";
 import Checkout from "./pages/shared-pages/Checkout";
 import ShoppingPage from "./pages/customer-pages/ShoppingPage";

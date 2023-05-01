@@ -7,32 +7,10 @@ import classes from "./Dashboard.module.css";
 import AuthContext from "../../../store/authContext";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import useAxios from "../../../hooks/useAxios";
 
 const TechTickets = () => {
   const { token } = useContext(AuthContext);
   const [tickets, setTickets] = useState([]);
-  //hit get tickets end point
-  // let requestConfig = {
-  //   method: "get",
-  //   address: "http://localhost:4040/tickets",
-  //   headers: {
-  //     headers: {
-  //       authorization: token,
-  //     },
-  //   },
-  // };
-  // const displayTickets = (data) => {
-  //   setTickets(data);
-  // };
-  // const { sendRequest, isLoading, error } = useAxios(
-  //   requestConfig,
-  //   displayTickets
-  // );
-
-  // useEffect(() => {
-  //   sendRequest(requestConfig, displayTickets);
-  // }, []);
 
   useEffect(() => {
     axios
@@ -49,8 +27,7 @@ const TechTickets = () => {
     initialValues: {
       search: "",
     },
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (values, helpers) => {
       axios
         .get(`http://localhost:4040/search/tickets?input=${values.search}`, {
           headers: {
@@ -58,11 +35,10 @@ const TechTickets = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
-          //Getting data, now will display different tickets in the .map
-          //or just redirect to ticket search page
+          setTickets(res.data);
         })
         .catch((err) => console.log(err));
+      helpers.resetForm();
     },
   });
 

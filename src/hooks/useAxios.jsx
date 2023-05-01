@@ -31,3 +31,25 @@ const useAxios = (requestConfig, applyData) => {
 };
 
 export default useAxios;
+
+//hit get tickets end point
+  // let requestConfig = {
+  //   method: "get",
+  //   address: "http://localhost:4040/tickets",
+  //   headers: {
+  //     headers: {
+  //       authorization: token,
+  //     },
+  //   },
+  // };
+  // const displayTickets = (data) => {
+  //   setTickets(data);
+  // };
+  // const { sendRequest, isLoading, error } = useAxios(
+  //   requestConfig,
+  //   displayTickets
+  // );
+
+  // useEffect(() => {
+  //   sendRequest(requestConfig, displayTickets);
+  // }, []);
