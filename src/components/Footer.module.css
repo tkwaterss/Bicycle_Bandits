@@ -14,20 +14,18 @@ footer {
   display: flex;
   width: 120px;
   justify-content: space-between;
+  height: 100%;
 }
 
-#linked:hover {
-  position:relative;
-  bottom: 5px;
-  transition:all 
+.iconContainer {
+  height: 100%;
+  aspect-ratio: 1/1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#instagram:hover {
-  position:relative;
-  bottom: 5px;
-  transition:all 
-}
-#github:hover {
-  position:relative;
-  bottom: 5px;
-  transition:all 
+
+.icon:hover {
+  font-size: 1.25rem;
+  transition: all .15s ease-in-out;
 }

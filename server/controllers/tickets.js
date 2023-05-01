@@ -1,6 +1,6 @@
 const { User, Bike, Ticket } = require("../util/models");
 const { Op } = require("sequelize");
-const { toTitleCase } = require("../util/formatting");
+const { toTitleCase } = require("../../general-utils/formatting");
 module.exports = {
   //get 10 tickets sorted by closest due date going forwards from today
   //TODO maybe first look for overdue tickets that aren't complete

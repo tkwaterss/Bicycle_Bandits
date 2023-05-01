@@ -18,8 +18,8 @@ module.exports = {
   //create a new list item (front end will call get again after response)
   addToDoItem: async (req, res) => {
     try {
-      await Todo.create(req.body);
-      res.sendStatus(200);
+      const newItem = await Todo.create(req.body);
+      res.status(200).send(newItem);
     } catch (err) {
       console.log("error in addToDoItem");
       console.log(err);
