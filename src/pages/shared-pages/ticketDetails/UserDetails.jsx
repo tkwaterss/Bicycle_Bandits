@@ -34,7 +34,7 @@ const UserDetails = (props) => {
     }, 500);
 
     return () => clearTimeout(delayDebounce);
-  }, [internalNotes, externalNotes, status, dueDate]);
+  }, [internalNotes, externalNotes, status, dueDate, id, token]);
 
   let userDisplay;
 
@@ -75,14 +75,16 @@ const UserDetails = (props) => {
     );
   }
   if (isEditing) {
-    userDisplay = <EditUserForm ticket={ticket} id={id} setEditing={setEditing}/>;
+    userDisplay = <EditUserForm ticket={ticket} setEditing={setEditing} />;
   }
 
   return (
     <>
       <Container>
         <div>
-          {!isEditing && <button onClick={() => setEditing(true)}>Edit Customer</button>}
+          {!isEditing && (
+            <button onClick={() => setEditing(true)}>Edit Customer</button>
+          )}
           <h3>Ticket #: {ticket.id}</h3>
           <input
             name="dueDate"

@@ -20,13 +20,8 @@ const TicketDetails = () => {
       .then((res) => {
         setTicket(res.data);
       });
-  }, [id]);
+  }, [id, token]);
 
-
-  //get ticket id from params
-
-  //display all info, multiple calls
-  //create an editing state that will switch the userDetails to an editable component with the same
   return (
     <>
       {ticket.user && (
@@ -35,7 +30,7 @@ const TicketDetails = () => {
           id={id}
         />
       )}
-      <TicketItems />
+      <TicketItems ticket={ticket} id={id} />
     </>
   );
 };

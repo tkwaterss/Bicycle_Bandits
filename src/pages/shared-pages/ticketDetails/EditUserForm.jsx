@@ -4,10 +4,8 @@ import axios from "axios";
 import AuthContext from "../../../store/authContext";
 
 const EditUserForm = (props) => {
-  const { ticket, id, setEditing } = props;
+  const { ticket, setEditing } = props;
   const { token } = useContext(AuthContext);
-
-  console.log(ticket);
 
   const formik = useFormik({
     initialValues: {
@@ -21,7 +19,7 @@ const EditUserForm = (props) => {
       color: ticket.bike.color,
       size: ticket.bike.size,
     },
-    onSubmit: (values, helpers) => {
+    onSubmit: (values) => {
       console.log(values);
       let body = {
         user: {
