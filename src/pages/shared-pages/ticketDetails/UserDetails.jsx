@@ -14,7 +14,7 @@ const UserDetails = (props) => {
   const [isEditing, setEditing] = useState(false);
 
   useEffect(() => {
-    const delayDebounce = setTimeout(() => {
+    const delaySave = setTimeout(() => {
       let body = {
         internalNotes,
         externalNotes,
@@ -33,7 +33,7 @@ const UserDetails = (props) => {
         .catch((err) => console.log(err));
     }, 500);
 
-    return () => clearTimeout(delayDebounce);
+    return () => clearTimeout(delaySave);
   }, [internalNotes, externalNotes, status, dueDate, id, token]);
 
   let userDisplay;

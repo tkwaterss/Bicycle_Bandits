@@ -5,16 +5,22 @@ const { toTitleCase } = require("../utils/formatting");
 module.exports = {
   //recieves query param, return matching users (by first or last name)
   searchCustomers: async (req, res) => {
-    let { input } = req.query;
-    input = toTitleCase(input);
+    let { firstname, lastname } = req.query;
+
+    firstname ? "" : firstname = "";
+    lastname ? "" : lastname = "";
+
+    firstname = toTitleCase(firstname);
+    lastname = toTitleCase(lastname);
     try {
       const users = await User.findAll({
         where: {
-          [Op.or]: {
-            firstname: { [Op.startsWith]: input },
-            lastname: { [Op.startsWith]: input },
+          [Op.and]: {
+            firstname: { [Op.startsWith]: firstname },
+            lastname: { [Op.startsWith]: lastname },
           },
         },
+        limit: 10,
       });
       res.status(200).send(users)
     } catch (err) {

@@ -115,7 +115,7 @@ server.put("/ticketProducts/:ticketProductId",isAuthenticated, updateTicketProdu
 server.delete("/ticketProducts/:ticketProductId",isAuthenticated, deleteTicketProduct);
 
 //users controller end points
-server.get("/users",isAuthenticated, searchCustomers);
+server.get("/users", isAuthenticated, searchCustomers);
 server.get("/users/bikes/:userId",isAuthenticated, getBikes);
 server.put("/users/update",isAuthenticated, updateUserInfo);
 server.post("/users",isAuthenticated, createUser);
