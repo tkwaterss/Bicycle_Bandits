@@ -76,3 +76,9 @@ p {
 .submitBtn {
   padding: 8px 20px;
 }
+
+.invalid {
+  background-color: red;
+  color: red;
+  border:solid;
+}

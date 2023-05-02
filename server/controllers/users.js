@@ -1,6 +1,6 @@
 const { User, Bike } = require("../util/models");
 const { Op } = require("sequelize");
-const { toTitleCase } = require("../../general-utils/formatting");
+const { toTitleCase } = require("../utils/formatting");
 
 module.exports = {
   //recieves query param, return matching users (by first or last name)
