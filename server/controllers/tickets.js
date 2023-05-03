@@ -72,7 +72,7 @@ module.exports = {
         lastname: { [Op.startsWith]: input },
       },
     };
-    if (category === "bikeinfo") {
+    if (category === "Bike Info") {
       searchTable = Bike;
       includeTable = User;
       query = {

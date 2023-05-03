@@ -39,8 +39,7 @@ const Register = () => {
           .oneOf([yup.ref("password")], "The passwords do not match");
       }
     }),
-    phone: yup
-      .number()
+    phone: yup.number()
       .min(1000000000, "Phone number must be at least 10 digits")
       .max(9999999999, "Phone number cannot be more than 10 digits")
       .typeError("Phone number must be a number")

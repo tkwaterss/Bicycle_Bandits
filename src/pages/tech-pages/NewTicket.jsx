@@ -2,13 +2,16 @@ import React, { useContext, useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/authContext";
 import Container from "../../components/UI/Container";
 import Input from "../../components/UI/Input";
 import LargeBtn from "../../components/UI/LargeBtn";
 import Card from "../../components/UI/Card";
+import classes from "./NewTicket.module.css";
 
 const NewTicket = () => {
+  const navigate = useNavigate();
   const { token } = useContext(AuthContext);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -18,7 +21,27 @@ const NewTicket = () => {
   const [bike, setBike] = useState({});
   const [existingBike, setExistingBike] = useState(false);
 
-  //! const validationSchema = yup.object().shape({});
+  const validationSchema = yup.object().shape({
+    dueDate: yup.date().required("This field is required"),
+    location: yup.string().required("This field is required"),
+    firstname: yup.string().required("This field is required"),
+    lastname: yup.string().required("This field is required"),
+    email: yup
+      .string()
+      .email("Please enter a valid email")
+      .required("This field is required"),
+    phone: yup
+      .number()
+      .min(1000000000, "Phone number must be at least 10 digits")
+      .max(9999999999, "Phone number cannot be more than 10 digits")
+      .typeError("Phone number must be a number")
+      .required("A phone number is required"),
+    brand: yup.string().required("This field is required"),
+    model: yup.string().required("This field is required"),
+    color: yup.string().required("This field is required"),
+    address: yup.string(),
+    size: yup.string(),
+  });
 
   const handleFirstName = (event) => {
     formik.handleChange(event);
@@ -54,7 +77,7 @@ const NewTicket = () => {
     }, 300);
 
     return () => clearTimeout(getUserList);
-  }, [firstname, lastname]);
+  }, [firstname, lastname, token]);
 
   const selectUser = (userId) => {
     setUser(users.filter((user) => user.id === +userId));
@@ -90,15 +113,10 @@ const NewTicket = () => {
       size: "",
       type: "",
     },
-    // validationSchema: validationSchema,
+    validationSchema: validationSchema,
     onSubmit: (values, helpers) => {
       if (existingBike) {
         values.bikeId = bike.id;
-        // values.brand = bike.brand;
-        // values.model = bike.model;
-        // values.color = bike.color;
-        // values.size = bike.size;
-        // values.type = bike.type;
       }
       let body = {
         newUserBody: {
@@ -124,7 +142,6 @@ const NewTicket = () => {
           userId: values.userId,
         },
       };
-      console.log(values);
 
       const createUserBikeTicket = () =>
         axios
@@ -134,7 +151,7 @@ const NewTicket = () => {
             },
           })
           .then((res) => {
-            console.log(res.data)
+            navigate(`/ticket/${res.data.id}`)
           })
           .catch((err) => console.log(err));
 
@@ -146,40 +163,9 @@ const NewTicket = () => {
             },
           })
           .then((res) => {
-            console.log(res.data);
+            navigate(`/ticket/${res.data.id}`)
           })
           .catch((err) => console.log(err));
-      
-      // const createUser = () =>
-      //   axios
-      //     .post(`http://localhost:4040/users`, newUserBody, {
-      //       headers: {
-      //         authorization: token,
-      //       },
-      //     })
-      //     .then((res) => {
-      //       newBikeBody.userId = res.data.id;
-      //       console.log("new User", res.data);
-      //       setUser(res.data);
-      //       createBike();
-      //     })
-      //     .catch((err) => console.log(err));
-
-      // const createBike = () =>
-      //   axios
-      //     .post(`http://localhost:4040/users/bike`, newBikeBody, {
-      //       headers: {
-      //         authorization: token,
-      //       },
-      //     })
-      //     .then((res) => {
-      //       newTicketBody.bikeId = res.data.id;
-      //       console.log("new bike", res.data);
-      //       setBike(res.data);
-      //       console.log(bike);
-      //       createTicket();
-      //     })
-      //     .catch((err) => console.log(err));
 
       const createTicket = () =>
         axios
@@ -189,19 +175,15 @@ const NewTicket = () => {
             },
           })
           .then((res) => {
-            console.log(res.data);
+            navigate(`/ticket/${res.data.id}`)
           })
           .catch((err) => console.log(err));
 
-          
       if (!values.userId && !values.bikeId) {
-        console.log("new everything");
         createUserBikeTicket();
       } else if (values.userId && !values.bikeId) {
-        console.log("existing user but new bike");
         createBikeTicket();
       } else if (values.userId && values.bikeId) {
-        console.log("existing user and bike");
         createTicket();
       }
     },
@@ -257,9 +239,15 @@ const NewTicket = () => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         placeholder="Brand"
+        invalid={formik.touched.brand && formik.errors.brand ? true : false}
       >
         Brand
       </Input>
+      {formik.touched.brand && formik.errors.brand ? (
+        <div>{formik.errors.brand}</div>
+      ) : (
+        <div className={classes.placeholder}></div>
+      )}
       <Input
         id="model"
         name="model"
@@ -268,9 +256,15 @@ const NewTicket = () => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         placeholder="Model"
+        invalid={formik.touched.model && formik.errors.model ? true : false}
       >
         Model
       </Input>
+      {formik.touched.model && formik.errors.model ? (
+        <div>{formik.errors.model}</div>
+      ) : (
+        <div className={classes.placeholder}></div>
+      )}
       <Input
         id="color"
         name="color"
@@ -279,9 +273,15 @@ const NewTicket = () => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         placeholder="Color"
+        invalid={formik.touched.color && formik.errors.color ? true : false}
       >
         Color
       </Input>
+      {formik.touched.color && formik.errors.color ? (
+        <div>{formik.errors.color}</div>
+      ) : (
+        <div className={classes.placeholder}></div>
+      )}
       <Input
         id="size"
         name="size"
@@ -322,9 +322,17 @@ const NewTicket = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Due Date"
+          invalid={
+            formik.touched.dueDate && formik.errors.dueDate ? true : false
+          }
         >
           Due Date
         </Input>
+        {formik.touched.dueDate && formik.errors.dueDate ? (
+          <div>{formik.errors.dueDate}</div>
+        ) : (
+          <div className={classes.placeholder}></div>
+        )}
         <Input
           id="location"
           name="location"
@@ -333,9 +341,17 @@ const NewTicket = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Location"
+          invalid={
+            formik.touched.location && formik.errors.location ? true : false
+          }
         >
           Location
         </Input>
+        {formik.touched.location && formik.errors.location ? (
+          <div>{formik.errors.location}</div>
+        ) : (
+          <div className={classes.placeholder}></div>
+        )}
         <h4>Customer Details</h4>
         <Input
           id="firstname"
@@ -345,9 +361,17 @@ const NewTicket = () => {
           onChange={handleFirstName}
           onBlur={formik.handleBlur}
           placeholder="First Name"
+          invalid={
+            formik.touched.firstname && formik.errors.firstname ? true : false
+          }
         >
           First Name
         </Input>
+        {formik.touched.firstname && formik.errors.firstname ? (
+          <div>{formik.errors.firstname}</div>
+        ) : (
+          <div className={classes.placeholder}></div>
+        )}
         <Input
           id="lastname"
           name="lastname"
@@ -356,9 +380,17 @@ const NewTicket = () => {
           onChange={handleLastName}
           onBlur={formik.handleBlur}
           placeholder="Last Name"
+          invalid={
+            formik.touched.lastname && formik.errors.lastname ? true : false
+          }
         >
           Last Name
         </Input>
+        {formik.touched.lastname && formik.errors.lastname ? (
+          <div>{formik.errors.lastname}</div>
+        ) : (
+          <div className={classes.placeholder}></div>
+        )}
         <Input
           id="email"
           name="email"
@@ -367,9 +399,15 @@ const NewTicket = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Email"
+          invalid={formik.touched.email && formik.errors.email ? true : false}
         >
           Email
         </Input>
+        {formik.touched.email && formik.errors.email ? (
+          <div>{formik.errors.email}</div>
+        ) : (
+          <div className={classes.placeholder}></div>
+        )}
         <Input
           id="phone"
           name="phone"
@@ -378,9 +416,15 @@ const NewTicket = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="Phone"
+          invalid={formik.touched.phone && formik.errors.phone ? true : false}
         >
           Phone
         </Input>
+        {formik.touched.phone && formik.errors.phone ? (
+          <div>{formik.errors.phone}</div>
+        ) : (
+          <div className={classes.placeholder}></div>
+        )}
         <Input
           id="address"
           name="address"
