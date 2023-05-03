@@ -15,8 +15,10 @@ const NewTicket = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState([]);
   const [bikes, setBikes] = useState([]);
+  const [bike, setBike] = useState({});
+  const [existingBike, setExistingBike] = useState(false);
 
-  // const validationSchema = yup.object().shape({});
+  //! const validationSchema = yup.object().shape({});
 
   const handleFirstName = (event) => {
     formik.handleChange(event);
@@ -25,6 +27,10 @@ const NewTicket = () => {
   const handleLastName = (event) => {
     formik.handleChange(event);
     setLastname(event.target.value);
+  };
+  const selectBike = (event) => {
+    let selectedBike = bikes.filter((bike) => bike.id === +event.target.value);
+    selectedBike && setBike(selectedBike[0]);
   };
 
   useEffect(() => {
@@ -59,17 +65,25 @@ const NewTicket = () => {
           authorization: token,
         },
       })
-      .then((res) => setBikes(res.data))
+      .then((res) => {
+        setBikes(res.data);
+        setExistingBike(true);
+        setBike(res.data[0]);
+      })
       .catch((err) => console.log(err));
   };
 
   const formik = useFormik({
     initialValues: {
+      dueDate: "",
+      location: "",
+      userId: "",
       firstname: "",
       lastname: "",
       email: "",
       phone: "",
       address: "",
+      bikeId: "",
       brand: "",
       model: "",
       color: "",
@@ -78,12 +92,123 @@ const NewTicket = () => {
     },
     // validationSchema: validationSchema,
     onSubmit: (values, helpers) => {
+      if (existingBike) {
+        values.bikeId = bike.id;
+        // values.brand = bike.brand;
+        // values.model = bike.model;
+        // values.color = bike.color;
+        // values.size = bike.size;
+        // values.type = bike.type;
+      }
+      let body = {
+        newUserBody: {
+          firstname: values.firstname,
+          lastname: values.lastname,
+          email: values.email,
+          phone: values.phone,
+          address: values.address,
+          employee: false,
+        },
+        newBikeBody: {
+          brand: values.brand,
+          model: values.model,
+          color: values.color,
+          size: values.size,
+          type: values.type,
+          userId: values.userId,
+        },
+        newTicketBody: {
+          dueDate: values.dueDate,
+          location: values.location,
+          bikeId: values.bikeId,
+          userId: values.userId,
+        },
+      };
       console.log(values);
-      //create ticket axios call goes here
+
+      const createUserBikeTicket = () =>
+        axios
+          .post(`http://localhost:4040/newUser`, body, {
+            headers: {
+              authorization: token,
+            },
+          })
+          .then((res) => {
+            console.log(res.data)
+          })
+          .catch((err) => console.log(err));
+
+      const createBikeTicket = () =>
+        axios
+          .post(`http://localhost:4040/newBike`, body, {
+            headers: {
+              authorization: token,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+      
+      // const createUser = () =>
+      //   axios
+      //     .post(`http://localhost:4040/users`, newUserBody, {
+      //       headers: {
+      //         authorization: token,
+      //       },
+      //     })
+      //     .then((res) => {
+      //       newBikeBody.userId = res.data.id;
+      //       console.log("new User", res.data);
+      //       setUser(res.data);
+      //       createBike();
+      //     })
+      //     .catch((err) => console.log(err));
+
+      // const createBike = () =>
+      //   axios
+      //     .post(`http://localhost:4040/users/bike`, newBikeBody, {
+      //       headers: {
+      //         authorization: token,
+      //       },
+      //     })
+      //     .then((res) => {
+      //       newTicketBody.bikeId = res.data.id;
+      //       console.log("new bike", res.data);
+      //       setBike(res.data);
+      //       console.log(bike);
+      //       createTicket();
+      //     })
+      //     .catch((err) => console.log(err));
+
+      const createTicket = () =>
+        axios
+          .post(`http://localhost:4040/tickets`, body.newTicketBody, {
+            headers: {
+              authorization: token,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+
+          
+      if (!values.userId && !values.bikeId) {
+        console.log("new everything");
+        createUserBikeTicket();
+      } else if (values.userId && !values.bikeId) {
+        console.log("existing user but new bike");
+        createBikeTicket();
+      } else if (values.userId && values.bikeId) {
+        console.log("existing user and bike");
+        createTicket();
+      }
     },
   });
 
   if (user[0]) {
+    formik.values.userId = user[0].id;
     formik.values.firstname = user[0].firstname;
     formik.values.lastname = user[0].lastname;
     formik.values.email = user[0].email;
@@ -110,13 +235,20 @@ const NewTicket = () => {
     return (
       <option
         key={bike.id}
-        value={bike}
+        value={bike.id}
       >{`${bike.brand}, ${bike.model}, ${bike.color}, ${bike.size}`}</option>
     );
   });
 
   let bikeForm = (
     <>
+      {user[0] ? (
+        <button onClick={() => setExistingBike(true)}>
+          Choose Existing Bike
+        </button>
+      ) : (
+        ""
+      )}
       <Input
         id="brand"
         name="brand"
@@ -164,10 +296,11 @@ const NewTicket = () => {
       <select
         id="type"
         name="type"
-        value={formik.values.type}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
+        defaultValue=""
       >
+        <option value="">-- Select a Type --</option>
         <option value="Full Suspension">Full Suspension</option>
         <option value="Hardtail">Hardtail</option>
         <option value="Gravel">Gravel</option>
@@ -181,6 +314,28 @@ const NewTicket = () => {
   return (
     <Container>
       <form onSubmit={formik.handleSubmit}>
+        <Input
+          id="dueDate"
+          name="dueDate"
+          type="date"
+          value={formik.values.dueDate}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          placeholder="Due Date"
+        >
+          Due Date
+        </Input>
+        <Input
+          id="location"
+          name="location"
+          type="text"
+          value={formik.values.location}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          placeholder="Location"
+        >
+          Location
+        </Input>
         <h4>Customer Details</h4>
         <Input
           id="firstname"
@@ -238,17 +393,19 @@ const NewTicket = () => {
           Address
         </Input>
         <h4>Bicycle Details</h4>
-        {user[0] ? (
+
+        {existingBike ? (
           <div>
             <h4>Choose an existing Bicycle:</h4>
-            <select name="bikes" id="bikes">
+            <select name="bikes" id="bikes" onChange={selectBike}>
+              <option defaultValue="no bike">-- Choose A Bike --</option>
               {bikesList && bikesList}
             </select>
+            <button onClick={() => setExistingBike(false)}>Add New Bike</button>
           </div>
         ) : (
-          ""
+          bikeForm
         )}
-        {bikeForm}
         <LargeBtn type="submit">Create Ticket</LargeBtn>
       </form>
       <div>

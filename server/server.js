@@ -40,6 +40,8 @@ const {
   updateUserInfo,
   createUser,
   createBike,
+  newUserBikeTicket,
+  newBikeTicket,
 } = require("./controllers/users");
 const {
   getToDoList,
@@ -120,6 +122,8 @@ server.get("/users/bikes/:userId",isAuthenticated, getBikes);
 server.put("/users/update",isAuthenticated, updateUserInfo);
 server.post("/users",isAuthenticated, createUser);
 server.post("/users/bike",isAuthenticated, createBike);
+server.post("/newUser", isAuthenticated, newUserBikeTicket);
+server.post("/newBike", isAuthenticated, newBikeTicket);
 
 //to do list contoller
 server.get("/toDoList",isAuthenticated, getToDoList);

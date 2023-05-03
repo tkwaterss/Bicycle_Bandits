@@ -1,4 +1,4 @@
-const { User, Bike } = require("../util/models");
+const { User, Bike, Ticket } = require("../util/models");
 const { Op } = require("sequelize");
 const { toTitleCase } = require("../utils/formatting");
 
@@ -65,8 +65,8 @@ module.exports = {
   //recieves body with new user info, create user
   createUser: async (req, res) => {
     try {
-      await User.create(req.body)
-      res.sendStatus(200);
+      let newUser = await User.create(req.body)
+      res.status(200).send(newUser);
     } catch (err) {
       console.log("error in createUser");
       console.log(err);
@@ -76,8 +76,36 @@ module.exports = {
   //recieves userId and body with new bike info, create new bike
   createBike: async (req, res) => {
     try {
-      await Bike.create(req.body)
-      res.sendStatus(200);
+      let newBike = await Bike.create(req.body)
+      res.status(200).send(newBike);
+    } catch (err) {
+      console.log("error in createBike");
+      console.log(err);
+      res.sendStatus(400);
+    }
+  },
+  newUserBikeTicket: async (req, res) => {
+    try {
+      console.log(req.body)
+      let newUser = await User.create(req.body.newUserBody);
+      req.body.newBikeBody.userId = newUser.id;
+      let newBike = await Bike.create(req.body.newBikeBody);
+      req.body.newTicketBody.userId = newUser.id;
+      req.body.newTicketBody.bikeId = newBike.id;
+      let newTicket = await Ticket.create(req.body.newTicketBody);
+      res.status(200).send(newTicket)
+    } catch (err) {
+      console.log("error in createBike");
+      console.log(err);
+      res.sendStatus(400);
+    }
+  },
+  newBikeTicket: async (req, res) => {
+    try {
+      let newBike = await Bike.create(req.body.newBikeBody);
+      req.body.newTicketBody.bikeId = newBike.id;
+      let newTicket = await Ticket.create(req.body.newTicketBody);
+      res.status(200).send(newTicket)
     } catch (err) {
       console.log("error in createBike");
       console.log(err);
