@@ -7,7 +7,7 @@ import classes from "./TicketDetails.module.css";
 import SmallBtn from "../../../components/UI/SmallBtn";
 
 const UserDetails = (props) => {
-  const { ticket, id } = props;
+  const { ticket, id, employee } = props;
   const [internalNotes, setInternalNotes] = useState(ticket.internalNotes);
   const [externalNotes, setExternalNotes] = useState(ticket.externalNotes);
   const [status, setStatus] = useState(ticket.status);
@@ -88,19 +88,19 @@ const UserDetails = (props) => {
     <>
       <Container className={classes.ticketDetailsContainer}>
         <div className={classes.ticketInfoContainer}>
-          {!isEditing && (
+          {!isEditing && employee && (
             <SmallBtn onClick={() => setEditing(true)}>Edit Customer</SmallBtn>
           )}
           <h3>Ticket #: {ticket.id}</h3>
-          <input
+          {employee ? <input
             name="dueDate"
             id="dueDate"
             onChange={(e) => setDueDate(e.target.value)}
             type="date"
             value={dueDate}
             className={classes.dueDatePicker}
-          />
-          <select
+          /> : <h5> Due: {dueDate}</h5>}
+          {employee ? <select
             name="status"
             id="status"
             value={status}
@@ -112,13 +112,13 @@ const UserDetails = (props) => {
             <option value="Not Here">Not Here</option>
             <option value="Finished">Finished</option>
             <option value="Done and Paid">Done and Paid</option>
-          </select>
+          </select> : <h5>{status}</h5>}
         </div>
         {userDisplay}
       </Container>
       <div className={classes.notesContainer}>
         <div className={classes.externalContainer}>
-          <h4>External Notes</h4>
+          {employee ? <h4>External Notes</h4> : <h4>Mechanic Notes</h4>}
           <textarea
             rows="6"
             cols="35"
@@ -127,7 +127,7 @@ const UserDetails = (props) => {
             className={classes.externalNotes}
           ></textarea>
         </div>
-        <div className={classes.internalContainer}>
+        {employee && <div className={classes.internalContainer}>
           <h4>Internal Notes</h4>
           <textarea
             rows="6"
@@ -136,7 +136,7 @@ const UserDetails = (props) => {
             onChange={(e) => setInternalNotes(e.target.value)}
             className={classes.internalNotes}
           ></textarea>
-        </div>
+        </div>}
       </div>
     </>
   );

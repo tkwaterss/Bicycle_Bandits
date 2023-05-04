@@ -4,12 +4,11 @@ import UserDetails from "./UserDetails";
 import TicketItems from "./TicketItems";
 import AuthContext from "../../../store/authContext";
 import axios from "axios";
-import classes from "./TicketDetails.module.css";
 
 const TicketDetails = () => {
   const [ticket, setTicket] = useState({});
   const { id } = useParams();
-  const { token } = useContext(AuthContext);
+  const { token, employee } = useContext(AuthContext);
 
   useEffect(() => {
     axios
@@ -26,12 +25,9 @@ const TicketDetails = () => {
   return (
     <>
       {ticket.user && (
-        <UserDetails
-          ticket={ticket}
-          id={id}
-        />
+        <UserDetails ticket={ticket} id={id} employee={employee} />
       )}
-      <TicketItems ticket={ticket} id={id} />
+      <TicketItems ticket={ticket} id={id} employee={employee} />
     </>
   );
 };

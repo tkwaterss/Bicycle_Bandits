@@ -12,7 +12,7 @@ import { useFormik } from "formik";
 
 const TicketItems = (props) => {
   const { token } = useContext(AuthContext);
-  const { ticket, id } = props;
+  const { employee, id } = props;
   const [laborItems, setLaborItems] = useState([]);
   const [productItems, setProductItems] = useState([]);
   const [total, setTotal] = useState([]);
@@ -123,7 +123,7 @@ const TicketItems = (props) => {
   return (
     <Container className={classes.ticketItemsContainer}>
       <div className={classes.titleContainer}>
-        <form onSubmit={formik.handleSubmit} className={classes.searchForm}>
+        {employee && <form onSubmit={formik.handleSubmit} className={classes.searchForm}>
           <div className={classes.searchBar}>
             <SearchBar
               id="search"
@@ -135,7 +135,7 @@ const TicketItems = (props) => {
             />
           </div>
           <LargeBtn className={classes.checkoutBtn}>Checkout</LargeBtn>
-        </form>
+        </form>}
         <ul className={classes.titleBar}>
           <li id={classes.titleTitle}>Title</li>
           <li id={classes.titleTime}>Time</li>
