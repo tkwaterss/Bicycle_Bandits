@@ -73,11 +73,11 @@ const TechTickets = () => {
       <div className={classes.titleContainer}>
         <form onSubmit={formik.handleSubmit} className={classes.searchForm}>
           <SearchBar
-            id={"search"}
-            name={"search"}
+            id="search"
+            name="search"
             value={formik.values.search}
             onChange={formik.handleChange}
-            placeholder={"Search Tickets"}
+            placeholder="Search Tickets"
           ></SearchBar>
         </form>
         <ul className={classes.titleBar}>

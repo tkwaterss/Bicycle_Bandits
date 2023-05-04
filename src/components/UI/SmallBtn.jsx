@@ -5,7 +5,7 @@ const SmallBtn = (props) => {
   return (
     <button
       type={props.type}
-      onClick={props.function}
+      onClick={props.onClick}
       className={`${classes.smallBtn} ${props.className}`}
     >
       {props.children}

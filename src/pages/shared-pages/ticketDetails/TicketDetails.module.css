@@ -101,6 +101,181 @@
   box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
 }
 
+/*^ Notes Styling */
+.notesContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+
+}
+.notesContainer h4 {
+  color: #FFFBDB;
+  background-color: rgba(98, 88, 52, 0.9);
+  border-radius: 4px 4px 0 0;
+  padding: 2px 4px;
+}
+
+.externalContainer {
+  width: 50%;
+}
+.externalNotes {
+  max-width: 100%;
+  min-width: 100%;
+  border: none;
+  border-radius: 0 0 4px 4px;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 4px;
+  background-color: #FFFBDB;
+  color: #30362F;
+}
+.externalNotes:focus {
+  outline: none;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.internalContainer {
+  width: 50%;
+}
+.internalNotes {
+  max-width: 100%;
+  min-width: 100%;
+  border: none;
+  border-radius: 0 0 4px 4px;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 4px;
+  background-color: #FFFBDB;
+  color: #30362F;
+}
+.internalNotes:focus {
+  outline: none;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/*^ Ticket Items Styling */
+.titleBar {
+  padding: 8px 3% 4px 4px;
+  list-style: none;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+  color: #FFFBDB;
+}
+.ticketItemsContainer {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.titleContainer {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  background-color: #30362F;
+  padding: 8px 4px 4px 4px;
+}
+.searchForm {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.searchBar {
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+.checkoutBtn {
+  min-height: 20px;
+  padding: 8px 16px;
+}
 
 
+/*^ Ticket Item Cards */
 
+.ticketItemsDisplayContainer {
+  width: 100%;
+}
+.ticketItemsCard {
+  color: #30362F;
+  padding: 2px 8px;
+  border-radius: 0;
+  border-bottom: 1.5px solid #30362F;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  font-size: 12px;
+}
+
+.listItemContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.itemsList {
+  list-style: none;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.quantitySet {
+  display: flex;
+  width: 70px;
+  justify-content: space-between;
+  align-items: center;
+}
+.adjustQuantityBtn {
+  width: 20px;
+  padding: 2px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#titleTitle {
+  width: 50%;
+}
+#titleTime {
+  width: 18%;
+  text-align: center;
+}
+#titleQuantity {
+  width: 70px;
+  text-align: center;
+}
+#titlePrice {
+  width: 12%;
+  text-align: right;
+  padding-right: 8px;
+}
+
+
+#itemTitle {
+  width: 50%;
+  text-align: left;
+}
+#itemTime {
+  width: 20%;
+  text-align: center;
+  border-right: solid grey;
+  border-left: solid grey;
+}
+#itemPrice {
+  width: 12%;
+  text-align: right;
+  border-left: solid grey;
+}
+
+
+.ticketTotalBar {
+  width: 100%;
+  border-radius: 0 0 8px 8px;
+  background-color: #30362F;
+  padding: 4px
+}
+.ticketTotalBar h3 {
+  font-size: 16px;
+}

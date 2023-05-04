@@ -45,8 +45,8 @@ const UserDetails = (props) => {
       <div className={classes.userInfoContainer}>
         <div className={classes.userdetailsContainer}>
           <h4>Customer Details</h4>
-          <div className={classes.detailsListContainer} >
-            <div className={classes.detailsListTitles} >
+          <div className={classes.detailsListContainer}>
+            <div className={classes.detailsListTitles}>
               <h5>Name:</h5>
               <h5>Email:</h5>
               <h5>Phone:</h5>
@@ -62,8 +62,8 @@ const UserDetails = (props) => {
         </div>
         <div className={classes.ticketdetailsContainer}>
           <h4>Bicycle Details</h4>
-          <div className={classes.detailsListContainer} >
-            <div className={classes.detailsListTitles} >
+          <div className={classes.detailsListContainer}>
+            <div className={classes.detailsListTitles}>
               <h5>Brand:</h5>
               <h5>Model:</h5>
               <h5>Color:</h5>
@@ -90,7 +90,6 @@ const UserDetails = (props) => {
         <div className={classes.ticketInfoContainer}>
           {!isEditing && (
             <SmallBtn onClick={() => setEditing(true)}>Edit Customer</SmallBtn>
-            
           )}
           <h3>Ticket #: {ticket.id}</h3>
           <input
@@ -117,19 +116,27 @@ const UserDetails = (props) => {
         </div>
         {userDisplay}
       </Container>
-      <div>
-        <textarea
-          rows="6"
-          cols="35"
-          value={externalNotes}
-          onChange={(e) => setExternalNotes(e.target.value)}
-        ></textarea>
-        <textarea
-          rows="6"
-          cols="35"
-          value={internalNotes}
-          onChange={(e) => setInternalNotes(e.target.value)}
-        ></textarea>
+      <div className={classes.notesContainer}>
+        <div className={classes.externalContainer}>
+          <h4>External Notes</h4>
+          <textarea
+            rows="6"
+            cols="35"
+            value={externalNotes}
+            onChange={(e) => setExternalNotes(e.target.value)}
+            className={classes.externalNotes}
+          ></textarea>
+        </div>
+        <div className={classes.internalContainer}>
+          <h4>Internal Notes</h4>
+          <textarea
+            rows="6"
+            cols="35"
+            value={internalNotes}
+            onChange={(e) => setInternalNotes(e.target.value)}
+            className={classes.internalNotes}
+          ></textarea>
+        </div>
       </div>
     </>
   );
