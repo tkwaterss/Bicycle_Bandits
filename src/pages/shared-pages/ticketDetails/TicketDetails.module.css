@@ -1,0 +1,106 @@
+/*^ Main Containers */
+.ticketDetailsContainer {
+  width: 100%;
+  display:flex;
+  gap: 10px;
+  height: 120px;
+}
+.ticketInfoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.userInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  gap: 8px;
+}
+.ticketInfoContainer h3 {
+  font-size: 15px;
+}
+.userInfoContainer h4 {
+  font-size: 13px;
+}
+.userInfoContainer h5 {
+  font-size: 11px;
+}
+
+/*^ Sub Containers */
+.userdetailsContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ticketdetailsContainer {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.detailsListContainer {
+  height: 100%;
+  display: flex;
+  width: 100%;
+}
+.detailsListTitles {
+  width: 60px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.detailsListValues {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/*^ Ticket Inputs Styling */
+.dueDatePicker {
+  background-color: #FFFBDB;
+  border:none;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+.dueDatePicker:hover {
+  background-color: #ebe4b6;
+  cursor: pointer;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
+}
+.dueDatePicker:focus {
+  outline: none;
+  background-color: #ebe4b6;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
+}
+
+.statusPicker {
+  background-color: #FFFBDB;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+.statusPicker:hover {
+  background-color: #ebe4b6;
+  cursor: pointer;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
+}
+.statusPicker:focus {
+  outline: none;
+  background-color: #ebe4b6;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
+}
+
+
+
+

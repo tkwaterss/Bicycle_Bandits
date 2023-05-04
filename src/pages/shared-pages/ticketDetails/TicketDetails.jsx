@@ -4,6 +4,7 @@ import UserDetails from "./UserDetails";
 import TicketItems from "./TicketItems";
 import AuthContext from "../../../store/authContext";
 import axios from "axios";
+import classes from "./TicketDetails.module.css";
 
 const TicketDetails = () => {
   const [ticket, setTicket] = useState({});

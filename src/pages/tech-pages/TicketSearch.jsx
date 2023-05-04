@@ -18,7 +18,7 @@ const TicketSearch = () => {
       status: "",
       category: "Customer",
     },
-    onSubmit: (values, helpers) => {
+    onSubmit: (values) => {
       axios
         .get(
           `http://localhost:4040/search/tickets?input=${values.input}&category=${values.category}`,
@@ -30,13 +30,13 @@ const TicketSearch = () => {
         )
         .then((res) => {
           let sortedList;
-          
+
           if (values.status !== "") {
             sortedList = res.data.filter((ticket) => {
               return ticket.status === values.status;
             });
           } else {
-            sortedList = res.data
+            sortedList = res.data;
           }
 
           setTicketList(sortedList);
@@ -59,9 +59,9 @@ const TicketSearch = () => {
           </ul>
         </Card>
       </Link>
-    )
-  })
-  
+    );
+  });
+
   return (
     <Container>
       <form onSubmit={formik.handleSubmit}>

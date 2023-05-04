@@ -3,6 +3,7 @@ import Container from "../../../components/UI/Container";
 import SearchBar from "../../../components/SearchBar";
 import AuthContext from "../../../store/authContext";
 import axios from "axios";
+import classes from "./TicketDetails.module.css";
 
 const TicketItems = (props) => {
   const { token } = useContext(AuthContext);

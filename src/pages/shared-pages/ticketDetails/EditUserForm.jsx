@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import AuthContext from "../../../store/authContext";
+import classes from "./TicketDetails.module.css";
 
 const EditUserForm = (props) => {
   const { ticket, setEditing } = props;

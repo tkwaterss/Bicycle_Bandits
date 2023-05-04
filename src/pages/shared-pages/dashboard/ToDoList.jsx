@@ -4,6 +4,8 @@ import Container from "../../../components/UI/Container";
 import Card from "../../../components/UI/Card";
 import classes from "./Dashboard.module.css";
 import AuthContext from "../../../store/authContext";
+import DeleteBtn from "../../../components/UI/DeleteBtn";
+import SmallBtn from "../../../components/UI/SmallBtn";
 
 const ToDoList = () => {
   const { token } = useContext(AuthContext);
@@ -57,24 +59,23 @@ const ToDoList = () => {
 
   let display = list.map((item) => {
     return (
-      <Card key={item.id} className={classes.ticketCard}>
-        <ul className={classes.ticketList}>
+      <Card key={item.id} className={classes.toDoCard}>
+        <ul className={classes.toDoList}>
           <li>{item.description}</li>
+          <DeleteBtn id={item.id} onClick={deleteItem}></DeleteBtn>
         </ul>
-        <button id={item.id} onClick={deleteItem}>
-          X
-        </button>
       </Card>
     );
   });
 
   return (
     <Container className={classes.toDoListContainer}>
-      <h2>To Do List</h2>
+      <h3>To Do List</h3>
       <div className={classes.cardContainer}>{display}</div>
+      <h5>Add Another Item</h5>
       <form onSubmit={submitHandler}>
-        <input type="text" ref={toDoRef} placeholder="New To Do Item" />
-        <button>ADD</button>
+        <input id={classes.toDoInput} type="text" ref={toDoRef} placeholder="New To Do Item" />
+        <SmallBtn type="submit">ADD</SmallBtn>
       </form>
     </Container>
   );

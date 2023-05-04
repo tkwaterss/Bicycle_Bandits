@@ -46,13 +46,23 @@ const TechTickets = () => {
     return (
       <Link key={ticket.id} to={`/ticket/${ticket.id}`}>
         <Card className={classes.ticketCard}>
-          <ul className={classes.ticketList}>
-            <li>{ticket.id}</li>
-            <li>{`${ticket.bike.brand}, ${ticket.bike.model}, ${ticket.bike.color}`}</li>
-            <li>{ticket.dueDate}</li>
-            <li>{ticket.status}</li>
-            <li>{`$${ticket.total}`}</li>
-          </ul>
+          <div className={classes.ticketList}>
+            <div id={classes.ticketId}>
+              <p>{ticket.id}</p>
+            </div>
+            <div id={classes.bikeDescription}>
+              <p>{`${ticket.bike.brand}, ${ticket.bike.model}, ${ticket.bike.color}`}</p>
+            </div>
+            <div id={classes.dueDate}>
+              <p>{ticket.dueDate}</p>
+            </div>
+            <div id={classes.status}>
+              <p>{ticket.status}</p>
+            </div>
+            <div id={classes.total}>
+              <p>{`$${parseFloat(ticket.total).toFixed(2)}`}</p>
+            </div>
+          </div>
         </Card>
       </Link>
     );
@@ -60,22 +70,24 @@ const TechTickets = () => {
 
   return (
     <Container className={classes.dashboardTicketContainer}>
-      <ul className={classes.titleBar}>
-        <li>Ticket ID</li>
-        <li> Bike Description</li>
-        <li>Due Date</li>
-        <li>Status</li>
-        <li>Cost</li>
-      </ul>
-      <form onSubmit={formik.handleSubmit} className={classes.searchForm}>
-        <SearchBar
-          id={"search"}
-          name={"search"}
-          value={formik.values.search}
-          onChange={formik.handleChange}
-          placeholder={"Search Tickets"}
-        ></SearchBar>
-      </form>
+      <div className={classes.titleContainer}>
+        <form onSubmit={formik.handleSubmit} className={classes.searchForm}>
+          <SearchBar
+            id={"search"}
+            name={"search"}
+            value={formik.values.search}
+            onChange={formik.handleChange}
+            placeholder={"Search Tickets"}
+          ></SearchBar>
+        </form>
+        <ul className={classes.titleBar}>
+          <li id={classes.ticketIdTitle} >ID</li>
+          <li id={classes.bikeDescriptionTitle} > Bike Description</li>
+          <li id={classes.dueDateTitle} >Due Date</li>
+          <li id={classes.statusTitle} >Status</li>
+          <li id={classes.totalTitle} >Cost</li>
+        </ul>
+      </div>
       <div className={classes.cardContainer}>{display}</div>
     </Container>
   );

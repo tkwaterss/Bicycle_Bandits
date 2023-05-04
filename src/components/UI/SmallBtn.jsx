@@ -1,16 +1,16 @@
 import React from "react";
 import classes from "./buttons.module.css";
 
-const LargeBtn = (props) => {
+const SmallBtn = (props) => {
   return (
     <button
       type={props.type}
       onClick={props.function}
-      className={`${classes.largeBtn} ${props.className}`}
+      className={`${classes.smallBtn} ${props.className}`}
     >
       {props.children}
     </button>
   );
 };
 
-export default LargeBtn;
+export default SmallBtn;

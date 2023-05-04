@@ -1,18 +1,11 @@
 .dashboardTicketContainer {
-  width: 90%;
+  width: 100%;
   padding: 0;
   padding-bottom: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
-}
-.toDoListContainer {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
 }
 .cardContainer {
   width: 95%;
@@ -23,17 +16,19 @@
 a {
   text-decoration: none;
 }
-
-.titleBar {
+.titleContainer {
   width: 100%;
+  border-radius: 8px 8px 0 0;
+  background-color: #30362F;
+  padding: 8px 4px 4px 4px;
+}
+.titleBar {
+  padding: 8px 3% 4px 3%;
   list-style: none;
   display: flex;
-  font-size: 14px;
+  font-size: 13px;
   justify-content: space-between;
-  background-color: #FFFBDB;
-  border-radius: 8px 8px 0 0;
-  color: #30362F;
-  padding: 4px 8px;
+  color: #FFFBDB;
 }
 .searchForm {
   text-align: center;
@@ -43,7 +38,6 @@ a {
   list-style: none;
   color: #30362F;
   display: flex;
-  font-size: 11px;
   padding: 4px 8px;
   display: flex;
   justify-content: space-between;
@@ -55,4 +49,112 @@ a {
   background-color: #ebe4b6;
   cursor: pointer;
   box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.ticketList p {
+  font-size: 10px;
+}
+
+#ticketId {
+  border-right: solid rgba(0, 0, 0, 0.4);
+  width: 5%;
+  display: flex;
+  justify-content: left;
+}
+#bikeDescription {
+  border-right: solid rgba(0, 0, 0, 0.4);
+  width: 46%;
+  display: flex;
+  justify-content: left;
+}
+#dueDate {
+  width: 14%;
+  display: flex;
+  justify-content: center;
+}
+#status {
+  border-right: solid rgba(0, 0, 0, 0.4);
+  border-left: solid rgba(0, 0, 0, 0.4);
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+#total {
+  width: 12%;
+  display: flex;
+  justify-content: right;
+}
+
+#ticketIdTitle {
+  width: 5%;
+  display: flex;
+  justify-content: left;
+}
+#bikeDescriptionTitle {
+  width: 46%;
+  display: flex;
+  justify-content: left;
+}
+#dueDateTitle {
+  width: 14%;
+  display: flex;
+  justify-content: center;
+}
+#statusTitle {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+#totalTitle {
+  width: 12%;
+  display: flex;
+  justify-content: right;
+}
+
+/* To Do List */
+.toDoListContainer {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.toDoCard {
+  border-radius: 4px;
+}
+.toDoCard:hover {
+  cursor: pointer;
+  box-shadow:inset 0 0 10px rgba(0, 0, 0, 0.4);
+}
+.toDoList {
+  list-style: none;
+  color: #30362F;
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.toDoListContainer form {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+}
+#toDoInput {
+  padding: 4px 8px;
+  width: 75%;
+  border-radius: 4px;
+  border: none;
+  background-color: #fffce8;
+  color: #30362F;
+}
+#toDoInput:hover {
+  background-color: #FFFBDB;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+#toDoInput:focus {
+  outline: none;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.1);
 }
