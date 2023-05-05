@@ -52,23 +52,23 @@ const tickets = [
   {userId: "10", bikeId: "10", externalNotes: "get this bike fixed up", internalNotes: "fix up the bike", dueDate: '2023-1-12', location: 'Storage', status: 'Done and Paid', total: '229.99'},
 ]
 const labor = [
-  {laborTitle: 'LABOR BASIC TUNE', laborDescription: 'basic tune', laborPrice: '85.00', laborTime: '45'},
-  {laborTitle: 'LABOR MAJOR TUNE', laborDescription: 'major tune', laborPrice: '150.00', laborTime: '90'},
-  {laborTitle: 'LABOR WHEEL TRUE', laborDescription: 'true wheel', laborPrice: '20.00', laborTime: '15'},
-  {laborTitle: 'LABOR DERAILLEUR ADJUSTMENT', laborDescription: 'adjust derailleur', laborPrice: '15.00', laborTime: '15'},
-  {laborTitle: 'LABOR BRAKE ADJUSTMENT', laborDescription: 'adjust brake', laborPrice: '15.00', laborTime: '15'},
-  {laborTitle: 'LABOR INSTALL NEW CHAIN', laborDescription: 'install new chain', laborPrice: '15.00', laborTime: '15'},
-  {laborTitle: 'LABOR INSTALL NEW GRIPS', laborDescription: 'install new grips', laborPrice: '10.00', laborTime: '15'},
-  {laborTitle: 'LABOR INSTALL NEW SADDLE', laborDescription: 'install new saddle', laborPrice: '10.00', laborTime: '15'},
-  {laborTitle: 'LABOR HUB ADJUSTMENT', laborDescription: 'adjust hub', laborPrice: '15.00', laborTime: '15'},
-  {laborTitle: 'LABOR HEADSET ADJUSTMENT', laborDescription: 'adjust headset', laborPrice: '15.00', laborTime: '15'},
+  {laborTitle: 'labor basic tune', laborDescription: 'basic tune', laborPrice: '85.00', laborTime: '45'},
+  {laborTitle: 'labor major tune', laborDescription: 'major tune', laborPrice: '150.00', laborTime: '90'},
+  {laborTitle: 'labor wheel true', laborDescription: 'true wheel', laborPrice: '20.00', laborTime: '15'},
+  {laborTitle: 'labor derailleur adjustment', laborDescription: 'adjust derailleur', laborPrice: '15.00', laborTime: '15'},
+  {laborTitle: 'labor brake adjustment', laborDescription: 'adjust brake', laborPrice: '15.00', laborTime: '15'},
+  {laborTitle: 'labor install new chain', laborDescription: 'install new chain', laborPrice: '15.00', laborTime: '15'},
+  {laborTitle: 'labor install new grips', laborDescription: 'install new grips', laborPrice: '10.00', laborTime: '15'},
+  {laborTitle: 'labor install new saddle', laborDescription: 'install new saddle', laborPrice: '10.00', laborTime: '15'},
+  {laborTitle: 'labor hub adjustment', laborDescription: 'adjust hub', laborPrice: '15.00', laborTime: '15'},
+  {laborTitle: 'labor headset adjustment', laborDescription: 'adjust headset', laborPrice: '15.00', laborTime: '15'},
 ]
 const products = [
-  {productTitle: 'Shimano Chain', productDescription: '', productPrice: '25.99', productImage: 'some image'},
-  {productTitle: 'Rear Shifter', productDescription: '', productPrice: '39.99', productImage: 'some image'},
-  {productTitle: 'Pro Saddle', productDescription: '', productPrice: '15.99', productImage: 'some image'},
-  {productTitle: 'DT Swiss Wheel', productDescription: '', productPrice: '100.99', productImage: 'some image'},
-  {productTitle: 'Carbon Bar', productDescription: '', productPrice: '75.99', productImage: 'some image'},
+  {productTitle: 'shimano chain', productDescription: '', productPrice: '25.99', productImage: 'some image'},
+  {productTitle: 'rear shifter', productDescription: '', productPrice: '39.99', productImage: 'some image'},
+  {productTitle: 'pro saddle', productDescription: '', productPrice: '15.99', productImage: 'some image'},
+  {productTitle: 'dt swiss wheel', productDescription: '', productPrice: '100.99', productImage: 'some image'},
+  {productTitle: 'carbon bar', productDescription: '', productPrice: '75.99', productImage: 'some image'},
 ]
 const orders= [
   {userId: "1", orderTotal: '25.99'},

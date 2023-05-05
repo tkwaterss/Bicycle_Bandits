@@ -36,9 +36,9 @@ const NewTicket = () => {
       .max(9999999999, "Phone number cannot be more than 10 digits")
       .typeError("Phone number must be a number")
       .required("A phone number is required"),
-    brand: yup.string().required("This field is required"),
-    model: yup.string().required("This field is required"),
-    color: yup.string().required("This field is required"),
+    brand: !existingBike ? yup.string().required("This field is required") : yup.string(),
+    model: !existingBike ? yup.string().required("This field is required") : yup.string(),
+    color: !existingBike ? yup.string().required("This field is required") : yup.string(),
     address: yup.string(),
     size: yup.string(),
   });
@@ -140,6 +140,10 @@ const NewTicket = () => {
           location: values.location,
           bikeId: values.bikeId,
           userId: values.userId,
+          total: 0,
+          status: "Checked In",
+          internalNotes: "",
+          externalNotes: "",
         },
       };
 

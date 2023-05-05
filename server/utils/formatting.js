@@ -8,15 +8,6 @@ module.exports = {
       })
       .join(" ");
   },
-  toUpperCase: (string) => {
-    return string.toUpperCase();
-  },
-  toLowerCase: (string) => {
-    return string.toLowerCase();
-  },
-  phoneFormat: (string) => {
-    //remove all special characters and make sure length is 10
-  }
 };
 
 //phone number formatting / validation

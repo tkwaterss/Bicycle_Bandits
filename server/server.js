@@ -34,6 +34,7 @@ const {
   addTicketProduct,
   updateTicketProduct,
   deleteTicketProduct,
+  searchTicketItems,
 } = require("./controllers/ticketItems");
 const {
   searchCustomers,
@@ -111,6 +112,7 @@ server.delete("/tickets/:ticketId",isAuthenticated, deleteTicket);
 
 //ticketItems controller end points
 server.get("/ticketItems/:ticketId",isAuthenticated, getTicketItems);
+server.get("/search/ticketItems", isAuthenticated, searchTicketItems)
 server.post("/ticketLabor",isAuthenticated, addTicketLabor);
 server.put("/ticketLabor/:ticketLaborId",isAuthenticated, updateTicketLabor);
 server.delete("/ticketLabor/:ticketLaborId",isAuthenticated, deleteTicketLabor);

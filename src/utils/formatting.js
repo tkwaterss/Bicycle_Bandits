@@ -16,5 +16,8 @@ module.exports = {
   },
   phoneFormat: (string) => {
     //remove all special characters and make sure length is 10
+  },
+  priceFormat: (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
   }
 };

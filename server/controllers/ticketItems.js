@@ -6,6 +6,7 @@ const {
   TicketProduct,
 } = require("../util/models");
 const { Op } = require("sequelize");
+const {toTitleCase} = require('../utils/formatting.js')
 
 module.exports = {
   //get full list of products and labor by Ticket ID
@@ -32,7 +33,7 @@ module.exports = {
 
       let ticketTotal = laborTotal + productTotal;
       await Ticket.update({ total: ticketTotal }, { where: { id: +ticketId } });
-
+        
       const list = {
         labor,
         products,
@@ -47,11 +48,44 @@ module.exports = {
       res.sendStatus(400);
     }
   },
+  searchTicketItems: async (req, res) => {
+    let { input } = req.query;
+    input = input.toLowerCase();
+    try {
+      let labor = await Labor.findAll({
+        where: { laborTitle: { [Op.substring]: input } },
+      });
+      let products = await Product.findAll({
+        where: { productTitle: { [Op.substring]: input } },
+      });
+      labor = labor.map((labor) => {
+        labor.dataValues.laborTitle = labor.dataValues.laborTitle.toUpperCase();
+        return labor;
+      });
+      products = products.map((product) => {
+        product.dataValues.productTitle = toTitleCase(
+          product.dataValues.productTitle
+        );
+        return product;
+      });
+      console.log(labor)
+      let response = {
+        labor,
+        products,
+      };
+      console.log(response)
+      res.status(200).send(response);
+    } catch (err) {
+      console.log("error in searchTicketItems");
+      console.log(err);
+      res.sendStatus(400);
+    }
+  },
   //given laborId and ticketId add new ticketLabor
   addTicketLabor: async (req, res) => {
     try {
-      await TicketLabor.create(req.body);
-      res.sendStatus(200);
+      let newItem = await TicketLabor.create(req.body);
+      res.status(200).send(newItem);
     } catch (err) {
       console.log("error in addTicketLabor");
       console.log(err);
@@ -60,11 +94,14 @@ module.exports = {
   },
   //update quantity of ticketLabor item given ID, recieves body with new QTY
   updateTicketLabor: async (req, res) => {
-    const {ticketLaborId} = req.params
-    const {quantity} = req.body
+    const { ticketLaborId } = req.params;
+    const { quantity } = req.body;
     try {
-      await TicketLabor.update({quantity: quantity}, {where: {id: +ticketLaborId}})
-      res.status(200).send({quantity});
+      await TicketLabor.update(
+        { quantity: quantity },
+        { where: { id: +ticketLaborId } }
+      );
+      res.status(200).send({ quantity });
     } catch (err) {
       console.log("error in updateTicketLabor");
       console.log(err);
@@ -96,11 +133,14 @@ module.exports = {
   },
   //update quantity of ticketProduct item given ID, recieves body with new QTY
   updateTicketProduct: async (req, res) => {
-    const {ticketProductId} = req.params
-    const {quantity} = req.body
+    const { ticketProductId } = req.params;
+    const { quantity } = req.body;
     try {
-      await TicketProduct.update({quantity: quantity}, {where: {id: +ticketProductId}})
-      res.status(200).send({quantity});
+      await TicketProduct.update(
+        { quantity: quantity },
+        { where: { id: +ticketProductId } }
+      );
+      res.status(200).send({ quantity });
     } catch (err) {
       console.log("error in updateTicketProduct");
       console.log(err);
