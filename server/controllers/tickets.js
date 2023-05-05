@@ -119,9 +119,23 @@ module.exports = {
       const ticket = await Ticket.findByPk(ticketId);
       await ticket.set(req.body);
       await ticket.save();
-      res.sendStatus(200)
+      res.sendStatus(200);
     } catch (err) {
       console.log("error in editTicket");
+      console.log(err);
+      res.sendStatus(400);
+    }
+  },
+  //update ticket total
+  updateTotal: async (req, res) => {
+    const { ticketId } = req.params;
+    try {
+      const ticket = await Ticket.findByPk(ticketId);
+      await ticket.set(req.body);
+      await ticket.save();
+      res.sendStatus(200);
+    } catch (err) {
+      console.log("error in updateTotal");
       console.log(err);
       res.sendStatus(400);
     }

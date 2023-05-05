@@ -14,6 +14,7 @@ import ShoppingPage from "./pages/customer-pages/ShoppingPage";
 import NewTicket from "./pages/tech-pages/NewTicket";
 import ProductLaborSearch from "./pages/tech-pages/ProductLaborSearch";
 import TicketSearch from "./pages/tech-pages/TicketSearch";
+import productsCache from './store/productsCache'
 
 function App() {
   const authCtx = useContext(AuthContext);

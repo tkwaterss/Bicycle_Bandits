@@ -64,7 +64,7 @@ module.exports = {
     const {quantity} = req.body
     try {
       await TicketLabor.update({quantity: quantity}, {where: {id: +ticketLaborId}})
-      res.sendStatus(200);
+      res.status(200).send({quantity});
     } catch (err) {
       console.log("error in updateTicketLabor");
       console.log(err);
@@ -100,7 +100,7 @@ module.exports = {
     const {quantity} = req.body
     try {
       await TicketProduct.update({quantity: quantity}, {where: {id: +ticketProductId}})
-      res.sendStatus(200);
+      res.status(200).send({quantity});
     } catch (err) {
       console.log("error in updateTicketProduct");
       console.log(err);

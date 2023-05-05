@@ -9,8 +9,6 @@ import { Link } from "react-router-dom"
 const CustomerTickets = () => {
   const { token, userId } = useContext(AuthContext);
   const [tickets, setTickets] = useState([])
-  // need to pull user Id out of local storage or context?
-  console.log(userId)
 
   useEffect(() => {
     axios.get(`http://localhost:4040/tickets/${userId}`, {

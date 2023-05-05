@@ -23,6 +23,7 @@ const {
   searchTickets,
   newTicket,
   editTicket,
+  updateTotal,
   deleteTicket,
 } = require("./controllers/tickets");
 const {
@@ -105,6 +106,7 @@ server.get("/ticket/:ticketId",isAuthenticated, getTicketDetails);
 server.get("/search/tickets",isAuthenticated, searchTickets);
 server.post("/tickets",isAuthenticated, newTicket);
 server.put("/tickets/:ticketId",isAuthenticated, editTicket);
+server.put("/tickets/total/:ticketId", isAuthenticated, updateTotal);
 server.delete("/tickets/:ticketId",isAuthenticated, deleteTicket);
 
 //ticketItems controller end points
