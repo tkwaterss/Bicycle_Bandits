@@ -13,7 +13,7 @@ const createToken = (email, id) => {
 module.exports = {
   register: async (req, res) => {
     try {
-      const { firstname, lastname, email, password, phone, address } = req.body;
+      const { firstname, lastname, email, password, phone, address, employee } = req.body;
 
       //TODO Utilize express-validator here to check all values are okay
 
@@ -31,7 +31,7 @@ module.exports = {
           hashedPass: hash,
           phone: phone,
           address: address,
-          employee: false,
+          employee: employee,
         });
 
         const token = createToken(

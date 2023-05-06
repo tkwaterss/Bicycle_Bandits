@@ -25,7 +25,7 @@ const TicketDetails = () => {
   return (
     <>
       {ticket.user && (
-        <UserDetails ticket={ticket} id={id} employee={employee} />
+        <UserDetails ticket={ticket} setTicket={setTicket} id={id} employee={employee} />
       )}
       <TicketItems ticket={ticket} id={id} employee={employee} />
     </>

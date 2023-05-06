@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
@@ -8,9 +8,11 @@ import classes from "./Landing.module.css";
 import LargeBtn from "../../components/UI/LargeBtn";
 import Input from "../../components/UI/Input";
 import { toLowerCase, toTitleCase } from "../../utils/formatting";
+import SmallBtn from "../../components/UI/SmallBtn"
 
 const Register = () => {
   const authCtx = useContext(AuthContext);
+  const [employee, setEmployee] = useState(false);
 
   const validationSchema = yup.object().shape({
     firstname: yup.string().required("This field is required"),
@@ -56,6 +58,7 @@ const Register = () => {
       confirmPass: "",
       phone: "",
       address: "",
+      employee: employee,
     },
     validationSchema: validationSchema,
     onSubmit: (values, helpers) => {
@@ -63,6 +66,7 @@ const Register = () => {
       values.firstname = toTitleCase(values.firstname);
       values.lastname = toTitleCase(values.lastname);
       values.email = toLowerCase(values.email);
+      values.employee = employee;
 
       axios
         .post("http://localhost:4040/register", values)
@@ -84,6 +88,10 @@ const Register = () => {
     <Container className={classes.registerContainer}>
       <h3>ENTER YOUR INFORMATION</h3>
       <form onSubmit={formik.handleSubmit} className={classes.registerForm}>
+        <div>
+          //! Radio group to choose customer or employee
+          //! Or different submit buttons?
+        </div>
         <div className={classes.registerInputs}>
           <Input
             id="firstname"
@@ -212,9 +220,12 @@ const Register = () => {
             Address
           </Input>
         </div>
-
-        <LargeBtn type="submit" className={classes.submitBtn}>
-          SUBMIT
+            //!Can I pass data through the submit button?
+        <LargeBtn type="submit" className={classes.submitBtn} function={() => setEmployee(true)}>
+          REGISTER AS EMPLOYEE
+        </LargeBtn>
+        <LargeBtn type="submit" className={classes.submitBtn} function={() => setEmployee(false)}>
+          REGISTER AS CUSTOMER
         </LargeBtn>
       </form>
     </Container>

@@ -5,8 +5,10 @@ import AuthContext from "../../../store/authContext";
 import classes from "./TicketDetails.module.css";
 
 const EditUserForm = (props) => {
-  const { ticket, setEditing } = props;
+  const { ticket, setEditing, setTicket } = props;
   const { token } = useContext(AuthContext);
+
+  console.log(ticket);
 
   const formik = useFormik({
     initialValues: {
@@ -37,7 +39,7 @@ const EditUserForm = (props) => {
           size: values.size,
         },
       };
-
+      setTicket({ ...ticket, user: body.user, bike: body.bike });
       axios
         .put(
           `http://localhost:4040/users/update?userId=${ticket.userId}&bikeId=${ticket.bikeId}`,
@@ -48,7 +50,7 @@ const EditUserForm = (props) => {
             },
           }
         )
-        .then((res) => console.log(res.data))
+        .then((res) => console.log(res))
         .catch((err) => console.log(err));
 
       setEditing(false);

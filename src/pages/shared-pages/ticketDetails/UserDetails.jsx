@@ -7,7 +7,7 @@ import classes from "./TicketDetails.module.css";
 import SmallBtn from "../../../components/UI/SmallBtn";
 
 const UserDetails = (props) => {
-  const { ticket, id, employee } = props;
+  const { ticket, id, employee, setTicket } = props;
   const [internalNotes, setInternalNotes] = useState(ticket.internalNotes);
   const [externalNotes, setExternalNotes] = useState(ticket.externalNotes);
   const [status, setStatus] = useState(ticket.status);
@@ -81,7 +81,7 @@ const UserDetails = (props) => {
     );
   }
   if (isEditing) {
-    userDisplay = <EditUserForm ticket={ticket} setEditing={setEditing} />;
+    userDisplay = <EditUserForm ticket={ticket} setEditing={setEditing} setTicket={setTicket} />;
   }
 
   return (
