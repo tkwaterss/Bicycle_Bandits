@@ -87,13 +87,22 @@ module.exports = {
   newUserBikeTicket: async (req, res) => {
     try {
       console.log(req.body)
-      let newUser = await User.create(req.body.newUserBody);
-      req.body.newBikeBody.userId = newUser.id;
-      let newBike = await Bike.create(req.body.newBikeBody);
-      req.body.newTicketBody.userId = newUser.id;
-      req.body.newTicketBody.bikeId = newBike.id;
-      let newTicket = await Ticket.create(req.body.newTicketBody);
-      res.status(200).send(newTicket)
+
+      const emailExists = await User.findOne({ where: { email: req.body.newUserBody.email } });
+      const phoneExists = await User.findOne({ where: { phone: req.body.newUserBody.phone } });
+      if (emailExists) {
+        res.status(400).send("An account using that email already exists");
+      } else if (phoneExists) {
+        res.status(400).send("An account with that phone number already exists");
+      } else {
+        let newUser = await User.create(req.body.newUserBody);
+        req.body.newBikeBody.userId = newUser.id;
+        let newBike = await Bike.create(req.body.newBikeBody);
+        req.body.newTicketBody.userId = newUser.id;
+        req.body.newTicketBody.bikeId = newBike.id;
+        let newTicket = await Ticket.create(req.body.newTicketBody);
+        res.status(200).send(newTicket)
+      }
     } catch (err) {
       console.log("error in createBike");
       console.log(err);

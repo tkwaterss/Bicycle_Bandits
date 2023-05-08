@@ -12,7 +12,7 @@ module.exports = {
             [Op.gte]: new Date(),
           },
         },
-        include: [{ model: Bike }],
+        include: [{ model: Bike }, {model: User}],
         limit: 10,
         order: [["dueDate", "ASC"]],
       });

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Container from "../../components/UI/Container";
 import SearchBar from "../../components/SearchBar";
 import { useFormik } from "formik";
@@ -6,11 +6,23 @@ import AuthContext from "../../store/authContext";
 import axios from "axios";
 import Card from "../../components/UI/Card";
 import { Link } from "react-router-dom";
+import classes from "./TicketSearch.module.css";
 
 const TicketSearch = () => {
   const { token } = useContext(AuthContext);
-
   const [ticketList, setTicketList] = useState([]);
+
+  console.log(ticketList)
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4040/tickets`, {
+        headers: {
+          authorization: token,
+        },
+      })
+      .then((res) => setTicketList(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -48,14 +60,18 @@ const TicketSearch = () => {
   let displayList = ticketList.map((ticket) => {
     return (
       <Link key={ticket.id} to={`/ticket/${ticket.id}`}>
-        <Card>
-          <ul>
-            <li>{`${ticket.user.firstname} ${ticket.user.lastname}`}</li>
-            <li>{`${ticket.bike.brand}, ${ticket.bike.model} / ${ticket.bike.color}`}</li>
-            <li>{ticket.location}</li>
-            <li>{ticket.dueDate}</li>
-            <li>{ticket.status}</li>
-            <li>{ticket.total}</li>
+        <Card className={classes.ticketCard}>
+          <ul className={classes.ticketDetailsList}>
+            <li
+              id={classes.customerName}
+            >{`${ticket.user.firstname} ${ticket.user.lastname}`}</li>
+            <li
+              id={classes.bikeDescription}
+            >{`${ticket.bike.brand}, ${ticket.bike.model} / ${ticket.bike.color}`}</li>
+            <li id={classes.bikeLocation}>{ticket.location}</li>
+            <li id={classes.ticketDueDate}>{ticket.dueDate}</li>
+            <li id={classes.ticketStatus}>{ticket.status}</li>
+            <li id={classes.ticketTotal}>$ {ticket.total}</li>
           </ul>
         </Card>
       </Link>
@@ -63,50 +79,54 @@ const TicketSearch = () => {
   });
 
   return (
-    <Container>
-      <form onSubmit={formik.handleSubmit}>
-        <SearchBar
-          id="input"
-          name="input"
-          type="text"
-          value={formik.values.input}
-          onChange={formik.handleChange}
-          placeholder="Search Tickets"
-        ></SearchBar>
-        <select
-          id="status"
-          name="status"
-          defaultValue=""
-          onChange={formik.handleChange}
-        >
-          <option value="">-- Sort by Status --</option>
-          <option value="Checked In">Checked In</option>
-          <option value="Waiting for Parts">Waiting for Parts</option>
-          <option value="Not Here">Not Here</option>
-          <option value="Finished">Finished</option>
-          <option value="Done and Paid">Done and Paid</option>
-        </select>
-        <select
-          id="category"
-          name="category"
-          onChange={formik.handleChange}
-          value={formik.values.category}
-        >
-          <option value="Customer">Customer</option>
-          <option value="Bike Info">Bike Info</option>
-        </select>
-      </form>
-      <div>
-        <div>
-          <h5>Customer Name</h5>
-          <h5>Bike Description</h5>
-          <h5>Location</h5>
-          <h5>Due Date</h5>
-          <h5>Status</h5>
-          <h5>Price</h5>
-        </div>
-        <div>{displayList}</div>
+    <Container className={classes.ticketSearchContainer}>
+      <div className={classes.titleContainer}>
+        <form onSubmit={formik.handleSubmit} className={classes.searchForm}>
+          <div className={classes.searchBarContainer}>
+            <SearchBar
+              id="input"
+              name="input"
+              type="text"
+              value={formik.values.input}
+              onChange={formik.handleChange}
+              placeholder="Search Tickets"
+            ></SearchBar>
+          </div>
+          <div className={classes.selectContainer}>
+            <select
+              id="status"
+              name="status"
+              defaultValue=""
+              onChange={formik.handleChange}
+            >
+              <option value="">-- Sort by Status --</option>
+              <option value="Checked In">Checked In</option>
+              <option value="Waiting for Parts">Waiting for Parts</option>
+              <option value="Not Here">Not Here</option>
+              <option value="Finished">Finished</option>
+              <option value="Done and Paid">Done and Paid</option>
+            </select>
+            <select
+              id="category"
+              name="category"
+              onChange={formik.handleChange}
+              value={formik.values.category}
+            >
+              <option value="Customer">Customer</option>
+              <option value="Bike Info">Bike Info</option>
+            </select>
+          </div>
+        </form>
+        <ul className={classes.titleBar}>
+          <li id={classes.nameTitle}>Customer Name</li>
+          <li id={classes.bikeTitle}>Bike Description</li>
+          <li id={classes.locationTitle}>Location</li>
+          <li id={classes.dueDateTitle}>Due Date</li>
+          <li id={classes.statusTitle}>Status</li>
+          <li id={classes.priceTitle}>Price</li>
+        </ul>
       </div>
+      <div className={classes.cardContainer}>{displayList}</div>
     </Container>
   );
 };

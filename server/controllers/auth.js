@@ -8,19 +8,19 @@ const createToken = (email, id) => {
   return jwt.sign({ email, id }, SECRET, { expiresIn: "2 days" });
 };
 
-//TODO Ensure that response codes are accurate to results
-//! Account for two account types here? some kind of validation
 module.exports = {
   register: async (req, res) => {
     try {
-      const { firstname, lastname, email, password, phone, address, employee } = req.body;
-
-      //TODO Utilize express-validator here to check all values are okay
+      const { firstname, lastname, email, password, phone, address, employee } =
+        req.body;
 
       //checking if account exists, if so then prompt to login or try different email
-      const userExists = await User.findOne({ where: { email } });
-      if (userExists) {
+      const emailExists = await User.findOne({ where: { email } });
+      const phoneExists = await User.findOne({ where: { phone } });
+      if (emailExists) {
         res.status(400).send("An account using that email already exists");
+      } else if (phoneExists) {
+        res.status(400).send("An account with that phone number already exists");
       } else {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
@@ -69,7 +69,7 @@ module.exports = {
       console.log(user);
       if (user) {
         const isAuthenticated = bcrypt.compareSync(password, user.hashedPass);
-        console.log(isAuthenticated)
+        console.log(isAuthenticated);
         if (isAuthenticated) {
           const token = createToken(user.dataValues.email, user.dataValues.id);
           const exp = Date.now() + 1000 * 60 * 60 * 48;

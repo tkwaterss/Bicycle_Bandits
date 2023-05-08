@@ -8,7 +8,8 @@ import classes from "./Landing.module.css";
 import LargeBtn from "../../components/UI/LargeBtn";
 import Input from "../../components/UI/Input";
 import { toLowerCase, toTitleCase } from "../../utils/formatting";
-import SmallBtn from "../../components/UI/SmallBtn"
+import SmallBtn from "../../components/UI/SmallBtn";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const authCtx = useContext(AuthContext);
@@ -41,7 +42,8 @@ const Register = () => {
           .oneOf([yup.ref("password")], "The passwords do not match");
       }
     }),
-    phone: yup.number()
+    phone: yup
+      .number()
       .min(1000000000, "Phone number must be at least 10 digits")
       .max(9999999999, "Phone number cannot be more than 10 digits")
       .typeError("Phone number must be a number")
@@ -75,7 +77,13 @@ const Register = () => {
           console.log("after auth", data);
         })
         .catch((err) => {
-          console.log("Sorry there was an issue with your registration", err);
+          console.log(err);
+          Swal.fire({
+            title: "Account Already Exists!",
+            text: err.response.data,
+            icon: "error",
+            confirmButtonText: "Enter New Info",
+          });
         });
       helpers.resetForm();
     },
@@ -88,10 +96,7 @@ const Register = () => {
     <Container className={classes.registerContainer}>
       <h3>ENTER YOUR INFORMATION</h3>
       <form onSubmit={formik.handleSubmit} className={classes.registerForm}>
-        <div>
-          //! Radio group to choose customer or employee
-          //! Or different submit buttons?
-        </div>
+        <div></div>
         <div className={classes.registerInputs}>
           <Input
             id="firstname"
@@ -220,11 +225,18 @@ const Register = () => {
             Address
           </Input>
         </div>
-            //!Can I pass data through the submit button?
-        <LargeBtn type="submit" className={classes.submitBtn} function={() => setEmployee(true)}>
+        <LargeBtn
+          type="submit"
+          className={classes.submitBtn}
+          function={() => setEmployee(true)}
+        >
           REGISTER AS EMPLOYEE
         </LargeBtn>
-        <LargeBtn type="submit" className={classes.submitBtn} function={() => setEmployee(false)}>
+        <LargeBtn
+          type="submit"
+          className={classes.submitBtn}
+          function={() => setEmployee(false)}
+        >
           REGISTER AS CUSTOMER
         </LargeBtn>
       </form>

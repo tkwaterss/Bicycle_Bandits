@@ -2,11 +2,13 @@ import React, { useContext, useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../store/authContext";
 import Container from "../../components/UI/Container";
 import Input from "../../components/UI/Input";
 import LargeBtn from "../../components/UI/LargeBtn";
+import SmallBtn from "../../components/UI/SmallBtn";
 import Card from "../../components/UI/Card";
 import classes from "./NewTicket.module.css";
 
@@ -36,9 +38,15 @@ const NewTicket = () => {
       .max(9999999999, "Phone number cannot be more than 10 digits")
       .typeError("Phone number must be a number")
       .required("A phone number is required"),
-    brand: !existingBike ? yup.string().required("This field is required") : yup.string(),
-    model: !existingBike ? yup.string().required("This field is required") : yup.string(),
-    color: !existingBike ? yup.string().required("This field is required") : yup.string(),
+    brand: !existingBike
+      ? yup.string().required("This field is required")
+      : yup.string(),
+    model: !existingBike
+      ? yup.string().required("This field is required")
+      : yup.string(),
+    color: !existingBike
+      ? yup.string().required("This field is required")
+      : yup.string(),
     address: yup.string(),
     size: yup.string(),
   });
@@ -155,9 +163,17 @@ const NewTicket = () => {
             },
           })
           .then((res) => {
-            navigate(`/ticket/${res.data.id}`)
+            navigate(`/ticket/${res.data.id}`);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err.response.data);
+            Swal.fire({
+              title: "Error!",
+              text: err.response.data,
+              icon: "error",
+              confirmButtonText: "Fix Inputs",
+            });
+          });
 
       const createBikeTicket = () =>
         axios
@@ -167,7 +183,7 @@ const NewTicket = () => {
             },
           })
           .then((res) => {
-            navigate(`/ticket/${res.data.id}`)
+            navigate(`/ticket/${res.data.id}`);
           })
           .catch((err) => console.log(err));
 
@@ -179,7 +195,7 @@ const NewTicket = () => {
             },
           })
           .then((res) => {
-            navigate(`/ticket/${res.data.id}`)
+            navigate(`/ticket/${res.data.id}`);
           })
           .catch((err) => console.log(err));
 
@@ -204,9 +220,9 @@ const NewTicket = () => {
 
   let displayUsers = users.map((user) => {
     return (
-      <Card key={user.id}>
-        <div style={{ color: "black" }} onClick={() => selectUser(user.id)}>
-          <div>
+      <Card key={user.id} className={classes.suggestionCard}>
+        <div onClick={() => selectUser(user.id)} className={classes.suggestionDiv}>
+          <div className={classes.nameNumberDiv}>
             <h5>{`${user.firstname} ${user.lastname}`}</h5>
             <h5>{user.phone}</h5>
           </div>
@@ -229,9 +245,9 @@ const NewTicket = () => {
   let bikeForm = (
     <>
       {user[0] ? (
-        <button onClick={() => setExistingBike(true)}>
+        <SmallBtn className={classes.chooseExistingBikeBtn} onClick={() => setExistingBike(true)}>
           Choose Existing Bike
-        </button>
+        </SmallBtn>
       ) : (
         ""
       )}
@@ -248,7 +264,7 @@ const NewTicket = () => {
         Brand
       </Input>
       {formik.touched.brand && formik.errors.brand ? (
-        <div>{formik.errors.brand}</div>
+        <div className={classes.errorMessage}>{formik.errors.brand}</div>
       ) : (
         <div className={classes.placeholder}></div>
       )}
@@ -265,7 +281,7 @@ const NewTicket = () => {
         Model
       </Input>
       {formik.touched.model && formik.errors.model ? (
-        <div>{formik.errors.model}</div>
+        <div className={classes.errorMessage}>{formik.errors.model}</div>
       ) : (
         <div className={classes.placeholder}></div>
       )}
@@ -282,7 +298,7 @@ const NewTicket = () => {
         Color
       </Input>
       {formik.touched.color && formik.errors.color ? (
-        <div>{formik.errors.color}</div>
+        <div className={classes.errorMessage}>{formik.errors.color}</div>
       ) : (
         <div className={classes.placeholder}></div>
       )}
@@ -303,6 +319,7 @@ const NewTicket = () => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         defaultValue=""
+        className={classes.bikeTypeSelector}
       >
         <option value="">-- Select a Type --</option>
         <option value="Full Suspension">Full Suspension</option>
@@ -316,8 +333,9 @@ const NewTicket = () => {
   );
 
   return (
-    <Container>
-      <form onSubmit={formik.handleSubmit}>
+    <Container className={classes.newTicketContainer}>
+      <form onSubmit={formik.handleSubmit} className={classes.newTicketForm}>
+        <h3>Enter Details</h3>
         <Input
           id="dueDate"
           name="dueDate"
@@ -333,7 +351,7 @@ const NewTicket = () => {
           Due Date
         </Input>
         {formik.touched.dueDate && formik.errors.dueDate ? (
-          <div>{formik.errors.dueDate}</div>
+          <div className={classes.errorMessage}>{formik.errors.dueDate}</div>
         ) : (
           <div className={classes.placeholder}></div>
         )}
@@ -352,112 +370,121 @@ const NewTicket = () => {
           Location
         </Input>
         {formik.touched.location && formik.errors.location ? (
-          <div>{formik.errors.location}</div>
+          <div className={classes.errorMessage}>{formik.errors.location}</div>
         ) : (
           <div className={classes.placeholder}></div>
         )}
-        <h4>Customer Details</h4>
-        <Input
-          id="firstname"
-          name="firstname"
-          type="text"
-          value={formik.values.firstname}
-          onChange={handleFirstName}
-          onBlur={formik.handleBlur}
-          placeholder="First Name"
-          invalid={
-            formik.touched.firstname && formik.errors.firstname ? true : false
-          }
-        >
-          First Name
-        </Input>
-        {formik.touched.firstname && formik.errors.firstname ? (
-          <div>{formik.errors.firstname}</div>
-        ) : (
-          <div className={classes.placeholder}></div>
-        )}
-        <Input
-          id="lastname"
-          name="lastname"
-          type="text"
-          value={formik.values.lastname}
-          onChange={handleLastName}
-          onBlur={formik.handleBlur}
-          placeholder="Last Name"
-          invalid={
-            formik.touched.lastname && formik.errors.lastname ? true : false
-          }
-        >
-          Last Name
-        </Input>
-        {formik.touched.lastname && formik.errors.lastname ? (
-          <div>{formik.errors.lastname}</div>
-        ) : (
-          <div className={classes.placeholder}></div>
-        )}
-        <Input
-          id="email"
-          name="email"
-          type="text"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          placeholder="Email"
-          invalid={formik.touched.email && formik.errors.email ? true : false}
-        >
-          Email
-        </Input>
-        {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
-        ) : (
-          <div className={classes.placeholder}></div>
-        )}
-        <Input
-          id="phone"
-          name="phone"
-          type="text"
-          value={formik.values.phone}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          placeholder="Phone"
-          invalid={formik.touched.phone && formik.errors.phone ? true : false}
-        >
-          Phone
-        </Input>
-        {formik.touched.phone && formik.errors.phone ? (
-          <div>{formik.errors.phone}</div>
-        ) : (
-          <div className={classes.placeholder}></div>
-        )}
-        <Input
-          id="address"
-          name="address"
-          type="text"
-          value={formik.values.address}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          placeholder="Address"
-        >
-          Address
-        </Input>
-        <h4>Bicycle Details</h4>
-
-        {existingBike ? (
-          <div>
-            <h4>Choose an existing Bicycle:</h4>
-            <select name="bikes" id="bikes" onChange={selectBike}>
-              <option defaultValue="no bike">-- Choose A Bike --</option>
-              {bikesList && bikesList}
-            </select>
-            <button onClick={() => setExistingBike(false)}>Add New Bike</button>
-          </div>
-        ) : (
-          bikeForm
-        )}
+        <div className={classes.userInfoContainer}>
+          <h4>Customer Details</h4>
+          <Input
+            id="firstname"
+            name="firstname"
+            type="text"
+            value={formik.values.firstname}
+            onChange={handleFirstName}
+            onBlur={formik.handleBlur}
+            placeholder="First Name"
+            invalid={
+              formik.touched.firstname && formik.errors.firstname ? true : false
+            }
+          >
+            First Name
+          </Input>
+          {formik.touched.firstname && formik.errors.firstname ? (
+            <div className={classes.errorMessage}>
+              {formik.errors.firstname}
+            </div>
+          ) : (
+            <div className={classes.placeholder}></div>
+          )}
+          <Input
+            id="lastname"
+            name="lastname"
+            type="text"
+            value={formik.values.lastname}
+            onChange={handleLastName}
+            onBlur={formik.handleBlur}
+            placeholder="Last Name"
+            invalid={
+              formik.touched.lastname && formik.errors.lastname ? true : false
+            }
+          >
+            Last Name
+          </Input>
+          {formik.touched.lastname && formik.errors.lastname ? (
+            <div className={classes.errorMessage}>{formik.errors.lastname}</div>
+          ) : (
+            <div className={classes.placeholder}></div>
+          )}
+          <Input
+            id="email"
+            name="email"
+            type="text"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="Email"
+            invalid={formik.touched.email && formik.errors.email ? true : false}
+          >
+            Email
+          </Input>
+          {formik.touched.email && formik.errors.email ? (
+            <div className={classes.errorMessage}>{formik.errors.email}</div>
+          ) : (
+            <div className={classes.placeholder}></div>
+          )}
+          <Input
+            id="phone"
+            name="phone"
+            type="text"
+            value={formik.values.phone}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="Phone"
+            invalid={formik.touched.phone && formik.errors.phone ? true : false}
+          >
+            Phone
+          </Input>
+          {formik.touched.phone && formik.errors.phone ? (
+            <div className={classes.errorMessage}>{formik.errors.phone}</div>
+          ) : (
+            <div className={classes.placeholder}></div>
+          )}
+          <Input
+            id="address"
+            name="address"
+            type="text"
+            value={formik.values.address}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            placeholder="Address"
+          >
+            Address
+          </Input>
+        </div>
+        <div className={classes.bikeInfoContainer}>
+          <h4>Bicycle Details</h4>
+          {existingBike ? (
+            <div className={classes.existingBikeSelector}>
+              <h5>Choose an Existing Bicycle:</h5>
+              <select name="bikes" id="bikes" onChange={selectBike}>
+                <option defaultValue="no bike">-- Choose A Bike --</option>
+                {bikesList && bikesList}
+              </select>
+              <h5>Or</h5>
+              <SmallBtn onClick={() => setExistingBike(false)}>
+                Add New Bike
+              </SmallBtn>
+            </div>
+          ) : (
+            bikeForm
+          )}
+        </div>
         <LargeBtn type="submit">Create Ticket</LargeBtn>
       </form>
-      <div>
-        <div>{displayUsers}</div>
+      <div className={classes.searchContainer}>
+        <h3>Suggestions</h3>
+        <div className={classes.userCardContainer}>{displayUsers}</div>
       </div>
     </Container>
   );

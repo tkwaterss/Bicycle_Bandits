@@ -1,3 +1,119 @@
+.newTicketContainer {
+  min-width: 650px;
+  width: 650px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.newTicketContainer h3 {
+  margin-bottom: 10px;
+}
+.newTicketForm {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  align-items: center;
+}
+.searchContainer {
+  width: 50%;
+}
+.userInfoContainer {
+  margin-top: 10px;
+  text-align: center;
+}
+.userInfoContainer h4 {
+  margin-bottom: 16px;
+}
+.bikeInfoContainer {
+  margin: 20px 0;
+  text-align: center;
+}
+.existingBikeSelector {
+  margin-top: 10px;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.existingBikeSelector select {
+  width: 200px;
+  background-color: #FFFBDB;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+.existingBikeSelector select:hover {
+  background-color: #ebe4b6;
+  cursor: pointer;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
+}
+.existingBikeSelector select:focus {
+  outline: none;
+  background-color: #ebe4b6;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
+}
+
+.userCardContainer {
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.suggestionCard {
+  padding: 4px;
+  color: #30362F;
+  border-radius: 4px;
+}
+.suggestionCard:hover {
+  background-color: #ebe4b6;
+  cursor: pointer;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out
+}
+.suggestionDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nameNumberDiv {
+  display: flex;
+  justify-content: space-between;
+}
+.chooseExistingBikeBtn {
+  margin: 10px;
+}
+.bikeTypeSelector {
+  margin-top: 16px;
+  background-color: #FFFBDB;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+.bikeTypeSelector:hover {
+  background-color: #ebe4b6;
+  cursor: pointer;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
+}
+.bikeTypeSelector:focus {
+  outline: none;
+  background-color: #ebe4b6;
+  box-shadow:inset 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
+}
+
+
+
 .placeholder {
   height: 1rem;
+}
+.errorMessage {
+  color:rgba(235, 78, 78, 0.849);
+  font-size: 14px;
 }

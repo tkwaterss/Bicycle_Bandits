@@ -10,6 +10,7 @@ import LargeBtn from "../../../components/UI/LargeBtn";
 import SmallBtn from "../../../components/UI/SmallBtn";
 import { useFormik } from "formik";
 import { priceFormat, toTitleCase } from "../../../utils/formatting";
+import Swal from "sweetalert2";
 
 const TicketItems = (props) => {
   const { token } = useContext(AuthContext);
@@ -46,8 +47,6 @@ const TicketItems = (props) => {
         .catch((err) => console.log(err));
     },
   });
-
-  console.log(laborResults);
 
   useEffect(() => {
     axios
@@ -87,55 +86,72 @@ const TicketItems = (props) => {
           }
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
         })
         .catch((err) => console.log(err));
     }
   }, [laborItems, productItems, id, token, total]);
 
   const addTicketLabor = (laborId) => {
-    if (laborItems.filter(item => item.id === laborId)) {
-      setSearching(false)
-      return
+    console.log(laborId);
+    console.log(laborItems);
+    let filtered = laborItems.filter((item) => item.laborId === laborId);
+    if (filtered.length > 0) {
+      Swal.fire({
+        title: "Item Already Added!",
+        text: `${filtered[0].labor.laborTitle} has already been added to the ticket.`,
+        icon: "warning",
+        confirmButtonText: "Okay!",
+      });
+      setSearching(false);
+      return;
     }
     let body = {
       quantity: 1,
       ticketId: id,
       laborId: laborId,
-    }
-    axios.post(`http://localhost:4040/ticketLabor`, body, {
-      headers: {
-        authorization: token,
-      }
-    })
-    .then(res => {
-      console.log(res.data)
-      setSearching(false)
-    })
-    .catch(err => console.log(err))
+    };
+    axios
+      .post(`http://localhost:4040/ticketLabor`, body, {
+        headers: {
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setSearching(false);
+      })
+      .catch((err) => console.log(err));
   };
-console.log(laborItems)
-  
-const addTicketProduct = (productId) => {
-    if (productItems.filter(item => item.id === productId)) {
-      setSearching(false)
-      return
+
+  const addTicketProduct = (productId) => {
+    let filtered = productItems.filter((item) => item.productId === productId)
+    if (filtered.length > 0) {
+      Swal.fire({
+        title: "Item Already Added!",
+        text: `${filtered[0].product.productTitle} has already been added to the ticket.`,
+        icon: "warning",
+        confirmButtonText: "Okay!",
+      })
+      setSearching(false);
+      return;
     }
     let body = {
       quantity: 1,
       ticketId: id,
       productId: productId,
-    }
-    axios.post(`http://localhost:4040/ticketProducts`, body, {
-      headers: {
-        authorization: token,
-      }
-    })
-    .then(res => {
-      console.log(res.data)
-      setSearching(false)
-    })
-    .catch(err => console.log(err))
+    };
+    axios
+      .post(`http://localhost:4040/ticketProducts`, body, {
+        headers: {
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setSearching(false);
+      })
+      .catch((err) => console.log(err));
   };
 
   const updateTicketLabor = (event, id, quantity, index) => {
@@ -231,7 +247,9 @@ const addTicketProduct = (productId) => {
         <Card key={item.id} className={classes.ticketItemsCard}>
           <div className={classes.listItemContainer}>
             <ul className={classes.itemsList}>
-              <li id={classes.itemTitle}>{item.labor.laborTitle.toUpperCase()}</li>
+              <li id={classes.itemTitle}>
+                {item.labor.laborTitle.toUpperCase()}
+              </li>
               <li id={classes.itemTime}>
                 {+item.labor.laborTime * item.quantity} minutes
               </li>
@@ -276,9 +294,15 @@ const addTicketProduct = (productId) => {
               <ul className={classes.itemsList}>
                 <li id={classes.itemTitle}>{item.laborTitle}</li>
                 <li id={classes.itemTime}>{item.laborTime} minutes</li>
+                <li className={classes.quantitySet}>1</li>
                 <li id={classes.itemPrice}>$ {priceFormat(item.laborPrice)}</li>
               </ul>
-              <SmallBtn onClick={() => addTicketLabor(item.id)}>ADD</SmallBtn>
+              <SmallBtn
+                onClick={() => addTicketLabor(item.id)}
+                className={classes.cancelSearch}
+              >
+                ADD
+              </SmallBtn>
             </div>
           </Card>
         );
@@ -292,7 +316,9 @@ const addTicketProduct = (productId) => {
         <Card key={item.id} className={classes.ticketItemsCard}>
           <div className={classes.listItemContainer}>
             <ul className={classes.itemsList}>
-              <li id={classes.itemTitle}>{toTitleCase(item.product.productTitle)}</li>
+              <li id={classes.itemTitle}>
+                {toTitleCase(item.product.productTitle)}
+              </li>
               <li id={classes.itemTime}></li>
               <div className={classes.quantitySet}>
                 <SmallBtn
@@ -325,24 +351,32 @@ const addTicketProduct = (productId) => {
       );
     });
 
-    if (searching) {
-      productDisplay =
-        productResults &&
-        productResults.map((item) => {
-          return (
-            <Card key={item.id} className={classes.ticketItemsCard}>
-              <div className={classes.listItemContainer}>
-                <ul className={classes.itemsList}>
-                  <li id={classes.itemTitle}>{item.productTitle}</li>
-                  <li id={classes.itemTime}>{item.productTime} minutes</li>
-                  <li id={classes.itemPrice}>$ {priceFormat(item.productPrice)}</li>
-                </ul>
-                <SmallBtn onClick={() => addTicketProduct(item.id)}>ADD</SmallBtn>
-              </div>
-            </Card>
-          );
-        });
-    }
+  if (searching) {
+    productDisplay =
+      productResults &&
+      productResults.map((item) => {
+        return (
+          <Card key={item.id} className={classes.ticketItemsCard}>
+            <div className={classes.listItemContainer}>
+              <ul className={classes.itemsList}>
+                <li id={classes.itemTitle}>{item.productTitle}</li>
+                <li id={classes.itemTime}>{item.productTime} minutes</li>
+                <li className={classes.quantitySet}>1</li>
+                <li id={classes.itemPrice}>
+                  $ {priceFormat(item.productPrice)}
+                </li>
+              </ul>
+              <SmallBtn
+                onClick={() => addTicketProduct(item.id)}
+                className={classes.cancelSearch}
+              >
+                ADD
+              </SmallBtn>
+            </div>
+          </Card>
+        );
+      });
+  }
 
   return (
     <Container className={classes.ticketItemsContainer}>
@@ -373,13 +407,20 @@ const addTicketProduct = (productId) => {
       </div>
       <div className={classes.ticketTotalBar}>
         <h3>Ticket Total: $ {total}</h3>
-        {!searching ? <LargeBtn className={classes.checkoutBtn}>
-          Checkout
-        </LargeBtn> : <LargeBtn type="button" className={classes.checkoutBtn} function={() => setSearching(false)}>Cancel</LargeBtn>}
+        {!searching ? (
+          <LargeBtn className={classes.checkoutBtn}>Checkout</LargeBtn>
+        ) : (
+          <LargeBtn
+            type="button"
+            className={classes.checkoutBtn}
+            function={() => setSearching(false)}
+          >
+            Cancel
+          </LargeBtn>
+        )}
       </div>
     </Container>
   );
 };
 
 export default TicketItems;
-
