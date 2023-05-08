@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import DisplayContext from '../../store/displayContext'
 
 import Landing from './Landing'
@@ -9,6 +9,7 @@ import Register from './Register'
 
 const LandingPage = () => {
   const { displayState } = useContext(DisplayContext);
+  const [loading, setLoading] = useState(false);
 
   let content
 
@@ -17,11 +18,11 @@ const LandingPage = () => {
   }
 
   if (displayState.landingDisplay === 'login') {
-    content = <Login />
+    content = <Login loading={loading} setLoading={setLoading} />
   }
 
   if (displayState.landingDisplay === 'register') {
-    content = <Register />
+    content = <Register loading={loading} setLoading={setLoading} />
   }
 
   return (

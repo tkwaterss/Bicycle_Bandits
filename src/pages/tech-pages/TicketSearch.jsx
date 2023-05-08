@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import Container from "../../components/UI/Container";
-import SearchBar from "../../components/SearchBar";
+import SearchBar from "../../components/UI/SearchBar";
 import { useFormik } from "formik";
 import AuthContext from "../../store/authContext";
 import axios from "axios";
@@ -12,7 +12,6 @@ const TicketSearch = () => {
   const { token } = useContext(AuthContext);
   const [ticketList, setTicketList] = useState([]);
 
-  console.log(ticketList)
   useEffect(() => {
     axios
       .get(`http://localhost:4040/tickets`, {
@@ -22,7 +21,7 @@ const TicketSearch = () => {
       })
       .then((res) => setTicketList(res.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [token]);
 
   const formik = useFormik({
     initialValues: {

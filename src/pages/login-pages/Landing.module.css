@@ -75,6 +75,16 @@ p {
 
 .submitBtn {
   padding: 8px 20px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.registerBtn {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .invalid {

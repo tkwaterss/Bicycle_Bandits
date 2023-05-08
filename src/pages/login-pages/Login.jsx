@@ -1,21 +1,26 @@
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
+import * as yup from "yup";
 import AuthContext from "../../store/authContext";
 import Container from "../../components/UI/Container";
 import classes from "./Landing.module.css";
 import Input from "../../components/UI/Input";
 import LargeBtn from "../../components/UI/LargeBtn";
-import * as yup from 'yup';
 import { toLowerCase } from "../../utils/formatting";
+import RiseLoader from "react-spinners/RiseLoader";
 
-const Login = () => {
+const Login = (props) => {
   const authCtx = useContext(AuthContext);
+  const { loading, setLoading } = props;
 
   const validationSchema = yup.object().shape({
-    email: yup.string().email("Please enter a valid email").required("This field is required"),
+    email: yup
+      .string()
+      .email("Please enter a valid email")
+      .required("This field is required"),
     password: yup.string().required("Please enter your password"),
-  })
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -24,14 +29,15 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, helpers) => {
-      console.log(values);
       values.email = toLowerCase(values.email);
+      setLoading(true);
 
       axios
         .post("http://localhost:4040/login", values)
         .then(({ data }) => {
           authCtx.login(data.token, data.exp, data.userId, data.employee);
           console.log("after auth", data);
+          setLoading(false);
         })
         .catch((err) => {
           console.log("Sorry there was an issue with your login", err);
@@ -39,6 +45,7 @@ const Login = () => {
       helpers.resetForm();
     },
   });
+
   return (
     //contain the login form and logic here
     <Container className={classes.loginContainer}>
@@ -57,10 +64,10 @@ const Login = () => {
           Email
         </Input>
         {formik.touched.email && formik.errors.email ? (
-            <div>{formik.errors.email}</div>
-          ) : (
-            ""
-          )}
+          <div>{formik.errors.email}</div>
+        ) : (
+          ""
+        )}
         <Input
           id="password"
           type="password"
@@ -69,17 +76,23 @@ const Login = () => {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           placeholder="name"
-          invalid={formik.touched.password && formik.errors.password ? true : false}
+          invalid={
+            formik.touched.password && formik.errors.password ? true : false
+          }
         >
           Password
         </Input>
         {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
-          ) : (
-            ""
-          )}
+          <div>{formik.errors.password}</div>
+        ) : (
+          ""
+        )}
         <LargeBtn type="submit" className={classes.submitBtn}>
-          SUBMIT
+          {loading ? (
+            <RiseLoader size={8} color="#FFFBDB"></RiseLoader>
+          ) : (
+            "SUBMIT"
+          )}
         </LargeBtn>
       </form>
     </Container>

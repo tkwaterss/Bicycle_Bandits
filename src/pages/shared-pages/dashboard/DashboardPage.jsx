@@ -3,8 +3,6 @@ import AuthContext from "../../../store/authContext";
 import TechTickets from "./TechTickets";
 import CustomerTickets from './CustomerTickets'
 import ToDoList from "./ToDoList";
-import classes from './Dashboard.module.css';
-import CustProductsPreview from "./CustProductsPreview";
 
 const Dashboard = () => {
   const authCtx = useContext(AuthContext);
@@ -21,7 +19,6 @@ const Dashboard = () => {
     display = (
       <>
         <CustomerTickets />
-        <CustProductsPreview />
       </>
     );
   }

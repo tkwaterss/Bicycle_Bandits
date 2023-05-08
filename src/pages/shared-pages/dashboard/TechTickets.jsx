@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Container from "../../../components/UI/Container";
-import SearchBar from "../../../components/SearchBar";
+import SearchBar from "../../../components/UI/SearchBar";
 import Card from "../../../components/UI/Card";
 import classes from "./Dashboard.module.css";
 import AuthContext from "../../../store/authContext";

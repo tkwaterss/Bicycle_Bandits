@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import Container from "../../../components/UI/Container";
-import SearchBar from "../../../components/SearchBar";
-import AuthContext from "../../../store/authContext";
 import axios from "axios";
+import { useFormik } from "formik";
+import Swal from "sweetalert2";
+import Container from "../../../components/UI/Container";
+import SearchBar from "../../../components/UI/SearchBar";
+import AuthContext from "../../../store/authContext";
 import classes from "./TicketDetails.module.css";
 import Card from "../../../components/UI/Card";
 import DeleteBtn from "../../../components/UI/DeleteBtn";
-import LargeBtn from "../../../components/UI/LargeBtn";
 import SmallBtn from "../../../components/UI/SmallBtn";
-import { useFormik } from "formik";
 import { priceFormat, toTitleCase } from "../../../utils/formatting";
-import Swal from "sweetalert2";
 
 const TicketItems = (props) => {
   const { token } = useContext(AuthContext);
@@ -125,14 +124,14 @@ const TicketItems = (props) => {
   };
 
   const addTicketProduct = (productId) => {
-    let filtered = productItems.filter((item) => item.productId === productId)
+    let filtered = productItems.filter((item) => item.productId === productId);
     if (filtered.length > 0) {
       Swal.fire({
         title: "Item Already Added!",
         text: `${filtered[0].product.productTitle} has already been added to the ticket.`,
         icon: "warning",
         confirmButtonText: "Okay!",
-      })
+      });
       setSearching(false);
       return;
     }
@@ -294,7 +293,7 @@ const TicketItems = (props) => {
               <ul className={classes.itemsList}>
                 <li id={classes.itemTitle}>{item.laborTitle}</li>
                 <li id={classes.itemTime}>{item.laborTime} minutes</li>
-                <li className={classes.quantitySet}>1</li>
+                <li className={classes.searchQuantity}>1</li>
                 <li id={classes.itemPrice}>$ {priceFormat(item.laborPrice)}</li>
               </ul>
               <SmallBtn
@@ -360,8 +359,8 @@ const TicketItems = (props) => {
             <div className={classes.listItemContainer}>
               <ul className={classes.itemsList}>
                 <li id={classes.itemTitle}>{item.productTitle}</li>
-                <li id={classes.itemTime}>{item.productTime} minutes</li>
-                <li className={classes.quantitySet}>1</li>
+                <li id={classes.itemTime}>N/A</li>
+                <li className={classes.searchQuantity}>1</li>
                 <li id={classes.itemPrice}>
                   $ {priceFormat(item.productPrice)}
                 </li>
@@ -406,18 +405,20 @@ const TicketItems = (props) => {
         {productDisplay}
       </div>
       <div className={classes.ticketTotalBar}>
-        <h3>Ticket Total: $ {total}</h3>
-        {!searching ? (
-          <LargeBtn className={classes.checkoutBtn}>Checkout</LargeBtn>
-        ) : (
-          <LargeBtn
-            type="button"
-            className={classes.checkoutBtn}
-            function={() => setSearching(false)}
-          >
-            Cancel
-          </LargeBtn>
-        )}
+        <div className={classes.totalBarFooterContainer}>
+          <h3>Ticket Total: $ {total}</h3>
+          {!searching ? (
+            ""
+          ) : (
+            <SmallBtn
+              type="button"
+              className={classes.checkoutBtn}
+              onClick={() => setSearching(false)}
+            >
+              Cancel
+            </SmallBtn>
+          )}
+        </div>
       </div>
     </Container>
   );

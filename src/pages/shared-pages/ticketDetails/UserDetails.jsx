@@ -46,34 +46,44 @@ const UserDetails = (props) => {
         <div className={classes.userdetailsContainer}>
           <h4>Customer Details</h4>
           <div className={classes.detailsListContainer}>
-            <div className={classes.detailsListTitles}>
-              <h5>Name:</h5>
-              <h5>Email:</h5>
-              <h5>Phone:</h5>
-              <h5>Address:</h5>
+            <div className={classes.detailsDiv}>
+              <h5 className={classes.detailLabel}>Name:</h5>
+              <h5
+                className={classes.detailValue}
+              >{`${ticket.user.firstname} ${ticket.user.lastname}`}</h5>
             </div>
-            <div className={classes.detailsListValues}>
-              <h5>{`${ticket.user.firstname} ${ticket.user.lastname}`}</h5>
-              <h5>{ticket.user.email}</h5>
-              <h5>{ticket.user.phone}</h5>
-              <h5>{ticket.user.address}</h5>
+            <div className={classes.detailsDiv}>
+              <h5 className={classes.detailLabel}>Email:</h5>
+              <h5 className={classes.detailValue}>{ticket.user.email}</h5>
+            </div>
+            <div className={classes.detailsDiv}>
+              <h5 className={classes.detailLabel}>Phone:</h5>
+              <h5 className={classes.detailValue}>{ticket.user.phone}</h5>
+            </div>
+            <div className={classes.detailsDiv}>
+              <h5 className={classes.detailLabel}>Address:</h5>
+              <h5 className={classes.detailValue}>{ticket.user.address}</h5>
             </div>
           </div>
         </div>
         <div className={classes.ticketdetailsContainer}>
           <h4>Bicycle Details</h4>
           <div className={classes.detailsListContainer}>
-            <div className={classes.detailsListTitles}>
-              <h5>Brand:</h5>
-              <h5>Model:</h5>
-              <h5>Color:</h5>
-              <h5>Size:</h5>
+            <div className={classes.detailsDiv}>
+              <h5 className={classes.detailLabel}>Brand:</h5>
+              <h5 className={classes.detailValue}>{ticket.bike.brand}</h5>
             </div>
-            <div className={classes.detailsListValues}>
-              <h5>{ticket.bike.brand}</h5>
-              <h5>{ticket.bike.model}</h5>
-              <h5>{ticket.bike.color}</h5>
-              <h5>{ticket.bike.size}</h5>
+            <div className={classes.detailsDiv}>
+              <h5 className={classes.detailLabel}>Model:</h5>
+              <h5 className={classes.detailValue}>{ticket.bike.model}</h5>
+            </div>
+            <div className={classes.detailsDiv}>
+              <h5 className={classes.detailLabel}>Color:</h5>
+              <h5 className={classes.detailValue}>{ticket.bike.color}</h5>
+            </div>
+            <div className={classes.detailsDiv}>
+              <h5 className={classes.detailLabel}>Size:</h5>
+              <h5 className={classes.detailValue}>{ticket.bike.size}</h5>
             </div>
           </div>
         </div>
@@ -81,7 +91,13 @@ const UserDetails = (props) => {
     );
   }
   if (isEditing) {
-    userDisplay = <EditUserForm ticket={ticket} setEditing={setEditing} setTicket={setTicket} />;
+    userDisplay = (
+      <EditUserForm
+        ticket={ticket}
+        setEditing={setEditing}
+        setTicket={setTicket}
+      />
+    );
   }
 
   return (
@@ -92,27 +108,35 @@ const UserDetails = (props) => {
             <SmallBtn onClick={() => setEditing(true)}>Edit Customer</SmallBtn>
           )}
           <h3>Ticket #: {ticket.id}</h3>
-          {employee ? <input
-            name="dueDate"
-            id="dueDate"
-            onChange={(e) => setDueDate(e.target.value)}
-            type="date"
-            value={dueDate}
-            className={classes.dueDatePicker}
-          /> : <h5> Due: {dueDate}</h5>}
-          {employee ? <select
-            name="status"
-            id="status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className={classes.statusPicker}
-          >
-            <option value="Checked In">Checked In</option>
-            <option value="Waiting for Parts">Waiting for Parts</option>
-            <option value="Not Here">Not Here</option>
-            <option value="Finished">Finished</option>
-            <option value="Done and Paid">Done and Paid</option>
-          </select> : <h5>{status}</h5>}
+          {employee ? (
+            <input
+              name="dueDate"
+              id="dueDate"
+              onChange={(e) => setDueDate(e.target.value)}
+              type="date"
+              value={dueDate}
+              className={classes.dueDatePicker}
+            />
+          ) : (
+            <h5> Due: {dueDate}</h5>
+          )}
+          {employee ? (
+            <select
+              name="status"
+              id="status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className={classes.statusPicker}
+            >
+              <option value="Checked In">Checked In</option>
+              <option value="Waiting for Parts">Waiting for Parts</option>
+              <option value="Not Here">Not Here</option>
+              <option value="Finished">Finished</option>
+              <option value="Done and Paid">Done and Paid</option>
+            </select>
+          ) : (
+            <h5>{status}</h5>
+          )}
         </div>
         {userDisplay}
       </Container>
@@ -127,16 +151,18 @@ const UserDetails = (props) => {
             className={classes.externalNotes}
           ></textarea>
         </div>
-        {employee && <div className={classes.internalContainer}>
-          <h4>Internal Notes</h4>
-          <textarea
-            rows="6"
-            cols="35"
-            value={internalNotes}
-            onChange={(e) => setInternalNotes(e.target.value)}
-            className={classes.internalNotes}
-          ></textarea>
-        </div>}
+        {employee && (
+          <div className={classes.internalContainer}>
+            <h4>Internal Notes</h4>
+            <textarea
+              rows="6"
+              cols="35"
+              value={internalNotes}
+              onChange={(e) => setInternalNotes(e.target.value)}
+              className={classes.internalNotes}
+            ></textarea>
+          </div>
+        )}
       </div>
     </>
   );

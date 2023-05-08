@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import axios from "axios";
 import AuthContext from "../../../store/authContext";
 import classes from "./TicketDetails.module.css";
+import SmallBtn from "../../../components/UI/SmallBtn";
 
 const EditUserForm = (props) => {
   const { ticket, setEditing, setTicket } = props;
@@ -62,14 +63,8 @@ const EditUserForm = (props) => {
       <div className={classes.userdetailsContainer}>
         <h4>Customer Details</h4>
         <div className={classes.detailsListContainer}>
-          <div className={classes.detailsListTitles}>
-            <h5>First Name:</h5>
-            <h5>Last Name:</h5>
-            <h5>Email:</h5>
-            <h5>Phone:</h5>
-            <h5>Address:</h5>
-          </div>
-          <div className={classes.detailsListValues}>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>First:</h5>
             <input
               id="firstname"
               name="firstname"
@@ -78,6 +73,9 @@ const EditUserForm = (props) => {
               onChange={formik.handleChange}
               placeholder="First Name"
             />
+          </div>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>Last:</h5>
             <input
               id="lastname"
               name="lastname"
@@ -86,6 +84,9 @@ const EditUserForm = (props) => {
               onChange={formik.handleChange}
               placeholder="Last Name"
             />
+          </div>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>Email:</h5>
             <input
               id="email"
               name="email"
@@ -94,6 +95,9 @@ const EditUserForm = (props) => {
               onChange={formik.handleChange}
               placeholder="Email"
             />
+          </div>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>Phone</h5>
             <input
               id="phone"
               name="phone"
@@ -102,6 +106,9 @@ const EditUserForm = (props) => {
               onChange={formik.handleChange}
               placeholder="Phone"
             />
+          </div>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>Address</h5>
             <input
               id="address"
               name="address"
@@ -116,13 +123,8 @@ const EditUserForm = (props) => {
       <div className={classes.ticketdetailsContainer}>
         <h4>Bicycle Details</h4>
         <div className={classes.detailsListContainer}>
-          <div className={classes.detailsListTitles}>
-            <h5>Brand:</h5>
-            <h5>Model:</h5>
-            <h5>Color:</h5>
-            <h5>Size:</h5>
-          </div>
-          <div className={classes.detailsListValues}>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>Brand:</h5>
             <input
               id="brand"
               name="brand"
@@ -131,6 +133,9 @@ const EditUserForm = (props) => {
               onChange={formik.handleChange}
               placeholder="Brand"
             />
+          </div>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>Model:</h5>
             <input
               id="model"
               name="model"
@@ -139,6 +144,9 @@ const EditUserForm = (props) => {
               onChange={formik.handleChange}
               placeholder="Model"
             />
+          </div>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>Color:</h5>
             <input
               id="color"
               name="color"
@@ -147,6 +155,9 @@ const EditUserForm = (props) => {
               onChange={formik.handleChange}
               placeholder="Color"
             />
+          </div>
+          <div className={classes.detailsDiv}>
+            <h5 className={classes.detailLabel}>Size:</h5>
             <input
               id="size"
               name="size"
@@ -156,9 +167,9 @@ const EditUserForm = (props) => {
               placeholder="Size"
             />
           </div>
+        <SmallBtn type="submit" className={classes.stopEditingBtn}>Stop Editing</SmallBtn>
         </div>
       </div>
-      <button type="submit">Stop Editing</button>
     </form>
   );
 };

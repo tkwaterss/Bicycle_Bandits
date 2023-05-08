@@ -19,7 +19,6 @@ const Header = () => {
 
   if (!authCtx.token) {
     //^ Landing Nav Bar
-    //TODO Should probably transition these to NavLinks as well
     links = (
       <ul className={classes.linksContainer}>
         <li
@@ -75,18 +74,8 @@ const Header = () => {
             HOME
           </NavLink>
         </li>
-        <li>
-          <NavLink style={activeStyle} to="/shopping">
-            SHOP ONLINE
-          </NavLink>
-        </li>
         <li onClick={() => authCtx.logout()}>
           <NavLink to="/">LOGOUT</NavLink>
-        </li>
-        <li>
-          <NavLink style={activeStyle} to="/checkout">
-            CART/CHECKOUT
-          </NavLink>
         </li>
       </ul>
     );

@@ -2,18 +2,19 @@ import React, { useContext, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2";
 import AuthContext from "../../store/authContext";
 import Container from "../../components/UI/Container";
 import classes from "./Landing.module.css";
 import LargeBtn from "../../components/UI/LargeBtn";
 import Input from "../../components/UI/Input";
 import { toLowerCase, toTitleCase } from "../../utils/formatting";
-import SmallBtn from "../../components/UI/SmallBtn";
-import Swal from "sweetalert2";
+import RiseLoader from "react-spinners/RiseLoader";
 
-const Register = () => {
+const Register = (props) => {
   const authCtx = useContext(AuthContext);
   const [employee, setEmployee] = useState(false);
+  const { loading, setLoading } = props;
 
   const validationSchema = yup.object().shape({
     firstname: yup.string().required("This field is required"),
@@ -64,6 +65,7 @@ const Register = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, helpers) => {
+      setLoading(true)
       console.log(values);
       values.firstname = toTitleCase(values.firstname);
       values.lastname = toTitleCase(values.lastname);
@@ -75,6 +77,7 @@ const Register = () => {
         .then(({ data }) => {
           authCtx.login(data.token, data.exp, data.userId, data.employee);
           console.log("after auth", data);
+          setLoading(false);
         })
         .catch((err) => {
           console.log(err);
@@ -227,17 +230,25 @@ const Register = () => {
         </div>
         <LargeBtn
           type="submit"
-          className={classes.submitBtn}
+          className={classes.registerBtn}
           function={() => setEmployee(true)}
         >
-          REGISTER AS EMPLOYEE
+          {loading ? (
+            <RiseLoader size={8} color="#FFFBDB"></RiseLoader>
+          ) : (
+            "REGISTER AS EMPLOYEE"
+          )}
         </LargeBtn>
         <LargeBtn
           type="submit"
-          className={classes.submitBtn}
+          className={classes.registerBtn}
           function={() => setEmployee(false)}
         >
-          REGISTER AS CUSTOMER
+          {loading ? (
+            <RiseLoader size={8} color="#FFFBDB"></RiseLoader>
+          ) : (
+            "REGISTER AS CUSTOMER"
+          )}
         </LargeBtn>
       </form>
     </Container>
