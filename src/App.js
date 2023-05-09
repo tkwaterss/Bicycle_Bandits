@@ -8,7 +8,6 @@ import Dashboard from "./pages/shared-pages/dashboard/DashboardPage";
 import LandingPage from "./pages/login-pages/LandingPage";
 import TicketDetails from "./pages/shared-pages/ticketDetails/TicketDetails";
 import NewTicket from "./pages/tech-pages/NewTicket";
-import ProductLaborSearch from "./pages/tech-pages/ProductLaborSearch";
 import TicketSearch from "./pages/tech-pages/TicketSearch";
 
 function App() {
@@ -35,10 +34,6 @@ function App() {
             <Route
               path="/newTicket"
               element={authCtx.employee ? <NewTicket /> : ""}
-            />
-            <Route
-              path="/searchItems"
-              element={authCtx.employee ? <ProductLaborSearch /> : ""}
             />
           </Routes>
       </main>

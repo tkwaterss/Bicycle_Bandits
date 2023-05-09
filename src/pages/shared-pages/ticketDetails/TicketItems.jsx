@@ -10,10 +10,11 @@ import Card from "../../../components/UI/Card";
 import DeleteBtn from "../../../components/UI/DeleteBtn";
 import SmallBtn from "../../../components/UI/SmallBtn";
 import { priceFormat, toTitleCase } from "../../../utils/formatting";
+import RiseLoader from "react-spinners/RiseLoader";
 
 const TicketItems = (props) => {
   const { token } = useContext(AuthContext);
-  const { employee, id } = props;
+  const { employee, id, loading, setLoading } = props;
   const [laborItems, setLaborItems] = useState([]);
   const [productItems, setProductItems] = useState([]);
   const [laborResults, setLaborResults] = useState([]);
@@ -27,8 +28,7 @@ const TicketItems = (props) => {
       search: "",
     },
     onSubmit: (values) => {
-      console.log("searching");
-
+      setLoading(true);
       axios
         .get(
           `http://localhost:4040/search/ticketItems?input=${values.search}`,
@@ -42,12 +42,14 @@ const TicketItems = (props) => {
           setSearching(true);
           setLaborResults(res.data.labor);
           setProductResults(res.data.products);
+          setLoading(false);
         })
         .catch((err) => console.log(err));
     },
   });
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:4040/ticketItems/${id}`, {
         headers: {
@@ -58,11 +60,13 @@ const TicketItems = (props) => {
         setLaborItems(res.data.labor);
         setProductItems(res.data.products);
         setTotal(priceFormat(res.data.ticketTotal));
+        setLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [id, token, searching]);
+  }, [id, token, searching, setLoading]);
 
   useEffect(() => {
+    setLoading(true);
     if (initial.current) {
       initial.current = false;
     } else {
@@ -85,13 +89,14 @@ const TicketItems = (props) => {
           }
         )
         .then((res) => {
-          // console.log(res.data);
+          setLoading(false);
         })
         .catch((err) => console.log(err));
     }
-  }, [laborItems, productItems, id, token, total]);
+  }, [laborItems, productItems, id, token, total, setLoading]);
 
   const addTicketLabor = (laborId) => {
+    setLoading(true);
     console.log(laborId);
     console.log(laborItems);
     let filtered = laborItems.filter((item) => item.laborId === laborId);
@@ -119,11 +124,13 @@ const TicketItems = (props) => {
       .then((res) => {
         console.log(res.data);
         setSearching(false);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
 
   const addTicketProduct = (productId) => {
+    setLoading(true);
     let filtered = productItems.filter((item) => item.productId === productId);
     if (filtered.length > 0) {
       Swal.fire({
@@ -149,6 +156,7 @@ const TicketItems = (props) => {
       .then((res) => {
         console.log(res.data);
         setSearching(false);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -214,6 +222,7 @@ const TicketItems = (props) => {
   };
 
   const deleteTicketLabor = (id) => {
+    setLoading(true);
     axios
       .delete(`http://localhost:4040/ticketLabor/${id}`, {
         headers: {
@@ -222,11 +231,13 @@ const TicketItems = (props) => {
       })
       .then((res) => {
         setLaborItems(laborItems.filter((item) => item.id !== id));
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
 
   const deleteTicketProduct = (id) => {
+    setLoading(true);
     axios
       .delete(`http://localhost:4040/ticketProducts/${id}`, {
         headers: {
@@ -235,6 +246,7 @@ const TicketItems = (props) => {
       })
       .then((res) => {
         setProductItems(productItems.filter((item) => item.id !== id));
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -406,7 +418,11 @@ const TicketItems = (props) => {
       </div>
       <div className={classes.ticketTotalBar}>
         <div className={classes.totalBarFooterContainer}>
-          <h3>Ticket Total: $ {total}</h3>
+          {!loading ? (
+            <h3>Ticket Total: $ {total}</h3>
+          ) : (
+            <RiseLoader size={18} color="#FFFBDB"></RiseLoader>
+          )}
           {!searching ? (
             ""
           ) : (

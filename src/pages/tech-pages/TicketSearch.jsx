@@ -7,19 +7,25 @@ import axios from "axios";
 import Card from "../../components/UI/Card";
 import { Link } from "react-router-dom";
 import classes from "./TicketSearch.module.css";
+import RiseLoader from "react-spinners/RiseLoader";
 
 const TicketSearch = () => {
   const { token } = useContext(AuthContext);
   const [ticketList, setTicketList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`http://localhost:4040/tickets`, {
         headers: {
           authorization: token,
         },
       })
-      .then((res) => setTicketList(res.data))
+      .then((res) => {
+        setTicketList(res.data);
+        setLoading(false);
+      })
       .catch((err) => console.log(err));
   }, [token]);
 
@@ -30,6 +36,7 @@ const TicketSearch = () => {
       category: "Customer",
     },
     onSubmit: (values) => {
+      setLoading(true);
       axios
         .get(
           `http://localhost:4040/search/tickets?input=${values.input}&category=${values.category}`,
@@ -51,6 +58,7 @@ const TicketSearch = () => {
           }
 
           setTicketList(sortedList);
+          setLoading(false);
         })
         .catch((err) => console.log(err));
     },
@@ -58,7 +66,7 @@ const TicketSearch = () => {
 
   let displayList = ticketList.map((ticket) => {
     return (
-      <Link key={ticket.id} to={`/ticket/${ticket.id}`}>
+      <Link key={ticket.id} to={`/ticket/${ticket.id}`} className={classes.ticketCard}>
         <Card className={classes.ticketCard}>
           <ul className={classes.ticketDetailsList}>
             <li
@@ -125,7 +133,13 @@ const TicketSearch = () => {
           <li id={classes.priceTitle}>Price</li>
         </ul>
       </div>
-      <div className={classes.cardContainer}>{displayList}</div>
+      <div className={classes.cardContainer}>
+        {loading ? (
+          <RiseLoader size={10} color="#FFFBDB"></RiseLoader>
+        ) : (
+          displayList
+        )}
+      </div>
     </Container>
   );
 };

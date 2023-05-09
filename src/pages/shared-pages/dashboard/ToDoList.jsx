@@ -6,25 +6,32 @@ import classes from "./Dashboard.module.css";
 import AuthContext from "../../../store/authContext";
 import DeleteBtn from "../../../components/UI/DeleteBtn";
 import SmallBtn from "../../../components/UI/SmallBtn";
+import RiseLoader from "react-spinners/RiseLoader";
 
-const ToDoList = () => {
+const ToDoList = (props) => {
   const { token } = useContext(AuthContext);
   const [list, setList] = useState([]);
   const toDoRef = useRef();
+  const { loading, setLoading } = props;
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("http://localhost:4040/toDoList", {
         headers: {
           authorization: token,
         },
       })
-      .then((res) => setList(res.data))
+      .then((res) => {
+        setList(res.data);
+        setLoading(false);
+      })
       .catch((err) => console.log(err));
   }, [token]);
 
   const submitHandler = (event) => {
     event.preventDefault();
+    setLoading(true);
     axios
       .post(
         "http://localhost:4040/toDoList",
@@ -37,6 +44,7 @@ const ToDoList = () => {
       )
       .then((res) => {
         setList([...list, res.data]);
+        setLoading(false);
       })
       .catch((err) => console.log(err));
     toDoRef.current.value = "";
@@ -44,6 +52,7 @@ const ToDoList = () => {
   };
 
   const deleteItem = (event) => {
+    setLoading(true);
     let id = event.target.id;
     axios
       .delete(`http://localhost:4040/toDoList/${id}`, {
@@ -53,6 +62,7 @@ const ToDoList = () => {
       })
       .then((res) => {
         setList(list.filter((item) => item.id !== +id));
+        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -71,10 +81,18 @@ const ToDoList = () => {
   return (
     <Container className={classes.toDoListContainer}>
       <h3>To Do List</h3>
-      <div className={classes.cardContainer}>{display}</div>
+      <div className={classes.cardContainer}>
+        {display}
+      {loading && <RiseLoader size={10} color="#FFFBDB"></RiseLoader>}
+      </div>
       <h5>Add Another Item</h5>
       <form onSubmit={submitHandler}>
-        <input id={classes.toDoInput} type="text" ref={toDoRef} placeholder="New To Do Item" />
+        <input
+          id={classes.toDoInput}
+          type="text"
+          ref={toDoRef}
+          placeholder="New To Do Item"
+        />
         <SmallBtn type="submit">ADD</SmallBtn>
       </form>
     </Container>

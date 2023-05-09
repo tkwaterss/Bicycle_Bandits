@@ -92,9 +92,11 @@
   display:flex;
   flex-direction: column;
   gap: 4px;
+  align-items: center;
 }
 .ticketCard {
   border-radius: 4px;
+  width: 100%;
 }
 .ticketDetailsList {
   list-style: none;

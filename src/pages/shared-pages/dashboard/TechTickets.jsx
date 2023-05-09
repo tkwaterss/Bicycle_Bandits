@@ -7,19 +7,25 @@ import classes from "./Dashboard.module.css";
 import AuthContext from "../../../store/authContext";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
+import RiseLoader from "react-spinners/RiseLoader";
 
-const TechTickets = () => {
+const TechTickets = (props) => {
   const { token } = useContext(AuthContext);
   const [tickets, setTickets] = useState([]);
+  const { loading, setLoading } = props;
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("http://localhost:4040/tickets", {
         headers: {
           authorization: token,
         },
       })
-      .then((res) => setTickets(res.data))
+      .then((res) => {
+        setTickets(res.data);
+        setLoading(false);
+      })
       .catch((err) => console.log(err));
   }, [token]);
 
@@ -28,6 +34,7 @@ const TechTickets = () => {
       search: "",
     },
     onSubmit: (values, helpers) => {
+      setLoading(true);
       axios
         .get(`http://localhost:4040/search/tickets?input=${values.search}`, {
           headers: {
@@ -36,6 +43,7 @@ const TechTickets = () => {
         })
         .then((res) => {
           setTickets(res.data);
+          setLoading(false);
         })
         .catch((err) => console.log(err));
       helpers.resetForm();
@@ -44,7 +52,7 @@ const TechTickets = () => {
 
   let display = tickets.map((ticket) => {
     return (
-      <Link key={ticket.id} to={`/ticket/${ticket.id}`}>
+      <Link key={ticket.id} to={`/ticket/${ticket.id}`} className={classes.ticketCard}>
         <Card className={classes.ticketCard}>
           <div className={classes.ticketList}>
             <div id={classes.ticketId}>
@@ -81,14 +89,20 @@ const TechTickets = () => {
           ></SearchBar>
         </form>
         <ul className={classes.titleBar}>
-          <li id={classes.ticketIdTitle} >ID</li>
-          <li id={classes.bikeDescriptionTitle} > Bike Description</li>
-          <li id={classes.dueDateTitle} >Due Date</li>
-          <li id={classes.statusTitle} >Status</li>
-          <li id={classes.totalTitle} >Cost</li>
+          <li id={classes.ticketIdTitle}>ID</li>
+          <li id={classes.bikeDescriptionTitle}> Bike Description</li>
+          <li id={classes.dueDateTitle}>Due Date</li>
+          <li id={classes.statusTitle}>Status</li>
+          <li id={classes.totalTitle}>Cost</li>
         </ul>
       </div>
-      <div className={classes.cardContainer}>{display}</div>
+      <div className={classes.cardContainer}>
+        {loading ? (
+          <RiseLoader size={10} color="#FFFBDB"></RiseLoader>
+        ) : (
+          display
+        )}
+      </div>
     </Container>
   );
 };

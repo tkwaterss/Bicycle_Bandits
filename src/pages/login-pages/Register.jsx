@@ -65,7 +65,7 @@ const Register = (props) => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, helpers) => {
-      setLoading(true)
+      setLoading(true);
       console.log(values);
       values.firstname = toTitleCase(values.firstname);
       values.lastname = toTitleCase(values.lastname);
