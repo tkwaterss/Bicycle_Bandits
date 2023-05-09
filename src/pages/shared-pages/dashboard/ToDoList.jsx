@@ -27,7 +27,7 @@ const ToDoList = (props) => {
         setLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [token]);
+  }, [token, setLoading]);
 
   const submitHandler = (event) => {
     event.preventDefault();
