@@ -25,7 +25,7 @@ const CustomerTickets = (props) => {
         setLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [token]);
+  }, [token, setLoading, userId]);
 
   let display;
 

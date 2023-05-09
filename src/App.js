@@ -18,7 +18,6 @@ function App() {
       <Header />
       <main>
           <Routes>
-            // if no token go to landing page, if token, go to dashboard
             <Route
               path="/"
               element={!authCtx.token ? <LandingPage /> : <Dashboard />}

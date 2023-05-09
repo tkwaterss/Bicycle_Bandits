@@ -4,6 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const db = require("./util/database");
 const seed = require("./util/seed");
+const path = require('path');
 const {
   User,
   Bike,
@@ -62,6 +63,7 @@ const { PORT } = process.env;
 //^ Middleware
 server.use(express.json());
 server.use(cors());
+// server.use(express.static(path.join(__dirname, 'build')));
 
 //^ Associations
 User.hasMany(Bike);
@@ -95,6 +97,10 @@ Product.hasMany(TicketProduct);
 TicketProduct.belongsTo(Product);
 
 //^ Endpoints
+
+  // server.get('/*', function (req, res) {
+  //    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  //  });
 
 //Authentication Controller
 server.post('/register', register);

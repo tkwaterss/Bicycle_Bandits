@@ -27,7 +27,7 @@ const TechTickets = (props) => {
         setLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [token]);
+  }, [token, setLoading]);
 
   const formik = useFormik({
     initialValues: {
