@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const db = require("./util/database");
 const seed = require("./util/seed");
-const path = require('path');
+const path = require("path");
 const {
   User,
   Bike,
@@ -53,7 +53,7 @@ const {
   deleteToDoItem,
 } = require("./controllers/todoList");
 const { searchCatelogue } = require("./controllers/items");
-const { login, register } = require('./controllers/auth');
+const { login, register } = require("./controllers/auth");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
 
 //^ Variables
@@ -63,7 +63,7 @@ const { PORT } = process.env;
 //^ Middleware
 server.use(express.json());
 server.use(cors());
-// server.use(express.static(path.join(__dirname, 'build')));
+server.use(express.static(path.resolve(__dirname, "../build")));
 
 //^ Associations
 User.hasMany(Bike);
@@ -98,55 +98,67 @@ TicketProduct.belongsTo(Product);
 
 //^ Endpoints
 
-  // server.get('/*', function (req, res) {
-  //    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  //  });
 
 //Authentication Controller
-server.post('/register', register);
-server.post('/login', login);
+server.post("/register", register);
+server.post("/login", login);
 
 //tickets controller end points
-server.get("/tickets",isAuthenticated, getTickets);
-server.get("/tickets/:userId",isAuthenticated, getUserTickets);
-server.get("/ticket/:ticketId",isAuthenticated, getTicketDetails);
-server.get("/search/tickets",isAuthenticated, searchTickets);
-server.post("/tickets",isAuthenticated, newTicket);
-server.put("/tickets/:ticketId",isAuthenticated, editTicket);
+server.get("/tickets", isAuthenticated, getTickets);
+server.get("/tickets/:userId", isAuthenticated, getUserTickets);
+server.get("/ticket/:ticketId", isAuthenticated, getTicketDetails);
+server.get("/search/tickets", isAuthenticated, searchTickets);
+server.post("/tickets", isAuthenticated, newTicket);
+server.put("/tickets/:ticketId", isAuthenticated, editTicket);
 server.put("/tickets/total/:ticketId", isAuthenticated, updateTotal);
-server.delete("/tickets/:ticketId",isAuthenticated, deleteTicket);
+server.delete("/tickets/:ticketId", isAuthenticated, deleteTicket);
 
 //ticketItems controller end points
-server.get("/ticketItems/:ticketId",isAuthenticated, getTicketItems);
-server.get("/search/ticketItems", isAuthenticated, searchTicketItems)
-server.post("/ticketLabor",isAuthenticated, addTicketLabor);
-server.put("/ticketLabor/:ticketLaborId",isAuthenticated, updateTicketLabor);
-server.delete("/ticketLabor/:ticketLaborId",isAuthenticated, deleteTicketLabor);
-server.post("/ticketProducts",isAuthenticated, addTicketProduct);
-server.put("/ticketProducts/:ticketProductId",isAuthenticated, updateTicketProduct);
-server.delete("/ticketProducts/:ticketProductId",isAuthenticated, deleteTicketProduct);
-
+server.get("/ticketItems/:ticketId", isAuthenticated, getTicketItems);
+server.get("/search/ticketItems", isAuthenticated, searchTicketItems);
+server.post("/ticketLabor", isAuthenticated, addTicketLabor);
+server.put("/ticketLabor/:ticketLaborId", isAuthenticated, updateTicketLabor);
+server.delete(
+  "/ticketLabor/:ticketLaborId",
+  isAuthenticated,
+  deleteTicketLabor
+  );
+server.post("/ticketProducts", isAuthenticated, addTicketProduct);
+server.put(
+  "/ticketProducts/:ticketProductId",
+  isAuthenticated,
+  updateTicketProduct
+);
+server.delete(
+  "/ticketProducts/:ticketProductId",
+  isAuthenticated,
+  deleteTicketProduct
+  );
+  
 //users controller end points
 server.get("/users", isAuthenticated, searchCustomers);
-server.get("/users/bikes/:userId",isAuthenticated, getBikes);
-server.put("/users/update",isAuthenticated, updateUserInfo);
-server.post("/users",isAuthenticated, createUser);
-server.post("/users/bike",isAuthenticated, createBike);
+server.get("/users/bikes/:userId", isAuthenticated, getBikes);
+server.put("/users/update", isAuthenticated, updateUserInfo);
+server.post("/users", isAuthenticated, createUser);
+server.post("/users/bike", isAuthenticated, createBike);
 server.post("/newUser", isAuthenticated, newUserBikeTicket);
 server.post("/newBike", isAuthenticated, newBikeTicket);
 
 //to do list contoller
-server.get("/toDoList",isAuthenticated, getToDoList);
-server.post("/toDoList",isAuthenticated, addToDoItem);
-server.put("/toDoList/:toDoId",isAuthenticated, updateToDoItem);
-server.delete("/toDoList/:toDoId",isAuthenticated, deleteToDoItem);
+server.get("/toDoList", isAuthenticated, getToDoList);
+server.post("/toDoList", isAuthenticated, addToDoItem);
+server.put("/toDoList/:toDoId", isAuthenticated, updateToDoItem);
+server.delete("/toDoList/:toDoId", isAuthenticated, deleteToDoItem);
 
 //items controller
-server.get("/tech/catalogue",isAuthenticated, searchCatelogue);
+server.get("/tech/catalogue", isAuthenticated, searchCatelogue);
+
+server.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
 
 //^ Database sycn and seed
-db
-.sync()
+db.sync()
   // .sync({force: true})
   .then(() => {
     // seed()
