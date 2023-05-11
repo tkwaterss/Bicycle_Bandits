@@ -25,7 +25,7 @@ a {
   padding: 8px 4px 4px 4px;
 }
 .titleBar {
-  padding: 8px 3% 4px 3%;
+  padding: 8px 10px 4px 10px;
   list-style: none;
   display: flex;
   font-size: 13px;
@@ -60,57 +60,66 @@ a {
 }
 
 #ticketId {
+  width: 4%;
+  display: flex;
+  justify-content: left;
   border-right: solid rgba(0, 0, 0, 0.4);
-  width: 5%;
+}
+#customerName {
+  width: 15%;
+  border-right: solid rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: left;
 }
 #bikeDescription {
-  border-right: solid rgba(0, 0, 0, 0.4);
-  width: 46%;
+  width: 40%;
   display: flex;
   justify-content: left;
 }
 #dueDate {
-  width: 14%;
+  width: 12%;
   display: flex;
   justify-content: center;
+  border-right: solid rgba(0, 0, 0, 0.4);
+  border-left: solid rgba(0, 0, 0, 0.4);
 }
 #status {
   border-right: solid rgba(0, 0, 0, 0.4);
-  border-left: solid rgba(0, 0, 0, 0.4);
-  width: 20%;
+  width: 16%;
   display: flex;
-  justify-content: center;
+  justify-content: left;
 }
 #total {
-  width: 12%;
+  width: 8%;
   display: flex;
   justify-content: right;
 }
 
 #ticketIdTitle {
-  width: 5%;
+  width: 4%;
   display: flex;
   justify-content: left;
 }
+#customerNameTitle {
+  width: 15%;
+}
 #bikeDescriptionTitle {
-  width: 46%;
+  width: 40%;
   display: flex;
   justify-content: left;
 }
 #dueDateTitle {
-  width: 14%;
+  width: 12%;
   display: flex;
   justify-content: center;
 }
 #statusTitle {
-  width: 20%;
+  width: 16%;
   display: flex;
   justify-content: center;
 }
 #totalTitle {
-  width: 12%;
+  width: 8%;
   display: flex;
   justify-content: right;
 }
@@ -127,11 +136,11 @@ a {
   border-radius: 4px;
   width: 100%;
 }
-.toDoCard:hover {
+/* .toDoCard:hover {
   cursor: pointer;
   box-shadow:inset 0 0 10px rgba(0, 0, 0, 0.4);
   transition: all 0.2s ease-in-out
-}
+} */
 .toDoList {
   list-style: none;
   color: #30362F;

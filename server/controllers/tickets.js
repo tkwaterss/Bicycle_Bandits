@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 const { toTitleCase } = require("../utils/formatting");
 module.exports = {
   //get 10 tickets sorted by closest due date going forwards from today
-  //TODO maybe first look for overdue tickets that aren't complete
   getTickets: async (req, res) => {
     try {
       const tickets = await Ticket.findAll({
@@ -58,9 +57,25 @@ module.exports = {
       res.sendStatus(400);
     }
   },
+  getAllTickets: async (req, res) => {
+    try {
+      const tickets = await Ticket.findAll({
+        where: {
+          dueDate: {
+            [Op.gte]: new Date(),
+          },
+        },
+        include: [{ model: Bike }, {model: User}],
+        order: [["dueDate", "ASC"]],
+      });
+      res.status(200).send(tickets);
+    } catch (err) {
+      console.log("error in getAllTickets");
+      console.log(err);
+      res.sendStatus(400);
+    }
+  },
   //find tickets based on search inputs
-  //search categories: customer name, bike brand / model
-  //TODO need to figure out multi word inputs
   searchTickets: async (req, res) => {
     let { input, category } = req.query;
     input = toTitleCase(input);
@@ -92,7 +107,6 @@ module.exports = {
           },
           { model: includeTable },
         ],
-        limit: 10,
       });
       res.status(200).send(tickets);
     } catch (err) {

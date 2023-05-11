@@ -50,26 +50,26 @@ const bikes = [
   {userId: "1", brand: "Time", model: "Alp D'Huez", color: "Red", size: "XS", type: "Road"},
 ]
 const tickets = [
-  {userId: "1", bikeId: "1", externalNotes: "", internalNotes: "", dueDate: '2024-01-12', location: 'Storage', status: 'Checked In', total: ''},
-  {userId: "2", bikeId: "2", externalNotes: "", internalNotes: "", dueDate: '2024-02-12', location: 'Storage', status: 'Finished', total: ''},
-  {userId: "3", bikeId: "3", externalNotes: "", internalNotes: "", dueDate: '2024-03-12', location: 'Storage', status: 'Done and Paid', total: ''},
-  {userId: "4", bikeId: "4", externalNotes: "", internalNotes: "", dueDate: '2024-04-12', location: 'Storage', status: 'Waiting for Parts', total: ''},
-  {userId: "5", bikeId: "5", externalNotes: "", internalNotes: "", dueDate: '2024-05-12', location: 'Storage', status: 'Not Here', total: ''},
-  {userId: "6", bikeId: "6", externalNotes: "", internalNotes: "", dueDate: '2024-06-12', location: 'Storage', status: 'Checked In', total: ''},
-  {userId: "7", bikeId: "7", externalNotes: "", internalNotes: "", dueDate: '2024-07-12', location: 'Storage', status: 'Finished', total: ''},
-  {userId: "8", bikeId: "8", externalNotes: "", internalNotes: "", dueDate: '2024-08-12', location: 'Storage', status: 'Checked In', total: ''},
-  {userId: "9", bikeId: "9", externalNotes: "", internalNotes: "", dueDate: '2023-09-12', location: 'Storage', status: 'Finished', total: ''},
-  {userId: "10", bikeId: "10", externalNotes: "", internalNotes: "", dueDate: '2023-1-12', location: 'Storage', status: 'Done and Paid', total: ''},
-  {userId: "1", bikeId: "20", externalNotes: "", internalNotes: "", dueDate: '2024-01-12', location: 'Storage', status: 'Checked In', total: ''},
-  {userId: "2", bikeId: "18", externalNotes: "", internalNotes: "", dueDate: '2024-02-12', location: 'Storage', status: 'Finished', total: ''},
-  {userId: "3", bikeId: "17", externalNotes: "", internalNotes: "", dueDate: '2024-03-12', location: 'Storage', status: 'Done and Paid', total: ''},
-  {userId: "4", bikeId: "15", externalNotes: "", internalNotes: "", dueDate: '2024-04-12', location: 'Storage', status: 'Waiting for Parts', total: ''},
-  {userId: "5", bikeId: "16", externalNotes: "", internalNotes: "", dueDate: '2024-05-12', location: 'Storage', status: 'Not Here', total: ''},
-  {userId: "6", bikeId: "14", externalNotes: "", internalNotes: "", dueDate: '2024-06-12', location: 'Storage', status: 'Checked In', total: ''},
-  {userId: "7", bikeId: "13", externalNotes: "", internalNotes: "", dueDate: '2024-07-12', location: 'Storage', status: 'Finished', total: ''},
-  {userId: "8", bikeId: "12", externalNotes: "", internalNotes: "", dueDate: '2024-08-12', location: 'Storage', status: 'Checked In', total: ''},
-  {userId: "9", bikeId: "11", externalNotes: "", internalNotes: "", dueDate: '2023-09-12', location: 'Storage', status: 'Finished', total: ''},
-  {userId: "10", bikeId: "19", externalNotes: "", internalNotes: "", dueDate: '2023-1-12', location: 'Storage', status: 'Done and Paid', total: ''},
+  {userId: "1", bikeId: "1", externalNotes: "", internalNotes: "", dueDate: '2024-01-12', location: 'Storage', status: 'Checked In', total: '0.00'},
+  {userId: "2", bikeId: "2", externalNotes: "", internalNotes: "", dueDate: '2024-02-12', location: 'Storage', status: 'Finished', total: '0.00'},
+  {userId: "3", bikeId: "3", externalNotes: "", internalNotes: "", dueDate: '2024-03-12', location: 'Storage', status: 'Done and Paid', total: '0.00'},
+  {userId: "4", bikeId: "4", externalNotes: "", internalNotes: "", dueDate: '2024-04-12', location: 'Storage', status: 'Waiting for Parts', total: '0.00'},
+  {userId: "5", bikeId: "5", externalNotes: "", internalNotes: "", dueDate: '2024-05-12', location: 'Storage', status: 'Not Here', total: '0.00'},
+  {userId: "6", bikeId: "6", externalNotes: "", internalNotes: "", dueDate: '2024-06-12', location: 'Storage', status: 'Checked In', total: '0.00'},
+  {userId: "7", bikeId: "7", externalNotes: "", internalNotes: "", dueDate: '2024-07-12', location: 'Storage', status: 'Finished', total: '0.00'},
+  {userId: "8", bikeId: "8", externalNotes: "", internalNotes: "", dueDate: '2024-08-12', location: 'Storage', status: 'Checked In', total: '0.00'},
+  {userId: "9", bikeId: "9", externalNotes: "", internalNotes: "", dueDate: '2023-09-12', location: 'Storage', status: 'Finished', total: '0.00'},
+  {userId: "10", bikeId: "10", externalNotes: "", internalNotes: "", dueDate: '2023-1-12', location: 'Storage', status: 'Done and Paid', total: '0.00'},
+  {userId: "1", bikeId: "20", externalNotes: "", internalNotes: "", dueDate: '2024-01-12', location: 'Storage', status: 'Checked In', total: '0.00'},
+  {userId: "2", bikeId: "18", externalNotes: "", internalNotes: "", dueDate: '2024-02-12', location: 'Storage', status: 'Finished', total: '0.00'},
+  {userId: "3", bikeId: "17", externalNotes: "", internalNotes: "", dueDate: '2024-03-12', location: 'Storage', status: 'Done and Paid', total: '0.00'},
+  {userId: "4", bikeId: "15", externalNotes: "", internalNotes: "", dueDate: '2024-04-12', location: 'Storage', status: 'Waiting for Parts', total: '0.00'},
+  {userId: "5", bikeId: "16", externalNotes: "", internalNotes: "", dueDate: '2024-05-12', location: 'Storage', status: 'Not Here', total: '0.00'},
+  {userId: "6", bikeId: "14", externalNotes: "", internalNotes: "", dueDate: '2024-06-12', location: 'Storage', status: 'Checked In', total: '0.00'},
+  {userId: "7", bikeId: "13", externalNotes: "", internalNotes: "", dueDate: '2024-07-12', location: 'Storage', status: 'Finished', total: '0.00'},
+  {userId: "8", bikeId: "12", externalNotes: "", internalNotes: "", dueDate: '2024-08-12', location: 'Storage', status: 'Checked In', total: '0.00'},
+  {userId: "9", bikeId: "11", externalNotes: "", internalNotes: "", dueDate: '2023-09-12', location: 'Storage', status: 'Finished', total: '0.00'},
+  {userId: "10", bikeId: "19", externalNotes: "", internalNotes: "", dueDate: '2023-1-12', location: 'Storage', status: 'Done and Paid', total: '0.00'},
 ]
 const labor = [
   //General
@@ -244,26 +244,26 @@ const products = [
   {productTitle: 'sram hydraulic brake', productPrice: '82.99'},
 
 ]
-const orders= [
-  {userId: "1", orderTotal: '25.99'},
-  {userId: "2", orderTotal: '39.99'},
-  {userId: "3", orderTotal: '15.99'},
-  {userId: "4", orderTotal: '100.99'},
-  {userId: "5", orderTotal: '75.99'},
-]
+// const orders= [
+//   {userId: "1", orderTotal: '25.99'},
+//   {userId: "2", orderTotal: '39.99'},
+//   {userId: "3", orderTotal: '15.99'},
+//   {userId: "4", orderTotal: '100.99'},
+//   {userId: "5", orderTotal: '75.99'},
+// ]
 const todo = [
   {complete: "false", description: 'Organize tires'},
   {complete: "false", description: 'Clean under benches'},
   {complete: "false", description: 'Wipe down surfaces'},
   {complete: "false", description: 'Label new inventory'},
 ]
-const carts = [
-  {userId: '1', productId: '1', quantity: "1"},
-  {userId: '2', productId: '2', quantity: "1"},
-  {userId: '3', productId: '3', quantity: "1"},
-  {userId: '4', productId: '4', quantity: "1"},
-  {userId: '5', productId: '5', quantity: "1"},
-]
+// const carts = [
+//   {userId: '1', productId: '1', quantity: "1"},
+//   {userId: '2', productId: '2', quantity: "1"},
+//   {userId: '3', productId: '3', quantity: "1"},
+//   {userId: '4', productId: '4', quantity: "1"},
+//   {userId: '5', productId: '5', quantity: "1"},
+// ]
 const ticketLabor = [
   {ticketId: "1", laborId: "1", quantity: "1"},
   {ticketId: "2", laborId: "2", quantity: "1"},
@@ -304,13 +304,13 @@ const ticketProduct = [
   {ticketId: "8", productId: "2", quantity: "1"},
   {ticketId: "9", productId: "3", quantity: "1"},
 ]
-const orderProduct = [
-  {orderId: "1", productId: "1", quantity: "1"},
-  {orderId: "2", productId: "2", quantity: "1"},
-  {orderId: "3", productId: "3", quantity: "1"},
-  {orderId: "4", productId: "4", quantity: "1"},
-  {orderId: "5", productId: "5", quantity: "1"},
-]
+// const orderProduct = [
+//   {orderId: "1", productId: "1", quantity: "1"},
+//   {orderId: "2", productId: "2", quantity: "1"},
+//   {orderId: "3", productId: "3", quantity: "1"},
+//   {orderId: "4", productId: "4", quantity: "1"},
+//   {orderId: "5", productId: "5", quantity: "1"},
+// ]
 
 const seed = async () => {
   try {
@@ -319,12 +319,12 @@ const seed = async () => {
     await Ticket.bulkCreate(tickets);
     await Labor.bulkCreate(labor);
     await Product.bulkCreate(products);
-    await Order.bulkCreate(orders);
+    // await Order.bulkCreate(orders);
     await Todo.bulkCreate(todo);
-    await Cart.bulkCreate(carts);
+    // await Cart.bulkCreate(carts);
     await TicketLabor.bulkCreate(ticketLabor);
     await TicketProduct.bulkCreate(ticketProduct);
-    await OrderProduct.bulkCreate(orderProduct);
+    // await OrderProduct.bulkCreate(orderProduct);
   }
   catch(err) {
     console.log(err)

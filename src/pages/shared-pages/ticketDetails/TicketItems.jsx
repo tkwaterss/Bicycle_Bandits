@@ -27,7 +27,7 @@ const TicketItems = (props) => {
     initialValues: {
       search: "",
     },
-    onSubmit: (values) => {
+    onSubmit: (values, helpers) => {
       setLoading(true);
       axios
         .get(
@@ -42,6 +42,7 @@ const TicketItems = (props) => {
           setSearching(true);
           setLaborResults(res.data.labor);
           setProductResults(res.data.products);
+          helpers.resetForm();
           setLoading(false);
         })
         .catch((err) => console.log(err));
@@ -265,7 +266,7 @@ const TicketItems = (props) => {
                 {+item.labor.laborTime * item.quantity} minutes
               </li>
               <div className={classes.quantitySet}>
-                <SmallBtn
+                {employee ? <SmallBtn
                   id="decrement"
                   className={classes.adjustQuantityBtn}
                   onClick={(e) =>
@@ -273,9 +274,9 @@ const TicketItems = (props) => {
                   }
                 >
                   -
-                </SmallBtn>
+                </SmallBtn> : <div className={classes.adjustQuantityBtn}></div>}
                 <li>{item.quantity}</li>
-                <SmallBtn
+                {employee ? <SmallBtn
                   id={"increment"}
                   className={classes.adjustQuantityBtn}
                   onClick={(e) =>
@@ -283,13 +284,13 @@ const TicketItems = (props) => {
                   }
                 >
                   +
-                </SmallBtn>
+                </SmallBtn> : <div className={classes.adjustQuantityBtn}></div>}
               </div>
               <li id={classes.itemPrice}>
                 $ {priceFormat(item.labor.laborPrice * item.quantity)}
               </li>
             </ul>
-            <DeleteBtn onClick={() => deleteTicketLabor(item.id)}>X</DeleteBtn>
+            {employee ? <DeleteBtn onClick={() => deleteTicketLabor(item.id)} className={classes.adjustQuantityBtn}>X</DeleteBtn> : <div className={classes.adjustQuantityBtn}></div>}
           </div>
         </Card>
       );
@@ -332,7 +333,7 @@ const TicketItems = (props) => {
               </li>
               <li id={classes.itemTime}></li>
               <div className={classes.quantitySet}>
-                <SmallBtn
+                {employee ? <SmallBtn
                   id="decrement"
                   className={classes.adjustQuantityBtn}
                   onClick={(e) =>
@@ -340,9 +341,9 @@ const TicketItems = (props) => {
                   }
                 >
                   -
-                </SmallBtn>
+                </SmallBtn> : <div className={classes.adjustQuantityBtn}></div>}
                 <li>{item.quantity}</li>
-                <SmallBtn
+                {employee ? <SmallBtn
                   id={"increment"}
                   className={classes.adjustQuantityBtn}
                   onClick={(e) =>
@@ -350,13 +351,13 @@ const TicketItems = (props) => {
                   }
                 >
                   +
-                </SmallBtn>
+                </SmallBtn> : <div className={classes.adjustQuantityBtn}></div>}
               </div>
               <li id={classes.itemPrice}>
                 $ {priceFormat(item.product.productPrice * item.quantity)}
               </li>
             </ul>
-            <DeleteBtn onClick={() => deleteTicketProduct(item.id)} />
+            {employee ? <DeleteBtn onClick={() => deleteTicketProduct(item.id)} className={classes.adjustQuantityBtn}/> : <div className={classes.adjustQuantityBtn}></div>}
           </div>
         </Card>
       );

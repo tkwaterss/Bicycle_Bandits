@@ -17,7 +17,7 @@ const TicketSearch = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:4040/tickets`, {
+      .get(`http://localhost:4040/allTickets`, {
         headers: {
           authorization: token,
         },
@@ -69,6 +69,7 @@ const TicketSearch = () => {
       <Link key={ticket.id} to={`/ticket/${ticket.id}`} className={classes.ticketCard}>
         <Card className={classes.ticketCard}>
           <ul className={classes.ticketDetailsList}>
+            <li id={classes.ticketId}>{ticket.id}</li>
             <li
               id={classes.customerName}
             >{`${ticket.user.firstname} ${ticket.user.lastname}`}</li>
@@ -125,6 +126,7 @@ const TicketSearch = () => {
           </div>
         </form>
         <ul className={classes.titleBar}>
+          <li id={classes.ticketIdLabel}>ID</li>
           <li id={classes.nameTitle}>Customer Name</li>
           <li id={classes.bikeTitle}>Bike Description</li>
           <li id={classes.locationTitle}>Location</li>

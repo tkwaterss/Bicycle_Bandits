@@ -11,11 +11,11 @@ const {
   Ticket,
   Labor,
   Product,
-  Order,
-  Cart,
+  // Order,
+  // Cart,
   TicketLabor,
   TicketProduct,
-  OrderProduct,
+  // OrderProduct,
 } = require("./util/models");
 const {
   getTickets,
@@ -26,6 +26,7 @@ const {
   editTicket,
   updateTotal,
   deleteTicket,
+  getAllTickets,
 } = require("./controllers/tickets");
 const {
   getTicketItems,
@@ -63,21 +64,21 @@ const { PORT } = process.env;
 //^ Middleware
 server.use(express.json());
 server.use(cors());
-server.use(express.static(path.join(__dirname, "../build")));
+// server.use(express.static(path.join(__dirname, "../build")));
 
 //^ Associations
 User.hasMany(Bike);
 Bike.belongsTo(User);
 User.hasMany(Ticket);
 Ticket.belongsTo(User);
-User.hasMany(Order);
-Order.belongsTo(User);
+// User.hasMany(Order);
+// Order.belongsTo(User);
 
-User.belongsToMany(Product, { through: Cart });
-Product.belongsToMany(User, { through: Cart });
+// User.belongsToMany(Product, { through: Cart });
+// Product.belongsToMany(User, { through: Cart });
 
-Order.belongsToMany(Product, { through: OrderProduct });
-Product.belongsToMany(Order, { through: OrderProduct });
+// Order.belongsToMany(Product, { through: OrderProduct });
+// Product.belongsToMany(Order, { through: OrderProduct });
 
 Bike.hasMany(Ticket);
 Ticket.belongsTo(Bike);
@@ -98,7 +99,6 @@ TicketProduct.belongsTo(Product);
 
 //^ Endpoints
 
-
 //Authentication Controller
 server.post("/register", register);
 server.post("/login", login);
@@ -107,6 +107,7 @@ server.post("/login", login);
 server.get("/tickets", isAuthenticated, getTickets);
 server.get("/tickets/:userId", isAuthenticated, getUserTickets);
 server.get("/ticket/:ticketId", isAuthenticated, getTicketDetails);
+server.get("/allTickets", isAuthenticated, getAllTickets);
 server.get("/search/tickets", isAuthenticated, searchTickets);
 server.post("/tickets", isAuthenticated, newTicket);
 server.put("/tickets/:ticketId", isAuthenticated, editTicket);
@@ -122,7 +123,7 @@ server.delete(
   "/ticketLabor/:ticketLaborId",
   isAuthenticated,
   deleteTicketLabor
-  );
+);
 server.post("/ticketProducts", isAuthenticated, addTicketProduct);
 server.put(
   "/ticketProducts/:ticketProductId",
@@ -133,8 +134,8 @@ server.delete(
   "/ticketProducts/:ticketProductId",
   isAuthenticated,
   deleteTicketProduct
-  );
-  
+);
+
 //users controller end points
 server.get("/users", isAuthenticated, searchCustomers);
 server.get("/users/bikes/:userId", isAuthenticated, getBikes);
@@ -153,15 +154,16 @@ server.delete("/toDoList/:toDoId", isAuthenticated, deleteToDoItem);
 //items controller
 server.get("/tech/catalogue", isAuthenticated, searchCatelogue);
 
-server.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
+// server.get("/*", function (req, res) {
+//   res.sendFile(path.join(__dirname, "../build/index.html"));
+// });
 
 //^ Database sycn and seed
-db.sync()
-  // .sync({force: true})
+db
+  .sync()
+  // .sync({ force: true })
   .then(() => {
-    // seed()
+    // seed();
   })
   .catch((err) => console.log(err, "could not connect"));
 

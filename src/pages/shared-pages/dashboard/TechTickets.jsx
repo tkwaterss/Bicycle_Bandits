@@ -58,6 +58,9 @@ const TechTickets = (props) => {
             <div id={classes.ticketId}>
               <p>{ticket.id}</p>
             </div>
+            <div id={classes.customerName}>
+              <p>{`${ticket.user.firstname} ${ticket.user.lastname}`}</p>
+            </div>
             <div id={classes.bikeDescription}>
               <p>{`${ticket.bike.brand}, ${ticket.bike.model}, ${ticket.bike.color}`}</p>
             </div>
@@ -90,6 +93,7 @@ const TechTickets = (props) => {
         </form>
         <ul className={classes.titleBar}>
           <li id={classes.ticketIdTitle}>ID</li>
+          <li id={classes.customerNameTitle}>Customer</li>
           <li id={classes.bikeDescriptionTitle}> Bike Description</li>
           <li id={classes.dueDateTitle}>Due Date</li>
           <li id={classes.statusTitle}>Status</li>

@@ -63,18 +63,21 @@
   box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
 }
 
+#ticketIdLabel {
+  width: 4%;
+}
 #nameTitle {
-  width: 15%;
+  width: 14%;
 }
 #bikeTitle {
-  width: 35%;
+  width: 32%;
 }
 #locationTitle {
-  width: 13%;
+  width: 12%;
   text-align: center;
 }
 #dueDateTitle {
-  width: 10%;
+  width: 11%;
   text-align: center;
 }
 #statusTitle {
@@ -117,17 +120,20 @@
   color: #30362F;
 }
 
-
+#ticketId {
+  width: 4%;
+  border-right: solid rgba(0, 0, 0, 0.4);
+}
 #customerName {
-  width: 15%;
+  width: 14%;
   border-right: solid rgba(0, 0, 0, 0.4);
 }
 #bikeDescription {
-  width: 35%;
+  width: 32%;
   border-right: solid rgba(0, 0, 0, 0.4);
 }
 #bikeLocation {
-  width: 13%;
+  width: 12%;
   text-align: center;
 }
 #ticketDueDate {

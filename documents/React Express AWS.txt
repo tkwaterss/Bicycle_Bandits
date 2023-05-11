@@ -1,0 +1,18 @@
+https://www.youtube.com/watch?v=vmty50KJg08&ab_channel=Koding101
+Following this video
+
+Create AWS EC2 Instance
+	-Create key value pair and save the resulting file somewhere safe
+	
+navigate to the .pem file location and coppy the ssh command
+
+sudo apt update
+
+sudo apt install nginx
+
+curl -s http://deb.nodesource.com/setup_16.x | sudo bash
+
+sudo apt install nodejs -y
+
+sudo npm install pm2@ latest -g
+

@@ -52,7 +52,6 @@ module.exports = {
       type: DataTypes.INTEGER,
     },
     laborTitle: DataTypes.STRING,
-    laborDescription: DataTypes.TEXT,
     laborPrice: DataTypes.FLOAT,
     laborTime: DataTypes.STRING,
   }),
@@ -64,19 +63,17 @@ module.exports = {
       type: DataTypes.INTEGER,
     },
     productTitle: DataTypes.STRING,
-    productDescription: DataTypes.TEXT,
-    productImage: DataTypes.TEXT,
     productPrice: DataTypes.FLOAT,
   }),
-  Order: db.define("order", {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-    },
-    orderTotal: DataTypes.FLOAT,
-  }),
+  // Order: db.define("order", {
+  //   id: {
+  //     allowNull: false,
+  //     primaryKey: true,
+  //     autoIncrement: true,
+  //     type: DataTypes.INTEGER,
+  //   },
+  //   orderTotal: DataTypes.FLOAT,
+  // }),
   Todo: db.define("todo", {
     id: {
       allowNull: false,
@@ -87,15 +84,15 @@ module.exports = {
     complete: DataTypes.BOOLEAN,
     description: DataTypes.TEXT,
   }),
-  Cart: db.define("cart", {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-    },
-    quantity: DataTypes.INTEGER,
-  }),
+  // Cart: db.define("cart", {
+  //   id: {
+  //     allowNull: false,
+  //     primaryKey: true,
+  //     autoIncrement: true,
+  //     type: DataTypes.INTEGER,
+  //   },
+  //   quantity: DataTypes.INTEGER,
+  // }),
   TicketLabor: db.define("ticketLabor", {
     id: {
       allowNull: false,
@@ -114,13 +111,13 @@ module.exports = {
     },
     quantity: DataTypes.INTEGER,
   }),
-  OrderProduct: db.define("orderProduct", {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-    },
-    quantity: DataTypes.INTEGER,
-  }),
+  // OrderProduct: db.define("orderProduct", {
+  //   id: {
+  //     allowNull: false,
+  //     primaryKey: true,
+  //     autoIncrement: true,
+  //     type: DataTypes.INTEGER,
+  //   },
+  //   quantity: DataTypes.INTEGER,
+  // }),
 };

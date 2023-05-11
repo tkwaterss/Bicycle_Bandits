@@ -32,7 +32,7 @@ const CustomerTickets = (props) => {
   if (tickets.length > 0) {
     display = tickets.map((ticket) => {
       return (
-        <Link key={ticket.id} to={`/ticket/${ticket.id}`}>
+        <Link key={ticket.id} to={`/ticket/${ticket.id}`} className={classes.ticketCard}>
           <Card className={classes.ticketCard}>
             <div className={classes.ticketList}>
               <div id={classes.ticketId}>

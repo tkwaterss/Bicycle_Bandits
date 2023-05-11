@@ -234,6 +234,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 8px;
 }
 .itemsList {
@@ -260,6 +261,7 @@
   align-items: center;
 }
 .adjustQuantityBtn {
+  height: 20px;
   width: 20px;
   padding: 2px 0;
   display: flex;
