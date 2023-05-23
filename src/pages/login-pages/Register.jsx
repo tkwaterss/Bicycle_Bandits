@@ -73,7 +73,7 @@ const Register = (props) => {
       values.employee = employee;
 
       axios
-        .post("http://localhost:4040/register", values)
+        .post("/register", values)
         .then(({ data }) => {
           authCtx.login(data.token, data.exp, data.userId, data.employee);
           console.log("after auth", data);

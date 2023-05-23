@@ -33,7 +33,7 @@ const Login = (props) => {
       setLoading(true);
 
       axios
-        .post("http://localhost:4040/login", values)
+        .post("/login", values)
         .then(({ data }) => {
           authCtx.login(data.token, data.exp, data.userId, data.employee);
           console.log("after auth", data);
