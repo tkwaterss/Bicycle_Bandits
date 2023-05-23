@@ -69,7 +69,7 @@ const NewTicket = () => {
       (firstname || lastname) &&
         axios
           .get(
-            `http://localhost:4040/users?${
+            `/users?${
               firstname ? `firstname=${firstname}` : ""
             }${firstname && lastname ? "&" : ""}${
               lastname ? `lastname=${lastname}` : ""
@@ -91,7 +91,7 @@ const NewTicket = () => {
     setUser(users.filter((user) => user.id === +userId));
 
     axios
-      .get(`http://localhost:4040/users/bikes/${userId}`, {
+      .get(`/users/bikes/${userId}`, {
         headers: {
           authorization: token,
         },
@@ -157,7 +157,7 @@ const NewTicket = () => {
 
       const createUserBikeTicket = () =>
         axios
-          .post(`http://localhost:4040/newUser`, body, {
+          .post(`/newUser`, body, {
             headers: {
               authorization: token,
             },
@@ -177,7 +177,7 @@ const NewTicket = () => {
 
       const createBikeTicket = () =>
         axios
-          .post(`http://localhost:4040/newBike`, body, {
+          .post(`/newBike`, body, {
             headers: {
               authorization: token,
             },
@@ -189,7 +189,7 @@ const NewTicket = () => {
 
       const createTicket = () =>
         axios
-          .post(`http://localhost:4040/tickets`, body.newTicketBody, {
+          .post(`/tickets`, body.newTicketBody, {
             headers: {
               authorization: token,
             },

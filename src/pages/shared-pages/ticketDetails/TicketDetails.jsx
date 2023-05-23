@@ -16,7 +16,7 @@ const TicketDetails = () => {
   useEffect(() => {
     setInitLoad(true);
     axios
-      .get(`http://localhost:4040/ticket/${id}`, {
+      .get(`/ticket/${id}`, {
         headers: {
           authorization: token,
         },

@@ -15,7 +15,7 @@ const CustomerTickets = (props) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:4040/tickets/${userId}`, {
+      .get(`/tickets/${userId}`, {
         headers: {
           authorization: token,
         },

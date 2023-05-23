@@ -17,7 +17,7 @@ const ToDoList = (props) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:4040/toDoList", {
+      .get("/toDoList", {
         headers: {
           authorization: token,
         },
@@ -34,7 +34,7 @@ const ToDoList = (props) => {
     setLoading(true);
     axios
       .post(
-        "http://localhost:4040/toDoList",
+        "/toDoList",
         { complete: false, description: toDoRef.current.value },
         {
           headers: {
@@ -55,7 +55,7 @@ const ToDoList = (props) => {
     setLoading(true);
     let id = event.target.id;
     axios
-      .delete(`http://localhost:4040/toDoList/${id}`, {
+      .delete(`/toDoList/${id}`, {
         headers: {
           authorization: token,
         },

@@ -17,7 +17,7 @@ const TicketSearch = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:4040/allTickets`, {
+      .get(`/allTickets`, {
         headers: {
           authorization: token,
         },
@@ -39,7 +39,7 @@ const TicketSearch = () => {
       setLoading(true);
       axios
         .get(
-          `http://localhost:4040/search/tickets?input=${values.input}&category=${values.category}`,
+          `/search/tickets?input=${values.input}&category=${values.category}`,
           {
             headers: {
               authorization: token,

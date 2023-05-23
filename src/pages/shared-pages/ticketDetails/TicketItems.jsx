@@ -31,7 +31,7 @@ const TicketItems = (props) => {
       setLoading(true);
       axios
         .get(
-          `http://localhost:4040/search/ticketItems?input=${values.search}`,
+          `/search/ticketItems?input=${values.search}`,
           {
             headers: {
               authorization: token,
@@ -52,7 +52,7 @@ const TicketItems = (props) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:4040/ticketItems/${id}`, {
+      .get(`/ticketItems/${id}`, {
         headers: {
           authorization: token,
         },
@@ -81,7 +81,7 @@ const TicketItems = (props) => {
       setTotal(priceFormat(newTotal));
       axios
         .put(
-          `http://localhost:4040/tickets/total/${id}`,
+          `/tickets/total/${id}`,
           { total },
           {
             headers: {
@@ -117,7 +117,7 @@ const TicketItems = (props) => {
       laborId: laborId,
     };
     axios
-      .post(`http://localhost:4040/ticketLabor`, body, {
+      .post(`/ticketLabor`, body, {
         headers: {
           authorization: token,
         },
@@ -149,7 +149,7 @@ const TicketItems = (props) => {
       productId: productId,
     };
     axios
-      .post(`http://localhost:4040/ticketProducts`, body, {
+      .post(`/ticketProducts`, body, {
         headers: {
           authorization: token,
         },
@@ -174,7 +174,7 @@ const TicketItems = (props) => {
     }
     axios
       .put(
-        `http://localhost:4040/ticketLabor/${id}`,
+        `/ticketLabor/${id}`,
         { quantity },
         {
           headers: {
@@ -202,7 +202,7 @@ const TicketItems = (props) => {
     }
     axios
       .put(
-        `http://localhost:4040/ticketProducts/${id}`,
+        `/ticketProducts/${id}`,
         { quantity },
         {
           headers: {
@@ -225,7 +225,7 @@ const TicketItems = (props) => {
   const deleteTicketLabor = (id) => {
     setLoading(true);
     axios
-      .delete(`http://localhost:4040/ticketLabor/${id}`, {
+      .delete(`/ticketLabor/${id}`, {
         headers: {
           authorization: token,
         },
@@ -240,7 +240,7 @@ const TicketItems = (props) => {
   const deleteTicketProduct = (id) => {
     setLoading(true);
     axios
-      .delete(`http://localhost:4040/ticketProducts/${id}`, {
+      .delete(`/ticketProducts/${id}`, {
         headers: {
           authorization: token,
         },

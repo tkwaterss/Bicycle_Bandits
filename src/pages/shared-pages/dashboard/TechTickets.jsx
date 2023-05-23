@@ -17,7 +17,7 @@ const TechTickets = (props) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:4040/tickets", {
+      .get("/tickets", {
         headers: {
           authorization: token,
         },
@@ -36,7 +36,7 @@ const TechTickets = (props) => {
     onSubmit: (values, helpers) => {
       setLoading(true);
       axios
-        .get(`http://localhost:4040/search/tickets?input=${values.search}`, {
+        .get(`/search/tickets?input=${values.search}`, {
           headers: {
             authorization: token,
           },

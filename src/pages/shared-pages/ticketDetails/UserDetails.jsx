@@ -24,7 +24,7 @@ const UserDetails = (props) => {
         dueDate,
       };
       axios
-        .put(`http://localhost:4040/tickets/${id}`, body, {
+        .put(`/tickets/${id}`, body, {
           headers: {
             authorization: token,
           },

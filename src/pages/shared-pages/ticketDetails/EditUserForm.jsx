@@ -43,7 +43,7 @@ const EditUserForm = (props) => {
       setTicket({ ...ticket, user: body.user, bike: body.bike });
       axios
         .put(
-          `http://localhost:4040/users/update?userId=${ticket.userId}&bikeId=${ticket.bikeId}`,
+          `/users/update?userId=${ticket.userId}&bikeId=${ticket.bikeId}`,
           body,
           {
             headers: {
