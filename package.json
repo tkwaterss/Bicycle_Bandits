@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "./server/server.js",
+  "proxy": "http://localhost:4040",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -35,7 +36,7 @@
   },
   "scripts": {
     "go": "react-scripts start",
-    "start": "react-scripts start",
+    "start": "node ./server/server.js && npm build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
