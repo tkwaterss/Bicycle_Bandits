@@ -3,10 +3,34 @@ import classes from "./Header.module.css";
 import { NavLink, Link } from "react-router-dom";
 import DisplayContext from "../store/displayContext";
 import AuthContext from "../store/authContext";
+import SmallBtn from "./UI/SmallBtn";
+import axios from "axios";
 
 const Header = () => {
   const { displayDispatch } = useContext(DisplayContext);
   const authCtx = useContext(AuthContext);
+
+  let accountType;
+
+  if (authCtx.employee) {
+    accountType = "Customer";
+  } else if (!authCtx.employee) {
+    accountType = "Employee";
+  }
+
+  const changeAccountType = (event) => {
+    axios.put(`/updateAccount/${authCtx.userId}`, {
+      employee: !authCtx.employee
+    }, {
+      headers: {
+        authorization: authCtx.token,
+      },
+    })
+    .then((res) => {
+      authCtx.changeAccount();
+    })
+    .catch((err) => console.log(err))
+  }
 
   const activeStyle = ({ isActive }) => {
     return {
@@ -94,7 +118,10 @@ const Header = () => {
           </h1>
         </Link>
       </div>
-      <nav>{links}</nav>
+      <nav>
+        {links}
+        {authCtx.token && <SmallBtn onClick={changeAccountType} className={classes.changeAccountBtn}>{`View as ${accountType}`}</SmallBtn>}
+      </nav>
     </header>
   );
 };

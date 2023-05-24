@@ -34,10 +34,14 @@ header {
 .nameContainer h1:hover {
   cursor: pointer;
 }
-
+nav {
+  display: flex;
+  margin-right: 20px;
+}
 .linksContainer {
   list-style: none;
   display:flex;
+  align-items: center;
   gap: 1rem;
   margin-right: 20px;
 }
@@ -63,4 +67,7 @@ header {
   color: #A59132;
   text-decoration: underline;
 }
-
+.changeAccountBtn {
+  padding: 4px 8px;
+  font-weight: bold;
+}

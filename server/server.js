@@ -46,6 +46,7 @@ const {
   createBike,
   newUserBikeTicket,
   newBikeTicket,
+  changeAccountType,
 } = require("./controllers/users");
 const {
   getToDoList,
@@ -64,8 +65,8 @@ const { PORT } = process.env;
 //^ Middleware
 server.use(express.json());
 server.use(cors());
-server.use(express.static(path.join(__dirname, "../build")));
-// server.use(express.static(path.join(__dirname, "../src")));
+// server.use(express.static(path.join(__dirname, "../build")));
+server.use(express.static(path.join(__dirname, "../src")));
 
 //^ Associations
 User.hasMany(Bike);
@@ -145,6 +146,7 @@ server.post("/users", isAuthenticated, createUser);
 server.post("/users/bike", isAuthenticated, createBike);
 server.post("/newUser", isAuthenticated, newUserBikeTicket);
 server.post("/newBike", isAuthenticated, newBikeTicket);
+server.put("/updateAccount/:userId", isAuthenticated, changeAccountType)
 
 //to do list contoller
 server.get("/toDoList", isAuthenticated, getToDoList);
@@ -155,12 +157,12 @@ server.delete("/toDoList/:toDoId", isAuthenticated, deleteToDoItem);
 //items controller
 server.get("/tech/catalogue", isAuthenticated, searchCatelogue);
 
-server.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
 // server.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "../public/index.html"));
+//   res.sendFile(path.join(__dirname, "../build/index.html"));
 // });
+server.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
 //^ Database sycn and seed
 db

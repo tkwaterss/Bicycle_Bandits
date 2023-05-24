@@ -91,7 +91,7 @@ const Login = (props) => {
           {loading ? (
             <RiseLoader size={8} color="#FFFBDB"></RiseLoader>
           ) : (
-            "SUBMIT"
+            "LOGIN"
           )}
         </LargeBtn>
       </form>

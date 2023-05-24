@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
@@ -13,7 +13,6 @@ import RiseLoader from "react-spinners/RiseLoader";
 
 const Register = (props) => {
   const authCtx = useContext(AuthContext);
-  const [employee, setEmployee] = useState(false);
   const { loading, setLoading } = props;
 
   const validationSchema = yup.object().shape({
@@ -26,16 +25,16 @@ const Register = (props) => {
     password: yup
       .string()
       .required("This field is required")
-      .min(8, "Password must be 8 or more characters")
-      .matches(
-        /(?=.*[a-z])(?=.*[A-Z])\w+/,
-        "Password ahould contain at least one uppercase and lowercase character"
-      )
-      .matches(/\d/, "Password should contain at least one number")
-      .matches(
-        /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/,
-        "Password should contain at least one special character"
-      ),
+      .min(8, "Password must be 8 or more characters"),
+      // .matches(
+      //   /(?=.*[a-z])(?=.*[A-Z])\w+/,
+      //   "Password ahould contain at least one uppercase and lowercase character"
+      // )
+      // .matches(/\d/, "Password should contain at least one number")
+      // .matches(
+      //   /[`!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?~]/,
+      //   "Password should contain at least one special character"
+      // ),
     confirmPass: yup.string().when("password", (password, field) => {
       if (password) {
         return field
@@ -61,7 +60,7 @@ const Register = (props) => {
       confirmPass: "",
       phone: "",
       address: "",
-      employee: employee,
+      employee: true,
     },
     validationSchema: validationSchema,
     onSubmit: (values, helpers) => {
@@ -70,7 +69,7 @@ const Register = (props) => {
       values.firstname = toTitleCase(values.firstname);
       values.lastname = toTitleCase(values.lastname);
       values.email = toLowerCase(values.email);
-      values.employee = employee;
+      values.employee = true;
 
       axios
         .post("/register", values)
@@ -225,26 +224,11 @@ const Register = (props) => {
             Address
           </Input>
         </div>
-        <LargeBtn
-          type="submit"
-          className={classes.registerBtn}
-          function={() => setEmployee(true)}
-        >
+        <LargeBtn type="submit" className={classes.submitBtn}>
           {loading ? (
             <RiseLoader size={8} color="#FFFBDB"></RiseLoader>
           ) : (
-            "REGISTER AS EMPLOYEE"
-          )}
-        </LargeBtn>
-        <LargeBtn
-          type="submit"
-          className={classes.registerBtn}
-          function={() => setEmployee(false)}
-        >
-          {loading ? (
-            <RiseLoader size={8} color="#FFFBDB"></RiseLoader>
-          ) : (
-            "REGISTER AS CUSTOMER"
+            "REGISTER"
           )}
         </LargeBtn>
       </form>

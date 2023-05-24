@@ -72,21 +72,12 @@ p {
   justify-content: center;
   gap: 8px;
 }
-
 .submitBtn {
-  padding: 8px 20px;
-  width: 100px;
+  width: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.registerBtn {
-  width: 240px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .invalid {
   background-color: red;
   color: red;

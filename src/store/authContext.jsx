@@ -29,7 +29,7 @@ const getLocalData = () => {
   if (storedEmp === null) {
     storedEmp = false;
   } else {
-    storedEmp = JSON.parse(storedEmp)
+    storedEmp = JSON.parse(storedEmp);
   }
 
   const remainingTime = calculateRemainingTime(storedExp);
@@ -99,6 +99,11 @@ export const AuthContextProvider = (props) => {
     logoutTimer = setTimeout(logout, remainingTime);
   };
 
+  const changeAccount = () => {
+    setEmployee(!employee)
+    localStorage.setItem("employee", !employee);
+  }
+
   //update timer if local data changes or logout function changes
   useEffect(() => {
     if (localData) {
@@ -116,6 +121,7 @@ export const AuthContextProvider = (props) => {
     logout,
     userId,
     employee,
+    changeAccount,
   };
 
   return (
