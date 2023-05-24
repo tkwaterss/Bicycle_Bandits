@@ -65,8 +65,8 @@ const { PORT } = process.env;
 //^ Middleware
 server.use(express.json());
 server.use(cors());
-// server.use(express.static(path.join(__dirname, "../build")));
-server.use(express.static(path.join(__dirname, "../src")));
+server.use(express.static(path.join(__dirname, "../build")));
+// server.use(express.static(path.join(__dirname, "../src")));
 
 //^ Associations
 User.hasMany(Bike);
@@ -157,12 +157,12 @@ server.delete("/toDoList/:toDoId", isAuthenticated, deleteToDoItem);
 //items controller
 server.get("/tech/catalogue", isAuthenticated, searchCatelogue);
 
-// server.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "../build/index.html"));
-// });
 server.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.sendFile(path.join(__dirname, "../build/index.html"));
 });
+// server.get("/*", function (req, res) {
+//   res.sendFile(path.join(__dirname, "../public/index.html"));
+// });
 
 //^ Database sycn and seed
 db
