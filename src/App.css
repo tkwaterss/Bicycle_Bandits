@@ -10,12 +10,12 @@ html {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 body {
   font-family: 'Montserrat';
-  min-width: 500px;
+  min-width: 1000px;
 }
 
 main {
-  min-height: calc(100vh - 90px);
-  margin-top: 50px;
+  min-height: calc(100vh - 100px);
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;

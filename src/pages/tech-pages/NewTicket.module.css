@@ -27,6 +27,9 @@
   margin: 20px 0;
   text-align: center;
 }
+.bikeInfoContainer h4 {
+  margin-bottom: 16px;
+}
 .existingBikeSelector {
   margin-top: 10px;
   width: 100%;
@@ -107,7 +110,9 @@
   transition: all 0.2s ease-in-out;
   box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
 }
-
+.newTicketSubmitBtn {
+  width: 100%;
+}
 
 
 .placeholder {

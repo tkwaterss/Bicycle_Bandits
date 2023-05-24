@@ -2,9 +2,9 @@
 header {
   font-family: 'Rye';
   width: 100vw;
-  min-width: 500px;
+  min-width: 1000px;
   background-color: #30362F;
-  height: 50px;
+  height: 60px;
   color: #FFFBDB;
   display: flex;
   justify-content: space-between;
@@ -17,17 +17,18 @@ header {
 
 .nameContainer {
   margin-left: 20px;
-  min-width: 210px;
+  min-width: 280px;
   border: solid;
-  text-align: center;
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .nameContainer a {
   text-decoration: none;
   color: #FFFBDB
 }
 .nameContainer h1 {
-  font-size: 20px;
+  font-size: 28px;
   font-weight: lighter;
 }
 .nameContainer h1:hover {
@@ -44,10 +45,11 @@ header {
 .linksContainer li {
   font-weight: 300;
   text-decoration: none;
+  font-size: 16px;
 }
 .linksContainer a {
   text-decoration: none;
-  font-size: 11px;
+
   font-weight: 300;
   color: #FFFBDB
 }

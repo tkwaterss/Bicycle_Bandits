@@ -92,9 +92,6 @@ const Register = (props) => {
     },
   });
 
-  console.log(formik.errors);
-  console.log(formik.touched);
-
   return (
     <Container className={classes.registerContainer}>
       <h3>ENTER YOUR INFORMATION</h3>

@@ -14,14 +14,16 @@
   padding: 8px 4px 4px 4px;
 }
 .titleBar {
-  padding: 8px 16px 4px 16px;
+  padding: 8px 10px 4px 10px;
   list-style: none;
   display: flex;
-  font-size: 13px;
   justify-content: space-between;
   color: #FFFBDB;
   font-size: 11px;
   align-items: center;
+}
+.titleBar li {
+  font-size: 14px;
 }
 .searchForm {
   text-align: center;
@@ -81,21 +83,23 @@
   text-align: center;
 }
 #statusTitle {
-  width: 15%;
+  width: 13%;
+  text-align: center;
 }
 #priceTitle {
-  width: 9%;
+  width: 8%;
   text-align: right;
 }
 
 
 /*^ Ticket Cards Styling  */
 .cardContainer {
-  width: 95%;
+  width: 100%;
   display:flex;
   flex-direction: column;
   gap: 4px;
   align-items: center;
+  padding: 0 10px;
 }
 .ticketCard {
   border-radius: 4px;
@@ -105,9 +109,10 @@
   list-style: none;
   display: flex;
   justify-content: space-between;
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: bold;
   align-items: center;
-  padding: 4px 4px;
+  padding: 6px 8px;
 }
 .ticketCard:hover {
   background-color: #ebe4b6;
@@ -143,10 +148,11 @@
   text-align: center;
 }
 #ticketStatus {
-  width: 15%;
+  width: 13%;
+  text-align: center;
 }
 #ticketTotal {
-  width: 9%;
+  width: 8%;
   border-left: solid rgba(0, 0, 0, 0.4);
   text-align: right;
 }

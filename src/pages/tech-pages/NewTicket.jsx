@@ -480,7 +480,7 @@ const NewTicket = () => {
             bikeForm
           )}
         </div>
-        <LargeBtn type="submit">Create Ticket</LargeBtn>
+        <LargeBtn type="submit" className={classes.newTicketSubmitBtn}>Create Ticket</LargeBtn>
       </form>
       <div className={classes.searchContainer}>
         <h3>Suggestions</h3>

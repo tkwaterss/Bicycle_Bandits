@@ -3,6 +3,7 @@
   border: none;
   padding: 4px 8px;
   border-radius: 8px 0 0 8px;
+  font-size: 16px;
   background-color: #fffce8;
   color: #30362F;
 }
@@ -18,6 +19,7 @@
 .searchBtn {
   border: none;
   padding: 4px 12px;
+  font-size: 16px;
   border-radius: 0 8px 8px 0;
   background-color: #A59132;
   color: #FFFBDB;

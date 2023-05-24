@@ -28,7 +28,7 @@ a {
   padding: 8px 10px 4px 10px;
   list-style: none;
   display: flex;
-  font-size: 13px;
+  font-size: 14px;
   justify-content: space-between;
   color: #FFFBDB;
 }
@@ -40,7 +40,7 @@ a {
   list-style: none;
   color: #30362F;
   display: flex;
-  padding: 4px 8px;
+  padding: 6px 8px;
   display: flex;
   justify-content: space-between;
 }
@@ -56,7 +56,8 @@ a {
 }
 
 .ticketList p {
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 #ticketId {
@@ -87,7 +88,7 @@ a {
   border-right: solid rgba(0, 0, 0, 0.4);
   width: 16%;
   display: flex;
-  justify-content: left;
+  justify-content: center;
 }
 #total {
   width: 8%;
@@ -150,6 +151,7 @@ a {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
+  font-weight: bold;
 }
 
 .toDoListContainer form {
@@ -164,6 +166,7 @@ a {
   border: none;
   background-color: #fffce8;
   color: #30362F;
+  font-size: 16px;
 }
 #toDoInput:hover {
   background-color: #FFFBDB;

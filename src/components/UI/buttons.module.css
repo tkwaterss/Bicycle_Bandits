@@ -1,5 +1,5 @@
 .largeBtn {
-  min-height: 40px;
+  min-height: 50px;
   border-radius: 6px;
   border: none;
   padding: 8px;
@@ -7,6 +7,10 @@
   background-color: #DA7422;
   box-shadow: 0 2px 5px .1px rgba(0, 0, 0, 0.2);
   letter-spacing: .6px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .largeBtn:hover {
