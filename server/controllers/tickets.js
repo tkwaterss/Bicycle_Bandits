@@ -1,6 +1,6 @@
 const { User, Bike, Ticket } = require("../util/models");
 const { Op } = require("sequelize");
-const { toTitleCase } = require("../utils/formatting");
+const { toTitleCase } = require("../util/formatting");
 module.exports = {
   //get 10 tickets sorted by closest due date going forwards from today
   getTickets: async (req, res) => {

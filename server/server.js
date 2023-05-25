@@ -4,7 +4,9 @@ const cors = require("cors");
 require("dotenv").config();
 const db = require("./util/database");
 const seed = require("./util/seed");
+const productSeed = require("./util/productSeed");
 const path = require("path");
+const axios = require("axios");
 const {
   User,
   Bike,
@@ -60,13 +62,13 @@ const { isAuthenticated } = require("./middleware/isAuthenticated");
 
 //^ Variables
 const server = express();
-const { PORT } = process.env;
+const { PORT, REACT_APP_HLC_TOKEN } = process.env;
 
 //^ Middleware
 server.use(express.json());
 server.use(cors());
-server.use(express.static(path.join(__dirname, "../build")));
-// server.use(express.static(path.join(__dirname, "../src")));
+// server.use(express.static(path.join(__dirname, "../build")));
+server.use(express.static(path.join(__dirname, "../src")));
 
 //^ Associations
 User.hasMany(Bike);
@@ -146,7 +148,7 @@ server.post("/users", isAuthenticated, createUser);
 server.post("/users/bike", isAuthenticated, createBike);
 server.post("/newUser", isAuthenticated, newUserBikeTicket);
 server.post("/newBike", isAuthenticated, newBikeTicket);
-server.put("/updateAccount/:userId", isAuthenticated, changeAccountType)
+server.put("/updateAccount/:userId", isAuthenticated, changeAccountType);
 
 //to do list contoller
 server.get("/toDoList", isAuthenticated, getToDoList);
@@ -157,19 +159,19 @@ server.delete("/toDoList/:toDoId", isAuthenticated, deleteToDoItem);
 //items controller
 server.get("/tech/catalogue", isAuthenticated, searchCatelogue);
 
-server.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
 // server.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "../public/index.html"));
+//   res.sendFile(path.join(__dirname, "../build/index.html"));
 // });
+server.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
 //^ Database sycn and seed
-db
-  .sync()
+db.sync()
   // .sync({ force: true })
   .then(() => {
     // seed();
+    // productSeed();
   })
   .catch((err) => console.log(err, "could not connect"));
 

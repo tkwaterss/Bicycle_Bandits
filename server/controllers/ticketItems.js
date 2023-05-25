@@ -6,7 +6,7 @@ const {
   TicketProduct,
 } = require("../util/models");
 const { Op } = require("sequelize");
-const {toTitleCase} = require('../utils/formatting.js')
+const {toTitleCase} = require('../util/formatting.js')
 
 module.exports = {
   //get full list of products and labor by Ticket ID

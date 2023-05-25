@@ -1,6 +1,6 @@
 const { Product, Labor } = require("../util/models");
 const { Op } = require("sequelize");
-const {toTitleCase} = require('../utils/formatting')
+const {toTitleCase} = require('../util/formatting')
 
 module.exports = {
   //recieves query to search both products and labor
