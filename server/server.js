@@ -7,6 +7,7 @@ const seed = require("./util/seed");
 const productSeed = require("./util/productSeed");
 const path = require("path");
 const axios = require("axios");
+const redis = require("redis");
 const {
   User,
   Bike,
@@ -69,6 +70,58 @@ server.use(express.json());
 server.use(cors());
 // server.use(express.static(path.join(__dirname, "../build")));
 server.use(express.static(path.join(__dirname, "../src")));
+
+//^ Caching
+let redisClient;
+
+(async () => {
+  redisClient = redis.createClient();
+
+  redisClient.on("error", (error) => console.error(`Error : ${error}`));
+
+  await redisClient.connect();
+})();
+
+const fetchApiBrands = async () => {
+  const apiResponse = await axios.get(
+    "https://api.hlc.bike/us/v3.0/Catalog/Brands",
+    {
+      headers: {
+        Authorization: `ApiKey ${REACT_APP_HLC_TOKEN}`,
+      },
+    }
+  );
+  console.log("Request sent to the API");
+  return apiResponse.data;
+};
+const getBrandsData = async (req, res) => {
+  let results;
+  let isCached = false;
+
+  try {
+    const cacheResults = await redisClient.get('brands');
+    //brands is the key for grabbing all brands data
+    if (cacheResults) {
+      isCached = true;
+      results = JSON.parse(cacheResults);
+    } else {
+      results = await fetchApiBrands();
+      if (results.length === 0) {
+        throw "API returned an empty array";
+      }
+      await redisClient.set('brands', JSON.stringify(results));
+    }
+    res.send({
+      fromCache: isCached,
+      data: results,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(404).send("Data unavailable");
+  }
+};
+
+server.get("/api/brands", getBrandsData);
 
 //^ Associations
 User.hasMany(Bike);
