@@ -14,6 +14,7 @@ const {
   Ticket,
   Labor,
   Product,
+  Brand,
   // Order,
   // Cart,
   TicketLabor,
@@ -60,6 +61,7 @@ const {
 const { searchCatelogue } = require("./controllers/items");
 const { login, register } = require("./controllers/auth");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
+const brandSeed = require("./util/brandSeed");
 
 //^ Variables
 const server = express();
@@ -78,7 +80,7 @@ let redisClient;
   redisClient = redis.createClient();
 
   redisClient.on("error", (error) => console.error(`Error : ${error}`));
-
+  redisClient.on("ready", () => console.log("Redis is ready"));
   await redisClient.connect();
 })();
 
@@ -94,12 +96,13 @@ const fetchApiBrands = async () => {
   console.log("Request sent to the API");
   return apiResponse.data;
 };
+
 const getBrandsData = async (req, res) => {
   let results;
   let isCached = false;
 
   try {
-    const cacheResults = await redisClient.get('brands');
+    const cacheResults = await redisClient.get("brands");
     //brands is the key for grabbing all brands data
     if (cacheResults) {
       isCached = true;
@@ -109,7 +112,11 @@ const getBrandsData = async (req, res) => {
       if (results.length === 0) {
         throw "API returned an empty array";
       }
-      await redisClient.set('brands', JSON.stringify(results));
+      //storing each brand in redis under a key with its ID #
+      results.forEach(async (brand) => {
+        await redisClient.set(`brand:${brand.Id}`, JSON.stringify(brand));
+      });
+      await redisClient.set("brands", JSON.stringify(results));
     }
     res.send({
       fromCache: isCached,
@@ -220,11 +227,13 @@ server.get("/*", function (req, res) {
 });
 
 //^ Database sycn and seed
-db.sync()
+db
+  // .sync()
   // .sync({ force: true })
   .then(() => {
-    // seed();
-    // productSeed();
+    seed();
+    brandSeed();
+    productSeed();
   })
   .catch((err) => console.log(err, "could not connect"));
 

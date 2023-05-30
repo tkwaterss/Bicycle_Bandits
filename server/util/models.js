@@ -55,6 +55,34 @@ module.exports = {
     laborPrice: DataTypes.FLOAT,
     laborTime: DataTypes.STRING,
   }),
+  // Product: db.define("product", {
+  //   id: {
+  //     allowNull: false,
+  //     primaryKey: true,
+  //     autoIncrement: true,
+  //     type: DataTypes.INTEGER,
+  //   },
+  //   productTitle: DataTypes.STRING,
+  //   productPrice: DataTypes.FLOAT,
+  // }),
+  Brand: db.define("brand", {
+    Id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+    Name: DataTypes.STRING,
+  }),
+  Category: db.define("category", {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    CategoryName: DataTypes.STRING,
+    Level: DataTypes.INTEGER,
+  }),
   Product: db.define("product", {
     id: {
       allowNull: false,
@@ -62,8 +90,14 @@ module.exports = {
       autoIncrement: true,
       type: DataTypes.INTEGER,
     },
-    productTitle: DataTypes.STRING,
-    productPrice: DataTypes.FLOAT,
+    ProductNo: DataTypes.INTEGER,
+    Name: DataTypes.STRING,
+    Description: DataTypes.TEXT,
+    BrandId: DataTypes.INTEGER,
+    MSRP: DataTypes.FLOAT,
+    Base: DataTypes.FLOAT,
+    ImageURL: DataTypes.TEXT
+
   }),
   // Order: db.define("order", {
   //   id: {
