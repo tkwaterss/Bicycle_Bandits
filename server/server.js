@@ -8,6 +8,7 @@ const productSeed = require("./util/productSeed");
 const path = require("path");
 const axios = require("axios");
 const redis = require("redis");
+const Stripe = require("stripe")
 const {
   User,
   Bike,
@@ -65,7 +66,9 @@ const brandSeed = require("./util/brandSeed");
 
 //^ Variables
 const server = express();
-const { PORT, REACT_APP_HLC_TOKEN } = process.env;
+const { PORT, REACT_APP_HLC_TOKEN, STRIPE_KEY } = process.env;
+const YOUR_DOMAIN = "http://localhost:4040";
+const stripe = Stripe(STRIPE_KEY);
 
 //^ Middleware
 server.use(express.json());
@@ -74,61 +77,61 @@ server.use(cors());
 server.use(express.static(path.join(__dirname, "../src")));
 
 //^ Caching
-let redisClient;
+// let redisClient;
 
-(async () => {
-  redisClient = redis.createClient();
+// (async () => {
+//   redisClient = redis.createClient();
 
-  redisClient.on("error", (error) => console.error(`Error : ${error}`));
-  redisClient.on("ready", () => console.log("Redis is ready"));
-  await redisClient.connect();
-})();
+//   redisClient.on("error", (error) => console.error(`Error : ${error}`));
+//   redisClient.on("ready", () => console.log("Redis is ready"));
+//   await redisClient.connect();
+// })();
 
-const fetchApiBrands = async () => {
-  const apiResponse = await axios.get(
-    "https://api.hlc.bike/us/v3.0/Catalog/Brands",
-    {
-      headers: {
-        Authorization: `ApiKey ${REACT_APP_HLC_TOKEN}`,
-      },
-    }
-  );
-  console.log("Request sent to the API");
-  return apiResponse.data;
-};
+// const fetchApiBrands = async () => {
+//   const apiResponse = await axios.get(
+//     "https://api.hlc.bike/us/v3.0/Catalog/Brands",
+//     {
+//       headers: {
+//         Authorization: `ApiKey ${REACT_APP_HLC_TOKEN}`,
+//       },
+//     }
+//   );
+//   console.log("Request sent to the API");
+//   return apiResponse.data;
+// };
 
-const getBrandsData = async (req, res) => {
-  let results;
-  let isCached = false;
+// const getBrandsData = async (req, res) => {
+//   let results;
+//   let isCached = false;
 
-  try {
-    const cacheResults = await redisClient.get("brands");
-    //brands is the key for grabbing all brands data
-    if (cacheResults) {
-      isCached = true;
-      results = JSON.parse(cacheResults);
-    } else {
-      results = await fetchApiBrands();
-      if (results.length === 0) {
-        throw "API returned an empty array";
-      }
-      //storing each brand in redis under a key with its ID #
-      results.forEach(async (brand) => {
-        await redisClient.set(`brand:${brand.Id}`, JSON.stringify(brand));
-      });
-      await redisClient.set("brands", JSON.stringify(results));
-    }
-    res.send({
-      fromCache: isCached,
-      data: results,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(404).send("Data unavailable");
-  }
-};
+//   try {
+//     const cacheResults = await redisClient.get("brands");
+//     //brands is the key for grabbing all brands data
+//     if (cacheResults) {
+//       isCached = true;
+//       results = JSON.parse(cacheResults);
+//     } else {
+//       results = await fetchApiBrands();
+//       if (results.length === 0) {
+//         throw "API returned an empty array";
+//       }
+//       //storing each brand in redis under a key with its ID #
+//       results.forEach(async (brand) => {
+//         await redisClient.set(`brand:${brand.Id}`, JSON.stringify(brand));
+//       });
+//       await redisClient.set("brands", JSON.stringify(results));
+//     }
+//     res.send({
+//       fromCache: isCached,
+//       data: results,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(404).send("Data unavailable");
+//   }
+// };
 
-server.get("/api/brands", getBrandsData);
+// server.get("/api/brands", getBrandsData);
 
 //^ Associations
 User.hasMany(Bike);
@@ -219,6 +222,23 @@ server.delete("/toDoList/:toDoId", isAuthenticated, deleteToDoItem);
 //items controller
 server.get("/tech/catalogue", isAuthenticated, searchCatelogue);
 
+//Stripe Endpoint
+server.post("/create-checkout-session", async (req, res) => {
+  const session = await stripe.checkout.sessions.create({
+    line_items: [
+      {
+        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+        price: "price_1NEaOXADL90E2GrzCDzOLYsp",
+        quantity: 1,
+      },
+    ],
+    mode: "payment",
+    success_url: `${YOUR_DOMAIN}?success=true`,
+    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+  });
+  res.redirect(303, session.url);
+});
+
 // server.get("/*", function (req, res) {
 //   res.sendFile(path.join(__dirname, "../build/index.html"));
 // });
@@ -227,13 +247,12 @@ server.get("/*", function (req, res) {
 });
 
 //^ Database sycn and seed
-db
-  // .sync()
+db.sync()
   // .sync({ force: true })
   .then(() => {
-    seed();
-    brandSeed();
-    productSeed();
+    // seed();
+    // brandSeed();
+    // productSeed();
   })
   .catch((err) => console.log(err, "could not connect"));
 
