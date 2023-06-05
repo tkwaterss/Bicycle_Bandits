@@ -3,8 +3,9 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const db = require("./util/database");
-const seed = require("./util/seed");
-const productSeed = require("./util/productSeed");
+// const seed = require("./util/seed");
+// const brandSeed = require("./util/brandSeed");
+// const productSeed = require("./util/productSeed");
 const path = require("path");
 const axios = require("axios");
 const redis = require("redis");
@@ -62,12 +63,11 @@ const {
 const { searchCatelogue } = require("./controllers/items");
 const { login, register } = require("./controllers/auth");
 const { isAuthenticated } = require("./middleware/isAuthenticated");
-const brandSeed = require("./util/brandSeed");
 
 //^ Variables
 const server = express();
 const { PORT, REACT_APP_HLC_TOKEN, STRIPE_KEY } = process.env;
-const YOUR_DOMAIN = "http://localhost:4040";
+const YOUR_DOMAIN = "http://localhost:4041";
 const stripe = Stripe(STRIPE_KEY);
 
 //^ Middleware
@@ -227,14 +227,20 @@ server.post("/create-checkout-session", async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
-        // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-        price: "price_1NEaOXADL90E2GrzCDzOLYsp",
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: "shimano chain",
+          },
+          //price listed in cents
+          unit_amount: 2500,
+        },
         quantity: 1,
       },
     ],
     mode: "payment",
-    success_url: `${YOUR_DOMAIN}?success=true`,
-    cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+    success_url: `${YOUR_DOMAIN}/checkout-success`,
+    cancel_url: `${YOUR_DOMAIN}/cart`,
   });
   res.redirect(303, session.url);
 });

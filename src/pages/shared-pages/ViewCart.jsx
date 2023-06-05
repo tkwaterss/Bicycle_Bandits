@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import CheckoutBtn from "../../components/CheckoutBtn";
-import "./App.css";
 
 const ViewCart = () => {
 
