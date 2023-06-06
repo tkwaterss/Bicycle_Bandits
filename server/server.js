@@ -67,7 +67,9 @@ const { isAuthenticated } = require("./middleware/isAuthenticated");
 //^ Variables
 const server = express();
 const { PORT, REACT_APP_HLC_TOKEN, STRIPE_KEY } = process.env;
-const YOUR_DOMAIN = "http://localhost:4041";
+// const YOUR_DOMAIN = "http://localhost:4041";
+const YOUR_DOMAIN = "https://bicycle-bandits.herokuapp.com/";
+
 const stripe = Stripe(STRIPE_KEY);
 
 //^ Middleware
