@@ -11,10 +11,11 @@ import DeleteBtn from "../../../components/UI/DeleteBtn";
 import SmallBtn from "../../../components/UI/SmallBtn";
 import { priceFormat, toTitleCase } from "../../../utils/formatting";
 import RiseLoader from "react-spinners/RiseLoader";
+import CheckoutBtn from "../../../components/CheckoutBtn";
 
 const TicketItems = (props) => {
   const { token } = useContext(AuthContext);
-  const { employee, id, loading, setLoading } = props;
+  const { employee, ticketId, loading, setLoading, ticket } = props;
   const [laborItems, setLaborItems] = useState([]);
   const [productItems, setProductItems] = useState([]);
   const [laborResults, setLaborResults] = useState([]);
@@ -30,14 +31,11 @@ const TicketItems = (props) => {
     onSubmit: (values, helpers) => {
       setLoading(true);
       axios
-        .get(
-          `/search/ticketItems?input=${values.search}`,
-          {
-            headers: {
-              authorization: token,
-            },
-          }
-        )
+        .get(`/search/ticketItems?input=${values.search}`, {
+          headers: {
+            authorization: token,
+          },
+        })
         .then((res) => {
           setSearching(true);
           setLaborResults(res.data.labor);
@@ -52,7 +50,7 @@ const TicketItems = (props) => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`/ticketItems/${id}`, {
+      .get(`/ticketItems/${ticketId}`, {
         headers: {
           authorization: token,
         },
@@ -64,7 +62,7 @@ const TicketItems = (props) => {
         setLoading(false);
       })
       .catch((err) => console.log(err));
-  }, [id, token, searching, setLoading]);
+  }, [ticketId, token, searching, setLoading]);
 
   useEffect(() => {
     setLoading(true);
@@ -81,7 +79,7 @@ const TicketItems = (props) => {
       setTotal(priceFormat(newTotal));
       axios
         .put(
-          `/tickets/total/${id}`,
+          `/tickets/total/${ticketId}`,
           { total },
           {
             headers: {
@@ -94,7 +92,7 @@ const TicketItems = (props) => {
         })
         .catch((err) => console.log(err));
     }
-  }, [laborItems, productItems, id, token, total, setLoading]);
+  }, [laborItems, productItems, ticketId, token, total, setLoading]);
 
   const addTicketLabor = (laborId) => {
     setLoading(true);
@@ -113,7 +111,7 @@ const TicketItems = (props) => {
     }
     let body = {
       quantity: 1,
-      ticketId: id,
+      ticketId: ticketId,
       laborId: laborId,
     };
     axios
@@ -145,7 +143,7 @@ const TicketItems = (props) => {
     }
     let body = {
       quantity: 1,
-      ticketId: id,
+      ticketId: ticketId,
       productId: productId,
     };
     axios
@@ -266,31 +264,48 @@ const TicketItems = (props) => {
                 {+item.labor.laborTime * item.quantity} minutes
               </li>
               <div className={classes.quantitySet}>
-                {employee ? <SmallBtn
-                  id="decrement"
-                  className={classes.adjustQuantityBtn}
-                  onClick={(e) =>
-                    updateTicketLabor(e, item.id, item.quantity, index)
-                  }
-                >
-                  -
-                </SmallBtn> : <div className={classes.adjustQuantityBtn}></div>}
+                {employee ? (
+                  <SmallBtn
+                    id="decrement"
+                    className={classes.adjustQuantityBtn}
+                    onClick={(e) =>
+                      updateTicketLabor(e, item.id, item.quantity, index)
+                    }
+                  >
+                    -
+                  </SmallBtn>
+                ) : (
+                  <div className={classes.adjustQuantityBtn}></div>
+                )}
                 <li>{item.quantity}</li>
-                {employee ? <SmallBtn
-                  id={"increment"}
-                  className={classes.adjustQuantityBtn}
-                  onClick={(e) =>
-                    updateTicketLabor(e, item.id, item.quantity, index)
-                  }
-                >
-                  +
-                </SmallBtn> : <div className={classes.adjustQuantityBtn}></div>}
+                {employee ? (
+                  <SmallBtn
+                    id={"increment"}
+                    className={classes.adjustQuantityBtn}
+                    onClick={(e) =>
+                      updateTicketLabor(e, item.id, item.quantity, index)
+                    }
+                  >
+                    +
+                  </SmallBtn>
+                ) : (
+                  <div className={classes.adjustQuantityBtn}></div>
+                )}
               </div>
               <li id={classes.itemPrice}>
                 $ {priceFormat(item.labor.laborPrice * item.quantity)}
               </li>
             </ul>
-            {employee ? <DeleteBtn onClick={() => deleteTicketLabor(item.id)} className={classes.adjustQuantityBtn}>X</DeleteBtn> : <div className={classes.adjustQuantityBtn}></div>}
+            {employee ? (
+              <DeleteBtn
+                onClick={() => deleteTicketLabor(item.id)}
+                className={classes.adjustQuantityBtn}
+              >
+                X
+              </DeleteBtn>
+            ) : (
+              <div className={classes.adjustQuantityBtn}></div>
+            )}
           </div>
         </Card>
       );
@@ -333,31 +348,46 @@ const TicketItems = (props) => {
               </li>
               <li id={classes.itemTime}></li>
               <div className={classes.quantitySet}>
-                {employee ? <SmallBtn
-                  id="decrement"
-                  className={classes.adjustQuantityBtn}
-                  onClick={(e) =>
-                    updateTicketProduct(e, item.id, item.quantity, index)
-                  }
-                >
-                  -
-                </SmallBtn> : <div className={classes.adjustQuantityBtn}></div>}
+                {employee ? (
+                  <SmallBtn
+                    id="decrement"
+                    className={classes.adjustQuantityBtn}
+                    onClick={(e) =>
+                      updateTicketProduct(e, item.id, item.quantity, index)
+                    }
+                  >
+                    -
+                  </SmallBtn>
+                ) : (
+                  <div className={classes.adjustQuantityBtn}></div>
+                )}
                 <li>{item.quantity}</li>
-                {employee ? <SmallBtn
-                  id={"increment"}
-                  className={classes.adjustQuantityBtn}
-                  onClick={(e) =>
-                    updateTicketProduct(e, item.id, item.quantity, index)
-                  }
-                >
-                  +
-                </SmallBtn> : <div className={classes.adjustQuantityBtn}></div>}
+                {employee ? (
+                  <SmallBtn
+                    id={"increment"}
+                    className={classes.adjustQuantityBtn}
+                    onClick={(e) =>
+                      updateTicketProduct(e, item.id, item.quantity, index)
+                    }
+                  >
+                    +
+                  </SmallBtn>
+                ) : (
+                  <div className={classes.adjustQuantityBtn}></div>
+                )}
               </div>
               <li id={classes.itemPrice}>
                 $ {priceFormat(item.product.productPrice * item.quantity)}
               </li>
             </ul>
-            {employee ? <DeleteBtn onClick={() => deleteTicketProduct(item.id)} className={classes.adjustQuantityBtn}/> : <div className={classes.adjustQuantityBtn}></div>}
+            {employee ? (
+              <DeleteBtn
+                onClick={() => deleteTicketProduct(item.id)}
+                className={classes.adjustQuantityBtn}
+              />
+            ) : (
+              <div className={classes.adjustQuantityBtn}></div>
+            )}
           </div>
         </Card>
       );
@@ -420,7 +450,10 @@ const TicketItems = (props) => {
       <div className={classes.ticketTotalBar}>
         <div className={classes.totalBarFooterContainer}>
           {!loading ? (
-            <h3>Ticket Total: $ {total}</h3>
+            <div>
+              <h3>Ticket Total: $ {total}</h3>
+              <CheckoutBtn cartItems={{productItems, laborItems}} customerId={ticket.userId} ticketId={ticket.id}/>
+            </div>
           ) : (
             <RiseLoader size={18} color="#FFFBDB"></RiseLoader>
           )}

@@ -240,7 +240,7 @@ server.post("/create-checkout-session", async (req, res) => {
         product_data: {
           name: item.name,
         },
-        unit_amount: item.price * 100,
+        unit_amount: Math.trunc(item.price * 100),
       },
       quantity: item.quantity,
     }
@@ -249,7 +249,7 @@ server.post("/create-checkout-session", async (req, res) => {
     line_items: lineItems,
     mode: "payment",
     success_url: `${YOUR_DOMAIN}/checkout-success`,
-    cancel_url: `${YOUR_DOMAIN}`,
+    cancel_url: `${YOUR_DOMAIN}/ticket/${req.body.ticketId}`,
   });
   res.status(200).send(session);
 });

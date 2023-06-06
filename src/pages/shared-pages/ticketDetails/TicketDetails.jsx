@@ -22,6 +22,7 @@ const TicketDetails = () => {
         },
       })
       .then((res) => {
+        console.log(res.data)
         setTicket(res.data);
         setInitLoad(false);
       });
@@ -41,7 +42,7 @@ const TicketDetails = () => {
       )}
       <TicketItems
         ticket={ticket}
-        id={id}
+        ticketId={id}
         employee={employee}
         loading={loading}
         setLoading={setLoading}

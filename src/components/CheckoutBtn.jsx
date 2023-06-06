@@ -1,33 +1,40 @@
 import React, { useContext } from "react";
 import axios from "axios";
 import AuthContext from "../store/authContext";
+import LargeBtn from "./UI/LargeBtn";
 
 //This button starts the Strip Payment Process
 
 const CheckoutBtn = (props) => {
-  const { userId, employee } = useContext(AuthContext);
   //recieving cart items data through props from where button is clicked
-  let { cartItems, customerId } = props;
+  let { cartItems, ticketId, customerId } = props;
+  //need to covert ticketItems to cartItems format
   cartItems = [
-    {
-      name: "Shimano Chain",
-      quantity: 1,
-      id: 2,
-      price: 25.99,
-    },
-    {
-      name: "Pro Saddle",
-      quantity: 2,
-      id: 1,
-      price: 53.99,
-    },
+    ...cartItems.laborItems.map((item) => {
+      return {
+        name: item.labor.laborTitle,
+        quantity: item.quantity,
+        id: item.laborId,
+        price: item.labor.laborPrice,
+      };
+    }),
+    ...cartItems.productItems.map((item) => {
+      return {
+        name: item.product.productTitle,
+        quantity: item.quantity,
+        id: item.laborId,
+        price: item.product.productPrice,
+      };
+    }),
   ];
 
   const handleCheckout = () => {
+    console.log(customerId, cartItems);
     axios
       .post("/create-checkout-session", {
         cartItems,
-        id: userId,
+        customerId,
+        ticketId,
       })
       .then((res) => {
         console.log(res.data.url);
