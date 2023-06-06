@@ -204,63 +204,63 @@ const labor = [
   {laborTitle: 'labor - rebuild suspension linkage', laborPrice: '90', laborTime: '75'},
   {laborTitle: 'labor - service suspension linkage', laborPrice: '150', laborTime: '120'},
 ]
-// const products = [
-//   {productTitle: 'shimano rear derailleur', productPrice: '75.99'},
-//   {productTitle: 'shimano front derailleur', productPrice: '45.99'},
-//   {productTitle: 'shimano rear flatbar shifter', productPrice: '30.99'},
-//   {productTitle: 'shimano front flatbar shifter', productPrice: '30.99'},
-//   {productTitle: 'shimano road sti shifter', productPrice: '55.99'},
-//   {productTitle: 'shimano cassette', productPrice: '45.99'},
-//   {productTitle: 'shimano chain', productPrice: '32.99'},
-//   {productTitle: 'pro saddle', productPrice: '53.99'},
-//   {productTitle: 'fizik saddle', productPrice: '76.99'},
-//   {productTitle: 'mountain handlebar', productPrice: '35.99'},
-//   {productTitle: 'road dropbar handlebar', productPrice: '40.99'},
-//   {productTitle: 'dt swiss wheelset', productPrice: '475.99'},
-//   {productTitle: 'raceface wheelset', productPrice: '675.99'},
-//   {productTitle: 'fulcrum wheelset', productPrice: '350.99'},
-//   {productTitle: 'sram rear derailleur', productPrice: '70.99'},
-//   {productTitle: 'sram front derailleur', productPrice: '40.99'},
-//   {productTitle: 'sram rear flatbar shifter', productPrice: '25.99'},
-//   {productTitle: 'sram front flatbar shifter', productPrice: '27.99'},
-//   {productTitle: 'sram road sti shifter', productPrice: '46.99'},
-//   {productTitle: 'sram cassette', productPrice: '25.99'},
-//   {productTitle: 'sram chain', productPrice: '20.99'},
-//   {productTitle: 'easton seatpost', productPrice: '55.99'},
-//   {productTitle: 'raceface grips', productPrice: '15.99'},
-//   {productTitle: 'shimano crank', productPrice: '120.99'},
-//   {productTitle: 'sram crank', productPrice: '110.99'},
-//   {productTitle: 'shimano bottom bracket', productPrice: '25.99'},
-//   {productTitle: 'sram bottom bracket', productPrice: '30.99'},
-//   {productTitle: 'derailleur cable', productPrice: '5.99'},
-//   {productTitle: 'brake cable', productPrice: '5.99'},
-//   {productTitle: 'derailleur housing', productPrice: '3.99'},
-//   {productTitle: 'brake housing', productPrice: '2.99'},
-//   {productTitle: 'hydraulic brake hose', productPrice: '45.99'},
-//   {productTitle: 'shimano hydraulic brake', productPrice: '85.99'},
-//   {productTitle: 'sram hydraulic brake', productPrice: '82.99'},
+const products = [
+  {productTitle: 'shimano rear derailleur', productPrice: '75.99'},
+  {productTitle: 'shimano front derailleur', productPrice: '45.99'},
+  {productTitle: 'shimano rear flatbar shifter', productPrice: '30.99'},
+  {productTitle: 'shimano front flatbar shifter', productPrice: '30.99'},
+  {productTitle: 'shimano road sti shifter', productPrice: '55.99'},
+  {productTitle: 'shimano cassette', productPrice: '45.99'},
+  {productTitle: 'shimano chain', productPrice: '32.99'},
+  {productTitle: 'pro saddle', productPrice: '53.99'},
+  {productTitle: 'fizik saddle', productPrice: '76.99'},
+  {productTitle: 'mountain handlebar', productPrice: '35.99'},
+  {productTitle: 'road dropbar handlebar', productPrice: '40.99'},
+  {productTitle: 'dt swiss wheelset', productPrice: '475.99'},
+  {productTitle: 'raceface wheelset', productPrice: '675.99'},
+  {productTitle: 'fulcrum wheelset', productPrice: '350.99'},
+  {productTitle: 'sram rear derailleur', productPrice: '70.99'},
+  {productTitle: 'sram front derailleur', productPrice: '40.99'},
+  {productTitle: 'sram rear flatbar shifter', productPrice: '25.99'},
+  {productTitle: 'sram front flatbar shifter', productPrice: '27.99'},
+  {productTitle: 'sram road sti shifter', productPrice: '46.99'},
+  {productTitle: 'sram cassette', productPrice: '25.99'},
+  {productTitle: 'sram chain', productPrice: '20.99'},
+  {productTitle: 'easton seatpost', productPrice: '55.99'},
+  {productTitle: 'raceface grips', productPrice: '15.99'},
+  {productTitle: 'shimano crank', productPrice: '120.99'},
+  {productTitle: 'sram crank', productPrice: '110.99'},
+  {productTitle: 'shimano bottom bracket', productPrice: '25.99'},
+  {productTitle: 'sram bottom bracket', productPrice: '30.99'},
+  {productTitle: 'derailleur cable', productPrice: '5.99'},
+  {productTitle: 'brake cable', productPrice: '5.99'},
+  {productTitle: 'derailleur housing', productPrice: '3.99'},
+  {productTitle: 'brake housing', productPrice: '2.99'},
+  {productTitle: 'hydraulic brake hose', productPrice: '45.99'},
+  {productTitle: 'shimano hydraulic brake', productPrice: '85.99'},
+  {productTitle: 'sram hydraulic brake', productPrice: '82.99'},
 
-// ]
-// const orders= [
-//   {userId: "1", orderTotal: '25.99'},
-//   {userId: "2", orderTotal: '39.99'},
-//   {userId: "3", orderTotal: '15.99'},
-//   {userId: "4", orderTotal: '100.99'},
-//   {userId: "5", orderTotal: '75.99'},
-// ]
+]
+const orders= [
+  {userId: "1", orderTotal: '25.99'},
+  {userId: "2", orderTotal: '39.99'},
+  {userId: "3", orderTotal: '15.99'},
+  {userId: "4", orderTotal: '100.99'},
+  {userId: "5", orderTotal: '75.99'},
+]
 const todo = [
   {complete: "false", description: 'Organize tires'},
   {complete: "false", description: 'Clean under benches'},
   {complete: "false", description: 'Wipe down surfaces'},
   {complete: "false", description: 'Label new inventory'},
 ]
-// const carts = [
-//   {userId: '1', productId: '1', quantity: "1"},
-//   {userId: '2', productId: '2', quantity: "1"},
-//   {userId: '3', productId: '3', quantity: "1"},
-//   {userId: '4', productId: '4', quantity: "1"},
-//   {userId: '5', productId: '5', quantity: "1"},
-// ]
+const carts = [
+  {userId: '1', productId: '1', quantity: "1"},
+  {userId: '2', productId: '2', quantity: "1"},
+  {userId: '3', productId: '3', quantity: "1"},
+  {userId: '4', productId: '4', quantity: "1"},
+  {userId: '5', productId: '5', quantity: "1"},
+]
 const ticketLabor = [
   {ticketId: "1", laborId: "1", quantity: "1"},
   {ticketId: "2", laborId: "2", quantity: "1"},
@@ -281,33 +281,33 @@ const ticketLabor = [
   {ticketId: "8", laborId: "9", quantity: "1"},
   {ticketId: "9", laborId: "3", quantity: "1"},
 ]
-// const ticketProduct = [
-//   {ticketId: "1", productId: "1", quantity: "1"},
-//   {ticketId: "2", productId: "2", quantity: "1"},
-//   {ticketId: "3", productId: "3", quantity: "1"},
-//   {ticketId: "4", productId: "4", quantity: "1"},
-//   {ticketId: "5", productId: "5", quantity: "1"},
-//   {ticketId: "6", productId: "1", quantity: "1"},
-//   {ticketId: "7", productId: "2", quantity: "1"},
-//   {ticketId: "8", productId: "3", quantity: "1"},
-//   {ticketId: "9", productId: "4", quantity: "1"},
-//   {ticketId: "1", productId: "5", quantity: "1"},
-//   {ticketId: "2", productId: "1", quantity: "1"},
-//   {ticketId: "3", productId: "2", quantity: "1"},
-//   {ticketId: "4", productId: "3", quantity: "1"},
-//   {ticketId: "5", productId: "4", quantity: "1"},
-//   {ticketId: "6", productId: "5", quantity: "1"},
-//   {ticketId: "7", productId: "1", quantity: "1"},
-//   {ticketId: "8", productId: "2", quantity: "1"},
-//   {ticketId: "9", productId: "3", quantity: "1"},
-// ]
-// const orderProduct = [
-//   {orderId: "1", productId: "1", quantity: "1"},
-//   {orderId: "2", productId: "2", quantity: "1"},
-//   {orderId: "3", productId: "3", quantity: "1"},
-//   {orderId: "4", productId: "4", quantity: "1"},
-//   {orderId: "5", productId: "5", quantity: "1"},
-// ]
+const ticketProduct = [
+  {ticketId: "1", productId: "1", quantity: "1"},
+  {ticketId: "2", productId: "2", quantity: "1"},
+  {ticketId: "3", productId: "3", quantity: "1"},
+  {ticketId: "4", productId: "4", quantity: "1"},
+  {ticketId: "5", productId: "5", quantity: "1"},
+  {ticketId: "6", productId: "1", quantity: "1"},
+  {ticketId: "7", productId: "2", quantity: "1"},
+  {ticketId: "8", productId: "3", quantity: "1"},
+  {ticketId: "9", productId: "4", quantity: "1"},
+  {ticketId: "1", productId: "5", quantity: "1"},
+  {ticketId: "2", productId: "1", quantity: "1"},
+  {ticketId: "3", productId: "2", quantity: "1"},
+  {ticketId: "4", productId: "3", quantity: "1"},
+  {ticketId: "5", productId: "4", quantity: "1"},
+  {ticketId: "6", productId: "5", quantity: "1"},
+  {ticketId: "7", productId: "1", quantity: "1"},
+  {ticketId: "8", productId: "2", quantity: "1"},
+  {ticketId: "9", productId: "3", quantity: "1"},
+]
+const orderProduct = [
+  {orderId: "1", productId: "1", quantity: "1"},
+  {orderId: "2", productId: "2", quantity: "1"},
+  {orderId: "3", productId: "3", quantity: "1"},
+  {orderId: "4", productId: "4", quantity: "1"},
+  {orderId: "5", productId: "5", quantity: "1"},
+]
 
 const seed = async () => {
   try {
@@ -315,13 +315,13 @@ const seed = async () => {
     await Bike.bulkCreate(bikes);
     await Ticket.bulkCreate(tickets);
     await Labor.bulkCreate(labor);
-    // await Product.bulkCreate(products);
-    // await Order.bulkCreate(orders);
+    await Product.bulkCreate(products);
+    await Order.bulkCreate(orders);
     await Todo.bulkCreate(todo);
-    // await Cart.bulkCreate(carts);
+    await Cart.bulkCreate(carts);
     await TicketLabor.bulkCreate(ticketLabor);
-    // await TicketProduct.bulkCreate(ticketProduct);
-    // await OrderProduct.bulkCreate(orderProduct);
+    await TicketProduct.bulkCreate(ticketProduct);
+    await OrderProduct.bulkCreate(orderProduct);
   }
   catch(err) {
     console.log(err)

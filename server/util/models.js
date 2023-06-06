@@ -55,16 +55,16 @@ module.exports = {
     laborPrice: DataTypes.FLOAT,
     laborTime: DataTypes.STRING,
   }),
-  // Product: db.define("product", {
-  //   id: {
-  //     allowNull: false,
-  //     primaryKey: true,
-  //     autoIncrement: true,
-  //     type: DataTypes.INTEGER,
-  //   },
-  //   productTitle: DataTypes.STRING,
-  //   productPrice: DataTypes.FLOAT,
-  // }),
+  Product: db.define("product", {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    productTitle: DataTypes.STRING,
+    productPrice: DataTypes.FLOAT,
+  }),
   Brand: db.define("brand", {
     Id: {
       allowNull: false,
@@ -83,31 +83,30 @@ module.exports = {
     CategoryName: DataTypes.STRING,
     Level: DataTypes.INTEGER,
   }),
-  Product: db.define("product", {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
-    },
-    ProductNo: DataTypes.INTEGER,
-    Name: DataTypes.STRING,
-    Description: DataTypes.TEXT,
-    BrandId: DataTypes.INTEGER,
-    MSRP: DataTypes.FLOAT,
-    Base: DataTypes.FLOAT,
-    ImageURL: DataTypes.TEXT
-
-  }),
-  // Order: db.define("order", {
+  // Product: db.define("product", {
   //   id: {
   //     allowNull: false,
   //     primaryKey: true,
   //     autoIncrement: true,
   //     type: DataTypes.INTEGER,
   //   },
-  //   orderTotal: DataTypes.FLOAT,
+  //   ProductNo: DataTypes.INTEGER,
+  //   Name: DataTypes.STRING,
+  //   Description: DataTypes.TEXT,
+  //   BrandId: DataTypes.INTEGER,
+  //   MSRP: DataTypes.FLOAT,
+  //   Base: DataTypes.FLOAT,
+  //   ImageURL: DataTypes.TEXT
   // }),
+  Order: db.define("order", {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    orderTotal: DataTypes.FLOAT,
+  }),
   Todo: db.define("todo", {
     id: {
       allowNull: false,
@@ -118,15 +117,15 @@ module.exports = {
     complete: DataTypes.BOOLEAN,
     description: DataTypes.TEXT,
   }),
-  // Cart: db.define("cart", {
-  //   id: {
-  //     allowNull: false,
-  //     primaryKey: true,
-  //     autoIncrement: true,
-  //     type: DataTypes.INTEGER,
-  //   },
-  //   quantity: DataTypes.INTEGER,
-  // }),
+  Cart: db.define("cart", {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    quantity: DataTypes.INTEGER,
+  }),
   TicketLabor: db.define("ticketLabor", {
     id: {
       allowNull: false,
@@ -145,13 +144,13 @@ module.exports = {
     },
     quantity: DataTypes.INTEGER,
   }),
-  // OrderProduct: db.define("orderProduct", {
-  //   id: {
-  //     allowNull: false,
-  //     primaryKey: true,
-  //     autoIncrement: true,
-  //     type: DataTypes.INTEGER,
-  //   },
-  //   quantity: DataTypes.INTEGER,
-  // }),
+  OrderProduct: db.define("orderProduct", {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+      type: DataTypes.INTEGER,
+    },
+    quantity: DataTypes.INTEGER,
+  }),
 };

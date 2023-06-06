@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const db = require("./util/database");
-// const seed = require("./util/seed");
+const seed = require("./util/seed");
 // const brandSeed = require("./util/brandSeed");
 // const productSeed = require("./util/productSeed");
 const path = require("path");
@@ -16,12 +16,12 @@ const {
   Ticket,
   Labor,
   Product,
-  Brand,
-  // Order,
-  // Cart,
+  // Brand,
+  Order,
+  Cart,
   TicketLabor,
   TicketProduct,
-  // OrderProduct,
+  OrderProduct,
 } = require("./util/models");
 const {
   getTickets,
@@ -138,14 +138,22 @@ User.hasMany(Bike);
 Bike.belongsTo(User);
 User.hasMany(Ticket);
 Ticket.belongsTo(User);
-// User.hasMany(Order);
-// Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsTo(User);
 
-// User.belongsToMany(Product, { through: Cart });
-// Product.belongsToMany(User, { through: Cart });
+User.belongsToMany(Product, { through: Cart });
+Product.belongsToMany(User, { through: Cart });
+User.hasMany(Cart);
+Cart.belongsTo(User);
+Product.hasMany(Cart);
+Cart.belongsTo(Product);
 
-// Order.belongsToMany(Product, { through: OrderProduct });
-// Product.belongsToMany(Order, { through: OrderProduct });
+Order.belongsToMany(Product, { through: OrderProduct });
+Product.belongsToMany(Order, { through: OrderProduct });
+Order.hasMany(OrderProduct);
+OrderProduct.belongsTo(Order);
+Product.hasMany(OrderProduct);
+OrderProduct.belongsTo(Product);
 
 Bike.hasMany(Ticket);
 Ticket.belongsTo(Bike);
@@ -224,25 +232,26 @@ server.get("/tech/catalogue", isAuthenticated, searchCatelogue);
 
 //Stripe Endpoint
 server.post("/create-checkout-session", async (req, res) => {
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price_data: {
-          currency: "usd",
-          product_data: {
-            name: "shimano chain",
-          },
-          //price listed in cents
-          unit_amount: 2500,
+  //format cartItems for stripe payment
+  const lineItems = req.body.cartItems.map(item => {
+    return {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.name,
         },
-        quantity: 1,
+        unit_amount: item.price * 100,
       },
-    ],
+      quantity: item.quantity,
+    }
+  })
+  const session = await stripe.checkout.sessions.create({
+    line_items: lineItems,
     mode: "payment",
     success_url: `${YOUR_DOMAIN}/checkout-success`,
-    cancel_url: `${YOUR_DOMAIN}/cart`,
+    cancel_url: `${YOUR_DOMAIN}`,
   });
-  res.redirect(303, session.url);
+  res.status(200).send(session);
 });
 
 // server.get("/*", function (req, res) {
@@ -253,10 +262,12 @@ server.get("/*", function (req, res) {
 });
 
 //^ Database sycn and seed
-db.sync()
+db
+  .sync()
   // .sync({ force: true })
   .then(() => {
     // seed();
+
     // brandSeed();
     // productSeed();
   })
