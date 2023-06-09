@@ -1,10 +1,34 @@
 const axios = require("axios");
 require("dotenv").config();
 const { REACT_APP_HLC_TOKEN } = process.env;
+const { Readable } = require("stream");
 
 const { Product } = require("./models");
 
+const stream = new Readable({
+  read() {},
+});
 
+try {
+  const response = await axios.get(
+    `https://api.hlc.bike/us/v3.0/Catalog/Products`,
+    {
+      headers: {
+        Authorization: `ApiKey ${REACT_APP_HLC_TOKEN}`,
+      },
+      responseType: "stream",
+    }
+  );
+  console.log(response.data);
+} catch (err) {
+  console.log(err)
+}
+
+response.data.pipe(stream);
+
+stream.on("data", (chunk) => {
+  console.log(chunk.toString());
+});
 
 // for (let i = 0; i < 100; i++) {
 //   let startIndex = i * 100;
@@ -32,38 +56,38 @@ const { Product } = require("./models");
 //     .catch((err) => console.log(err));
 // }
 
-const getProducts = async () => {
-  let products = [];
+// const getProducts = async () => {
+//   let products = [];
 
-  await axios
-    .get(`https://api.hlc.bike/us/v3.0/Catalog/Products`, {
-      headers: {
-        Authorization: `ApiKey ${REACT_APP_HLC_TOKEN}`,
-      },
-    })
-    .then( (res) => {
-      products = res.data.map((product => {
-        let newProduct = {
-          ProductNo: +product.ProductNo,
-          Name: product.Name,
-          Description: product.Description,
-          BrandId: product.BrandId,
-          MSRP: product.Variants[0].Prices[0].Amount,
-          Base: product.Variants[0].Prices[1].Amount,
-          ImageURL: product.Variants[0].Images[0].Url,
-        }
-        return newProduct
-      }));
-    })
-    .catch((err) => console.log(err));
+//   await axios
+//     .get(`https://api.hlc.bike/us/v3.0/Catalog/Products`, {
+//       headers: {
+//         Authorization: `ApiKey ${REACT_APP_HLC_TOKEN}`,
+//       },
+//     })
+//     .then((res) => {
+//       products = res.data.map((product) => {
+//         let newProduct = {
+//           ProductNo: +product.ProductNo,
+//           Name: product.Name,
+//           Description: product.Description,
+//           BrandId: product.BrandId,
+//           MSRP: product.Variants[0].Prices[0].Amount,
+//           Base: product.Variants[0].Prices[1].Amount,
+//           ImageURL: product.Variants[0].Images[0].Url,
+//         };
+//         return newProduct;
+//       });
+//     })
+//     .catch((err) => console.log(err));
 
-    return products;
-}
+//   return products;
+// };
 
 //TODO Need to figure out a way to get all products to populate into DB, everything else is working
 
 const productSeed = async () => {
-  const products = getProducts()
+  const products = getProducts();
   try {
     await Product.bulkCreate(products);
   } catch (err) {
