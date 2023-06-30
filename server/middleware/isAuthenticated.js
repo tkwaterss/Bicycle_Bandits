@@ -5,7 +5,8 @@ const { SECRET } = process.env;
 module.exports = {
   isAuthenticated: (req, res, next) => {
     const headerToken = req.get("Authorization");
-
+    console.log('attempting to auth')
+    console.log(headerToken);
     if (!headerToken) {
       console.log("ERROR in authentication");
       res.sendStatus(401);

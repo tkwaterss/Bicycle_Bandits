@@ -15,6 +15,8 @@ const TicketDetails = () => {
 
   useEffect(() => {
     setInitLoad(true);
+    console.log('getting ticket details');
+    console.log(token);
     axios
       .get(`/ticket/${id}`, {
         headers: {

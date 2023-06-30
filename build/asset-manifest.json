@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.72a10314.css",
-    "main.js": "/static/js/main.c9704fde.js",
+    "main.css": "/static/css/main.1ba9ff03.css",
+    "main.js": "/static/js/main.d8340d93.js",
     "static/media/jackson-blackhurst-AezEmNkxXQg-unsplash.jpg": "/static/media/jackson-blackhurst-AezEmNkxXQg-unsplash.f2cbf92162f3f9d3b7d9.jpg",
     "index.html": "/index.html",
-    "main.72a10314.css.map": "/static/css/main.72a10314.css.map",
-    "main.c9704fde.js.map": "/static/js/main.c9704fde.js.map"
+    "main.1ba9ff03.css.map": "/static/css/main.1ba9ff03.css.map",
+    "main.d8340d93.js.map": "/static/js/main.d8340d93.js.map"
   },
   "entrypoints": [
-    "static/css/main.72a10314.css",
-    "static/js/main.c9704fde.js"
+    "static/css/main.1ba9ff03.css",
+    "static/js/main.d8340d93.js"
   ]
 }

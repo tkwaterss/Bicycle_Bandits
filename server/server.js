@@ -68,6 +68,7 @@ const { isAuthenticated } = require("./middleware/isAuthenticated");
 const server = express();
 const { PORT, REACT_APP_HLC_TOKEN, STRIPE_KEY } = process.env;
 // const YOUR_DOMAIN = "http://localhost:4041";
+// const YOUR_DOMAIN = "http://localhost:4040";
 const YOUR_DOMAIN = "https://bicycle-bandits.herokuapp.com";
 
 const stripe = Stripe(STRIPE_KEY);
@@ -75,8 +76,8 @@ const stripe = Stripe(STRIPE_KEY);
 //^ Middleware
 server.use(express.json());
 server.use(cors());
-server.use(express.static(path.join(__dirname, "../build")));
-// server.use(express.static(path.join(__dirname, "../src")));
+// server.use(express.static(path.join(__dirname, "../build")));
+server.use(express.static(path.join(__dirname, "../src")));
 
 //^ Caching
 // let redisClient;
@@ -256,12 +257,12 @@ server.post("/create-checkout-session", async (req, res) => {
   res.status(200).send(session);
 });
 
-server.get("/*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
-});
 // server.get("/*", function (req, res) {
-//   res.sendFile(path.join(__dirname, "../public/index.html"));
+//   res.sendFile(path.join(__dirname, "../build/index.html"));
 // });
+server.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
 //^ Database sycn and seed
 db
